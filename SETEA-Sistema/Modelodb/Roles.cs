@@ -25,5 +25,9 @@ namespace SETEA_Sistema.Modelodb
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Usuarios> Usuarios { get; set; }
+
+        public override string ToString() {
+                return Nombre;
+        }
     }
 }

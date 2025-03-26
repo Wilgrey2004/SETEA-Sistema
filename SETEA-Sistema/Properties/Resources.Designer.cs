@@ -22,7 +22,7 @@ namespace SETEA_Sistema.Properties {
     [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Resources.Tools.StronglyTypedResourceBuilder", "17.0.0.0")]
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
     [global::System.Runtime.CompilerServices.CompilerGeneratedAttribute()]
-    internal class Resources {
+    public class Resources {
         
         private static global::System.Resources.ResourceManager resourceMan;
         
@@ -36,7 +36,7 @@ namespace SETEA_Sistema.Properties {
         ///   Devuelve la instancia de ResourceManager almacenada en caché utilizada por esta clase.
         /// </summary>
         [global::System.ComponentModel.EditorBrowsableAttribute(global::System.ComponentModel.EditorBrowsableState.Advanced)]
-        internal static global::System.Resources.ResourceManager ResourceManager {
+        public static global::System.Resources.ResourceManager ResourceManager {
             get {
                 if (object.ReferenceEquals(resourceMan, null)) {
                     global::System.Resources.ResourceManager temp = new global::System.Resources.ResourceManager("SETEA_Sistema.Properties.Resources", typeof(Resources).Assembly);
@@ -51,7 +51,7 @@ namespace SETEA_Sistema.Properties {
         ///   búsquedas de recursos mediante esta clase de recurso fuertemente tipado.
         /// </summary>
         [global::System.ComponentModel.EditorBrowsableAttribute(global::System.ComponentModel.EditorBrowsableState.Advanced)]
-        internal static global::System.Globalization.CultureInfo Culture {
+        public static global::System.Globalization.CultureInfo Culture {
             get {
                 return resourceCulture;
             }
@@ -63,7 +63,7 @@ namespace SETEA_Sistema.Properties {
         /// <summary>
         ///   Busca un recurso adaptado de tipo System.Drawing.Bitmap.
         /// </summary>
-        internal static System.Drawing.Bitmap image {
+        public static System.Drawing.Bitmap image {
             get {
                 object obj = ResourceManager.GetObject("image", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
@@ -73,7 +73,7 @@ namespace SETEA_Sistema.Properties {
         /// <summary>
         ///   Busca un recurso adaptado de tipo System.Drawing.Bitmap.
         /// </summary>
-        internal static System.Drawing.Bitmap LogoSeteaHD {
+        public static System.Drawing.Bitmap LogoSeteaHD {
             get {
                 object obj = ResourceManager.GetObject("LogoSeteaHD", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
@@ -101,9 +101,36 @@ namespace SETEA_Sistema.Properties {
         ///      &lt;div style=&quot;text-align: center; margin-bottom: 20px&quot;&gt;
         ///        &lt;div style=&quot;font-size: 20px; font-weight: bold [resto de la cadena truncado]&quot;;.
         /// </summary>
-        internal static string PlantillaFactura {
+        public static string PlantillaFactura {
             get {
                 return ResourceManager.GetString("PlantillaFactura", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a &lt;!DOCTYPE html&gt;
+        ///&lt;html lang=&quot;es&quot;&gt;
+        ///  &lt;head&gt;
+        ///    &lt;meta http-equiv=&quot;Content-Type&quot; content=&quot;text/html; charset=UTF-8&quot; /&gt;
+        ///    &lt;title&gt;Factura S E T E A&lt;/title&gt;
+        ///  &lt;/head&gt;
+        ///  &lt;body&gt;
+        ///    &lt;div
+        ///      style=&quot;
+        ///        padding: 20px;
+        ///        font-family: Arial, sans-serif;
+        ///        max-width: 800px;
+        ///        border-radius: 10px;
+        ///        margin: 20px auto;
+        ///      &quot;
+        ///    &gt;
+        ///      &lt;!-- Encabezado --&gt;
+        ///      &lt;div style=&quot;text-align: center; margin-bottom: 20px&quot;&gt;
+        ///        &lt;div style=&quot;font-size: 20px; font-weight: bold [resto de la cadena truncado]&quot;;.
+        /// </summary>
+        public static string PlantillaFactura1 {
+            get {
+                return ResourceManager.GetString("PlantillaFactura1", resourceCulture);
             }
         }
         
@@ -129,9 +156,65 @@ namespace SETEA_Sistema.Properties {
         ///      &lt;div style=&quot;text-align: center; margin-bottom: 20px&quot;&gt;
         ///        &lt;div  [resto de la cadena truncado]&quot;;.
         /// </summary>
-        internal static string PlantillaListaDeCompras {
+        public static string PlantillaListaDeCompras {
             get {
                 return ResourceManager.GetString("PlantillaListaDeCompras", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a &lt;!DOCTYPE html&gt;
+        ///&lt;html lang=&quot;es&quot;&gt;
+        ///  &lt;head&gt;
+        ///    &lt;meta http-equiv=&quot;Content-Type&quot; content=&quot;text/html; charset=UTF-8&quot; /&gt;
+        ///    &lt;title&gt;Lista de Compras SETEA&lt;/title&gt;
+        ///  &lt;/head&gt;
+        ///  &lt;body&gt;
+        ///    &lt;div
+        ///      style=&quot;
+        ///        background-color: #f8f3f3;
+        ///        padding: 20px;
+        ///        font-family: Arial, sans-serif;
+        ///        max-width: 800px;
+        ///        border-radius: 10px;
+        ///        margin: 20px auto;
+        ///      &quot;
+        ///    &gt;
+        ///      &lt;!-- Encabezado --&gt;
+        ///      &lt;div style=&quot;text-align: center; margin-bottom: 20px&quot;&gt;
+        ///        &lt;div  [resto de la cadena truncado]&quot;;.
+        /// </summary>
+        public static string PlantillaListaDeCompras1 {
+            get {
+                return ResourceManager.GetString("PlantillaListaDeCompras1", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a &lt;!DOCTYPE html&gt;
+        ///&lt;html lang=&quot;es&quot;&gt;
+        ///  &lt;head&gt;
+        ///    &lt;meta charset=&quot;UTF-8&quot; /&gt;
+        ///    &lt;meta name=&quot;viewport&quot; content=&quot;width=device-width, initial-scale=1.0&quot; /&gt;
+        ///    &lt;title&gt;Factura S E T E A&lt;/title&gt;
+        ///  &lt;/head&gt;
+        ///  &lt;body&gt;
+        ///    &lt;div
+        ///      style=&quot;
+        ///        background-color: #f8f3f3;
+        ///        padding: 20px;
+        ///        font-family: Arial, sans-serif;
+        ///        max-width: min-content;
+        ///        border-radius: 10px;
+        ///        margin: 20px auto;
+        ///      &quot;
+        ///    &gt;
+        ///      &lt;!-- Encabezado --&gt;
+        ///      &lt;div style=&quot;text-align: center; ma [resto de la cadena truncado]&quot;;.
+        /// </summary>
+        public static string PlantillaNew {
+            get {
+                return ResourceManager.GetString("PlantillaNew", resourceCulture);
             }
         }
         
@@ -157,9 +240,37 @@ namespace SETEA_Sistema.Properties {
         ///      &lt;div style=&quot;text-align: center; margin-bottom: 20px&quot;&gt;
         ///        &lt;div st [resto de la cadena truncado]&quot;;.
         /// </summary>
-        internal static string PlantillaReporteUsuarios {
+        public static string PlantillaReporteUsuarios {
             get {
                 return ResourceManager.GetString("PlantillaReporteUsuarios", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a &lt;!DOCTYPE html&gt;
+        ///&lt;html lang=&quot;es&quot;&gt;
+        ///  &lt;head&gt;
+        ///    &lt;meta charset=&quot;UTF-8&quot; /&gt;
+        ///    &lt;meta name=&quot;viewport&quot; content=&quot;width=device-width, initial-scale=1.0&quot; /&gt;
+        ///    &lt;title&gt;Factura S E T E A&lt;/title&gt;
+        ///  &lt;/head&gt;
+        ///  &lt;body&gt;
+        ///    &lt;div
+        ///      style=&quot;
+        ///        padding: 20px;
+        ///        font-family: Arial, sans-serif;
+        ///        max-width: min-content;
+        ///        border-radius: 10px;
+        ///        margin: 20px auto;
+        ///      &quot;
+        ///    &gt;
+        ///      &lt;!-- Encabezado --&gt;
+        ///      &lt;div style=&quot;text-align: center; margin-bottom: 20px&quot;&gt;
+        ///        &lt;div st [resto de la cadena truncado]&quot;;.
+        /// </summary>
+        public static string PlantillaReporteUsuarios1 {
+            get {
+                return ResourceManager.GetString("PlantillaReporteUsuarios1", resourceCulture);
             }
         }
         
@@ -184,9 +295,36 @@ namespace SETEA_Sistema.Properties {
         ///      &lt;div style=&quot;text-align: center; margin-bottom: 20px&quot;&gt;
         ///        &lt;div style=&quot;font-size: 20px; font-weight: bold [resto de la cadena truncado]&quot;;.
         /// </summary>
-        internal static string PlantillaReporteventas {
+        public static string PlantillaReporteventas {
             get {
                 return ResourceManager.GetString("PlantillaReporteventas", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a &lt;!DOCTYPE html&gt;
+        ///&lt;html lang=&quot;es&quot;&gt;
+        ///  &lt;head&gt;
+        ///    &lt;meta http-equiv=&quot;Content-Type&quot; content=&quot;text/html; charset=UTF-8&quot; /&gt;
+        ///    &lt;title&gt;Factura S E T E A&lt;/title&gt;
+        ///  &lt;/head&gt;
+        ///  &lt;body&gt;
+        ///    &lt;div
+        ///      style=&quot;
+        ///        padding: 20px;
+        ///        font-family: Arial, sans-serif;
+        ///        max-width: 800px;
+        ///        border-radius: 10px;
+        ///        margin: 20px auto;
+        ///      &quot;
+        ///    &gt;
+        ///      &lt;!-- Encabezado --&gt;
+        ///      &lt;div style=&quot;text-align: center; margin-bottom: 20px&quot;&gt;
+        ///        &lt;div style=&quot;font-size: 20px; font-weight: bold [resto de la cadena truncado]&quot;;.
+        /// </summary>
+        public static string PlantillaReporteventas1 {
+            get {
+                return ResourceManager.GetString("PlantillaReporteventas1", resourceCulture);
             }
         }
         
@@ -211,9 +349,36 @@ namespace SETEA_Sistema.Properties {
         ///      &lt;div style=&quot;text-align: center; margin-bottom: 20px&quot;&gt;
         ///        &lt;div style=&quot;font-size: 20px; font-weight: bold; [resto de la cadena truncado]&quot;;.
         /// </summary>
-        internal static string PlantillaReportProductos {
+        public static string PlantillaReportProductos {
             get {
                 return ResourceManager.GetString("PlantillaReportProductos", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a &lt;!DOCTYPE html&gt;
+        ///&lt;html lang=&quot;es&quot;&gt;
+        ///  &lt;head&gt;
+        ///    &lt;meta http-equiv=&quot;Content-Type&quot; content=&quot;text/html; charset=UTF-8&quot; /&gt;
+        ///    &lt;title&gt;Inventario SETEA&lt;/title&gt;
+        ///  &lt;/head&gt;
+        ///  &lt;body&gt;
+        ///    &lt;div
+        ///      style=&quot;
+        ///        padding: 20px;
+        ///        font-family: Arial, sans-serif;
+        ///        max-width: 800px;
+        ///        border-radius: 10px;
+        ///        margin: 20px auto;
+        ///      &quot;
+        ///    &gt;
+        ///      &lt;!-- Encabezado --&gt;
+        ///      &lt;div style=&quot;text-align: center; margin-bottom: 20px&quot;&gt;
+        ///        &lt;div style=&quot;font-size: 20px; font-weight: bold; [resto de la cadena truncado]&quot;;.
+        /// </summary>
+        public static string PlantillaReportProductos1 {
+            get {
+                return ResourceManager.GetString("PlantillaReportProductos1", resourceCulture);
             }
         }
     }

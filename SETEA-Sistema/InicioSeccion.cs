@@ -3,6 +3,7 @@ using MaterialSkin.Controls;
 using SETEA_Sistema.Modelodb;
 using System;
 using System.Collections.Generic;
+using System.Data.Entity;
 using System.Linq;
 using System.Windows.Forms;
 
@@ -62,21 +63,25 @@ namespace SETEA_Sistema
                                         }
                                 }
 
-                                // Si todos los campos están llenos, ejecuta tu lógica aquí
-                                Usuarios userEnter = new Usuarios();
-
-                                userEnter = db.Usuarios.FirstOrDefault(usf => usf.Correo == UserCorreo.Text || usf.Nombre == UserCorreo.Text && usf.Contraseña == UserPass.Text);
-
-                                if (userEnter != null)
+                                try
                                 {
+                                        var query = db.Usuarios.FirstOrDefault(x => x.Correo == UserCorreo.Text || x.Nombre == UserCorreo.Text && x.Contraseña == UserPass.Text);
+                                        if (query != null)
+                                        {
 
-                                        userEnter.Ultima_Vez = DateTime.Now;
-                                        db.SaveChanges();
-                                        Gestion gs = new Gestion();
-                                        Hide();
-                                        gs.ShowDialog();
-                                        Show();
+                                                query.Ultima_Vez = DateTime.Now;
+                                                db.SaveChanges();
+                                                Gestion gs = new Gestion();
+                                                Hide();
+                                                gs.ShowDialog();
+                                                Show();
+                                        }
+                                } catch(Exception ex)
+                                {
+                                        MessageBox.Show("Error: " + ex.Message);
                                 }
+                               
+                               
                         }
                 }
         }
