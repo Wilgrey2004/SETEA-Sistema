@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="bb21b802c9d44dcd8a22e47243156e4d" Name="Diagram1" ZoomLevel="74">
+        <EntityTypeShape EntityType="DBS.Categorias" Width="1.5" PointX="0.75" PointY="1.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="DBS.ClienteCaja" Width="1.5" PointX="7.75" PointY="0.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="DBS.Clientes" Width="1.5" PointX="7.75" PointY="3.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="DBS.estado" Width="1.5" PointX="0.75" PointY="5.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="DBS.MetodosPago" Width="1.5" PointX="7.75" PointY="6.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="DBS.producto" Width="1.5" PointX="3" PointY="1" IsExpanded="true" />
+        <EntityTypeShape EntityType="DBS.Roles" Width="1.5" PointX="2.75" PointY="6.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="DBS.Usuarios" Width="1.5" PointX="5" PointY="6" IsExpanded="true" />
+        <EntityTypeShape EntityType="DBS.VentaEnCaja" Width="1.5" PointX="5.25" PointY="1.125" IsExpanded="true" />
+        <AssociationConnector Association="DBS.FK__producto__catego__59063A47" ManuallyRouted="false" />
+        <AssociationConnector Association="DBS.FK__producto__Estado__5AEE82B9" ManuallyRouted="false" />
+        <AssociationConnector Association="DBS.FK__VentaEnCa__idPro__5EBF139D" ManuallyRouted="false" />
+        <AssociationConnector Association="DBS.FK__Usuarios__RolId__3D5E1FD2" ManuallyRouted="false" />
+        <EntityTypeShape EntityType="DBS.Codigo_De_Productos" Width="1.5" PointX="0.625" PointY="3.75" />
+        <AssociationConnector Association="DBS.FK__Codigo_De__ID_Pr__7F2BE32F" />
+        <EntityTypeShape EntityType="DBS.Cliente_RP" Width="1.5" PointX="5.25" PointY="14.125" />
+        <EntityTypeShape EntityType="DBS.Dispositivo_Info_RP" Width="1.5" PointX="3" PointY="10.625" />
+        <EntityTypeShape EntityType="DBS.Dispositivos_RP" Width="1.5" PointX="5.25" PointY="10.375" />
+        <EntityTypeShape EntityType="DBS.Estados_RP" Width="1.5" PointX="5.25" PointY="17.25" />
+        <EntityTypeShape EntityType="DBS.Marca_Del_Dispositivo_RP" Width="1.5" PointX="0.75" PointY="13.875" />
+        <EntityTypeShape EntityType="DBS.Reparaciones_RP" Width="1.5" PointX="7.5" PointY="10" />
+        <EntityTypeShape EntityType="DBS.Tipo_Dispositivos_RP" Width="1.5" PointX="0.75" PointY="10.875" />
+        <AssociationConnector Association="DBS.FK__Reparacio__Clien__43D61337" />
+        <AssociationConnector Association="DBS.FK__Dispositi__Info___3E1D39E1" />
+        <AssociationConnector Association="DBS.FK__Dispositi__Marca__3864608B" />
+        <AssociationConnector Association="DBS.FK__Dispositi__Tipo___367C1819" />
+        <AssociationConnector Association="DBS.FK__Reparacio__Dispo__45BE5BA9" />
+        <AssociationConnector Association="DBS.FK__Reparacio__Estad__47A6A41B" />
+      </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>

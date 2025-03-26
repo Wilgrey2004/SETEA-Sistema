@@ -1,0 +1,963 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+    <Schema Namespace="DBS.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="Categorias">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Nombre" Type="nvarchar" MaxLength="50" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Cliente_RP">
+          <Key>
+            <PropertyRef Name="ID_Cliente_RP" />
+          </Key>
+          <Property Name="ID_Cliente_RP" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Nombre_Cliente_RP" Type="varchar" MaxLength="100" />
+          <Property Name="Numero_Cliente_RP" Type="varchar" MaxLength="55" />
+          <Property Name="Correo_Electronico_Cliente_RP" Type="varchar" MaxLength="255" />
+          <Property Name="Direccion_Cliente" Type="varchar" MaxLength="255" />
+          <Property Name="Fecha_Registro" Type="datetime" />
+        </EntityType>
+        <EntityType Name="ClienteCaja">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="nombre" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="fechaRegistro" Type="datetime" />
+        </EntityType>
+        <EntityType Name="Clientes">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Nombre" Type="nvarchar" MaxLength="100" Nullable="false" />
+          <Property Name="Correo" Type="nvarchar" MaxLength="100" />
+          <Property Name="Telefono" Type="nvarchar" MaxLength="20" />
+          <Property Name="Clasificacion" Type="nvarchar" MaxLength="50" />
+          <Property Name="FechaRegistro" Type="datetime" />
+        </EntityType>
+        <EntityType Name="Codigo_De_Productos">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="CodigoDelProducto" Type="varchar" MaxLength="100" Nullable="false" />
+          <Property Name="ID_Producto_Enlazado" Type="int" />
+          <Property Name="Fecha_De_Agregacion" Type="datetime" />
+        </EntityType>
+        <EntityType Name="Dispositivo_Info_RP">
+          <Key>
+            <PropertyRef Name="ID_Info_Dispositivo" />
+          </Key>
+          <Property Name="ID_Info_Dispositivo" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Tipo_Del_Dispositivo" Type="int" />
+          <Property Name="Marca_Del_Dispositivo" Type="int" />
+        </EntityType>
+        <EntityType Name="Dispositivos_RP">
+          <Key>
+            <PropertyRef Name="ID_Dispositivo_RP" />
+          </Key>
+          <Property Name="ID_Dispositivo_RP" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Fallo_Encontrado_Del_Dispositivo" Type="text" />
+          <Property Name="Descripcion_Del_Problema_De_Parte_Del_Cliente" Type="text" />
+          <Property Name="Info_Dispositivo_ID" Type="int" />
+          <Property Name="Numero_de_Serie" Type="varchar" MaxLength="100" />
+          <Property Name="Fecha_Recepcion" Type="datetime" />
+        </EntityType>
+        <EntityType Name="estado">
+          <Key>
+            <PropertyRef Name="Estado" />
+          </Key>
+          <Property Name="Estado" Type="varchar" MaxLength="20" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Estados_RP">
+          <Key>
+            <PropertyRef Name="ID_Estado_RP" />
+          </Key>
+          <Property Name="ID_Estado_RP" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Estado" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="Descripcion" Type="varchar" MaxLength="255" />
+          <Property Name="Fecha_Creacion" Type="datetime" />
+        </EntityType>
+        <EntityType Name="Marca_Del_Dispositivo_RP">
+          <Key>
+            <PropertyRef Name="ID_Marca_Dispositivo_RP" />
+          </Key>
+          <Property Name="ID_Marca_Dispositivo_RP" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Nombre_De_La_Marca" Type="varchar" MaxLength="100" Nullable="false" />
+        </EntityType>
+        <EntityType Name="MetodosPago">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Metodo" Type="nvarchar" MaxLength="50" Nullable="false" />
+        </EntityType>
+        <EntityType Name="producto">
+          <Key>
+            <PropertyRef Name="idProducto" />
+          </Key>
+          <Property Name="idProducto" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="nombre" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="descripcion" Type="varchar(max)" />
+          <Property Name="PrecioUnidad" Type="decimal" Precision="18" Scale="0" />
+          <Property Name="cantidadRestante" Type="int" />
+          <Property Name="categoriaId" Type="int" />
+          <Property Name="FechaCreacion" Type="datetime" />
+          <Property Name="Estado" Type="varchar" MaxLength="20" />
+        </EntityType>
+        <EntityType Name="Reparaciones_RP">
+          <Key>
+            <PropertyRef Name="ID_Reparacion_RP" />
+          </Key>
+          <Property Name="ID_Reparacion_RP" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Cliente" Type="int" />
+          <Property Name="Dispositivo_RP" Type="int" />
+          <Property Name="Estado_RP" Type="int" />
+          <Property Name="Fecha_De_Ingreso" Type="datetime" />
+          <Property Name="Fecha_De_Alta" Type="datetime" />
+          <Property Name="Cobro_Reparacion" Type="decimal" Precision="18" Scale="0" />
+          <Property Name="Diagnostico_Inicial" Type="text" />
+          <Property Name="Notas_Adicionales" Type="text" />
+        </EntityType>
+        <EntityType Name="Roles">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Nombre" Type="nvarchar" MaxLength="50" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Tipo_Dispositivos_RP">
+          <Key>
+            <PropertyRef Name="ID_Tipo_Dispositivo" />
+          </Key>
+          <Property Name="ID_Tipo_Dispositivo" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Nombre_Tipo" Type="varchar" MaxLength="100" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Usuarios">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Nombre" Type="nvarchar" MaxLength="100" Nullable="false" />
+          <Property Name="Correo" Type="nvarchar" MaxLength="200" Nullable="false" />
+          <Property Name="Contraseña" Type="nvarchar" MaxLength="200" Nullable="false" />
+          <Property Name="RolId" Type="int" Nullable="false" />
+          <Property Name="FechaCreacion" Type="datetime" />
+          <Property Name="Ultima_Vez" Type="datetime" />
+        </EntityType>
+        <EntityType Name="VentaEnCaja">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Nombre" Type="varchar" MaxLength="100" Nullable="false" />
+          <Property Name="ProductoNombre" Type="varchar" MaxLength="200" Nullable="false" />
+          <Property Name="NumeroDelCliente" Type="varchar" MaxLength="20" />
+          <Property Name="idProdicto" Type="int" />
+          <Property Name="FechaVenta" Type="datetime" />
+          <Property Name="cantidadProducto" Type="int" />
+          <Property Name="Descuento" Type="int" />
+          <Property Name="PrecioUnidad" Type="decimal" Precision="18" Scale="0" />
+          <Property Name="precioPorCantidad" Type="decimal" Precision="18" Scale="0" />
+          <Property Name="codigoDelProducto" Type="varchar" MaxLength="100" Nullable="false" />
+        </EntityType>
+        <Association Name="FK__Codigo_De__ID_Pr__1332DBDC">
+          <End Role="producto" Type="Self.producto" Multiplicity="0..1" />
+          <End Role="Codigo_De_Productos" Type="Self.Codigo_De_Productos" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="producto">
+              <PropertyRef Name="idProducto" />
+            </Principal>
+            <Dependent Role="Codigo_De_Productos">
+              <PropertyRef Name="ID_Producto_Enlazado" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Dispositi__Info___3E1D39E1">
+          <End Role="Dispositivo_Info_RP" Type="Self.Dispositivo_Info_RP" Multiplicity="0..1" />
+          <End Role="Dispositivos_RP" Type="Self.Dispositivos_RP" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Dispositivo_Info_RP">
+              <PropertyRef Name="ID_Info_Dispositivo" />
+            </Principal>
+            <Dependent Role="Dispositivos_RP">
+              <PropertyRef Name="Info_Dispositivo_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Dispositi__Marca__3864608B">
+          <End Role="Marca_Del_Dispositivo_RP" Type="Self.Marca_Del_Dispositivo_RP" Multiplicity="0..1" />
+          <End Role="Dispositivo_Info_RP" Type="Self.Dispositivo_Info_RP" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Marca_Del_Dispositivo_RP">
+              <PropertyRef Name="ID_Marca_Dispositivo_RP" />
+            </Principal>
+            <Dependent Role="Dispositivo_Info_RP">
+              <PropertyRef Name="Marca_Del_Dispositivo" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Dispositi__Tipo___367C1819">
+          <End Role="Tipo_Dispositivos_RP" Type="Self.Tipo_Dispositivos_RP" Multiplicity="0..1" />
+          <End Role="Dispositivo_Info_RP" Type="Self.Dispositivo_Info_RP" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Tipo_Dispositivos_RP">
+              <PropertyRef Name="ID_Tipo_Dispositivo" />
+            </Principal>
+            <Dependent Role="Dispositivo_Info_RP">
+              <PropertyRef Name="Tipo_Del_Dispositivo" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__producto__catego__7A672E12">
+          <End Role="Categorias" Type="Self.Categorias" Multiplicity="0..1" />
+          <End Role="producto" Type="Self.producto" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Categorias">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="producto">
+              <PropertyRef Name="categoriaId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__producto__Estado__7C4F7684">
+          <End Role="estado" Type="Self.estado" Multiplicity="0..1" />
+          <End Role="producto" Type="Self.producto" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="estado">
+              <PropertyRef Name="Estado" />
+            </Principal>
+            <Dependent Role="producto">
+              <PropertyRef Name="Estado" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Reparacio__Clien__43D61337">
+          <End Role="Cliente_RP" Type="Self.Cliente_RP" Multiplicity="0..1" />
+          <End Role="Reparaciones_RP" Type="Self.Reparaciones_RP" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Cliente_RP">
+              <PropertyRef Name="ID_Cliente_RP" />
+            </Principal>
+            <Dependent Role="Reparaciones_RP">
+              <PropertyRef Name="Cliente" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Reparacio__Dispo__45BE5BA9">
+          <End Role="Dispositivos_RP" Type="Self.Dispositivos_RP" Multiplicity="0..1" />
+          <End Role="Reparaciones_RP" Type="Self.Reparaciones_RP" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Dispositivos_RP">
+              <PropertyRef Name="ID_Dispositivo_RP" />
+            </Principal>
+            <Dependent Role="Reparaciones_RP">
+              <PropertyRef Name="Dispositivo_RP" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Reparacio__Estad__47A6A41B">
+          <End Role="Estados_RP" Type="Self.Estados_RP" Multiplicity="0..1" />
+          <End Role="Reparaciones_RP" Type="Self.Reparaciones_RP" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Estados_RP">
+              <PropertyRef Name="ID_Estado_RP" />
+            </Principal>
+            <Dependent Role="Reparaciones_RP">
+              <PropertyRef Name="Estado_RP" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Usuarios__RolId__3D5E1FD2">
+          <End Role="Roles" Type="Self.Roles" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="Usuarios" Type="Self.Usuarios" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Roles">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Usuarios">
+              <PropertyRef Name="RolId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__VentaEnCa__idPro__0B91BA14">
+          <End Role="producto" Type="Self.producto" Multiplicity="0..1" />
+          <End Role="VentaEnCaja" Type="Self.VentaEnCaja" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="producto">
+              <PropertyRef Name="idProducto" />
+            </Principal>
+            <Dependent Role="VentaEnCaja">
+              <PropertyRef Name="idProdicto" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="DBSStoreContainer">
+          <EntitySet Name="Categorias" EntityType="Self.Categorias" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Cliente_RP" EntityType="Self.Cliente_RP" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="ClienteCaja" EntityType="Self.ClienteCaja" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Clientes" EntityType="Self.Clientes" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Codigo_De_Productos" EntityType="Self.Codigo_De_Productos" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Dispositivo_Info_RP" EntityType="Self.Dispositivo_Info_RP" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Dispositivos_RP" EntityType="Self.Dispositivos_RP" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="estado" EntityType="Self.estado" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Estados_RP" EntityType="Self.Estados_RP" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Marca_Del_Dispositivo_RP" EntityType="Self.Marca_Del_Dispositivo_RP" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="MetodosPago" EntityType="Self.MetodosPago" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="producto" EntityType="Self.producto" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Reparaciones_RP" EntityType="Self.Reparaciones_RP" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Roles" EntityType="Self.Roles" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Tipo_Dispositivos_RP" EntityType="Self.Tipo_Dispositivos_RP" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Usuarios" EntityType="Self.Usuarios" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="VentaEnCaja" EntityType="Self.VentaEnCaja" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="FK__Codigo_De__ID_Pr__1332DBDC" Association="Self.FK__Codigo_De__ID_Pr__1332DBDC">
+            <End Role="producto" EntitySet="producto" />
+            <End Role="Codigo_De_Productos" EntitySet="Codigo_De_Productos" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Dispositi__Info___3E1D39E1" Association="Self.FK__Dispositi__Info___3E1D39E1">
+            <End Role="Dispositivo_Info_RP" EntitySet="Dispositivo_Info_RP" />
+            <End Role="Dispositivos_RP" EntitySet="Dispositivos_RP" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Dispositi__Marca__3864608B" Association="Self.FK__Dispositi__Marca__3864608B">
+            <End Role="Marca_Del_Dispositivo_RP" EntitySet="Marca_Del_Dispositivo_RP" />
+            <End Role="Dispositivo_Info_RP" EntitySet="Dispositivo_Info_RP" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Dispositi__Tipo___367C1819" Association="Self.FK__Dispositi__Tipo___367C1819">
+            <End Role="Tipo_Dispositivos_RP" EntitySet="Tipo_Dispositivos_RP" />
+            <End Role="Dispositivo_Info_RP" EntitySet="Dispositivo_Info_RP" />
+          </AssociationSet>
+          <AssociationSet Name="FK__producto__catego__7A672E12" Association="Self.FK__producto__catego__7A672E12">
+            <End Role="Categorias" EntitySet="Categorias" />
+            <End Role="producto" EntitySet="producto" />
+          </AssociationSet>
+          <AssociationSet Name="FK__producto__Estado__7C4F7684" Association="Self.FK__producto__Estado__7C4F7684">
+            <End Role="estado" EntitySet="estado" />
+            <End Role="producto" EntitySet="producto" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Reparacio__Clien__43D61337" Association="Self.FK__Reparacio__Clien__43D61337">
+            <End Role="Cliente_RP" EntitySet="Cliente_RP" />
+            <End Role="Reparaciones_RP" EntitySet="Reparaciones_RP" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Reparacio__Dispo__45BE5BA9" Association="Self.FK__Reparacio__Dispo__45BE5BA9">
+            <End Role="Dispositivos_RP" EntitySet="Dispositivos_RP" />
+            <End Role="Reparaciones_RP" EntitySet="Reparaciones_RP" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Reparacio__Estad__47A6A41B" Association="Self.FK__Reparacio__Estad__47A6A41B">
+            <End Role="Estados_RP" EntitySet="Estados_RP" />
+            <End Role="Reparaciones_RP" EntitySet="Reparaciones_RP" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Usuarios__RolId__3D5E1FD2" Association="Self.FK__Usuarios__RolId__3D5E1FD2">
+            <End Role="Roles" EntitySet="Roles" />
+            <End Role="Usuarios" EntitySet="Usuarios" />
+          </AssociationSet>
+          <AssociationSet Name="FK__VentaEnCa__idPro__0B91BA14" Association="Self.FK__VentaEnCa__idPro__0B91BA14">
+            <End Role="producto" EntitySet="producto" />
+            <End Role="VentaEnCaja" EntitySet="VentaEnCaja" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema></edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="DBS" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="Categorias">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Nombre" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <NavigationProperty Name="producto" Relationship="Self.FK__producto__catego__59063A47" FromRole="Categorias" ToRole="producto" />
+        </EntityType>
+        <EntityType Name="ClienteCaja">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="nombre" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="fechaRegistro" Type="DateTime" Precision="3" />
+        </EntityType>
+        <EntityType Name="Clientes">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Nombre" Type="String" MaxLength="100" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Correo" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="Telefono" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
+          <Property Name="Clasificacion" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="FechaRegistro" Type="DateTime" Precision="3" />
+        </EntityType>
+        <EntityType Name="estado">
+          <Key>
+            <PropertyRef Name="Estado1" />
+          </Key>
+          <Property Name="Estado1" Type="String" MaxLength="20" FixedLength="false" Unicode="false" Nullable="false" />
+          <NavigationProperty Name="producto" Relationship="Self.FK__producto__Estado__5AEE82B9" FromRole="estado" ToRole="producto" />
+        </EntityType>
+        <EntityType Name="MetodosPago">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Metodo" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+        </EntityType>
+        <EntityType Name="producto">
+          <Key>
+            <PropertyRef Name="idProducto" />
+          </Key>
+          <Property Name="idProducto" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="nombre" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="descripcion" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="PrecioUnidad" Type="Decimal" Precision="18" Scale="0" />
+          <Property Name="cantidadRestante" Type="Int32" />
+          <Property Name="categoriaId" Type="Int32" />
+          <Property Name="FechaCreacion" Type="DateTime" Precision="3" />
+          <Property Name="Estado" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="Categorias" Relationship="Self.FK__producto__catego__59063A47" FromRole="producto" ToRole="Categorias" />
+          <NavigationProperty Name="estado1" Relationship="Self.FK__producto__Estado__5AEE82B9" FromRole="producto" ToRole="estado" />
+          <NavigationProperty Name="VentaEnCaja" Relationship="Self.FK__VentaEnCa__idPro__5EBF139D" FromRole="producto" ToRole="VentaEnCaja" />
+          <NavigationProperty Name="Codigo_De_Productos" Relationship="DBS.FK__Codigo_De__ID_Pr__7F2BE32F" FromRole="producto" ToRole="Codigo_De_Productos" />
+        </EntityType>
+        <EntityType Name="Roles">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Nombre" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <NavigationProperty Name="Usuarios" Relationship="Self.FK__Usuarios__RolId__3D5E1FD2" FromRole="Roles" ToRole="Usuarios" />
+        </EntityType>
+        <EntityType Name="Usuarios">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Nombre" Type="String" MaxLength="100" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Correo" Type="String" MaxLength="200" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Contraseña" Type="String" MaxLength="200" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="RolId" Type="Int32" Nullable="false" />
+          <Property Name="FechaCreacion" Type="DateTime" Precision="3" />
+          <Property Name="Ultima_Vez" Type="DateTime" Precision="3" />
+          <NavigationProperty Name="Roles" Relationship="Self.FK__Usuarios__RolId__3D5E1FD2" FromRole="Usuarios" ToRole="Roles" />
+        </EntityType>
+        <EntityType Name="VentaEnCaja">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Nombre" Type="String" MaxLength="100" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="ProductoNombre" Type="String" MaxLength="200" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="NumeroDelCliente" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="idProdicto" Type="Int32" />
+          <Property Name="FechaVenta" Type="DateTime" Precision="3" />
+          <Property Name="cantidadProducto" Type="Int32" />
+          <Property Name="PrecioUnidad" Type="Decimal" Precision="18" Scale="0" />
+          <Property Name="precioPorCantidad" Type="Decimal" Precision="18" Scale="0" />
+          <NavigationProperty Name="producto" Relationship="Self.FK__VentaEnCa__idPro__5EBF139D" FromRole="VentaEnCaja" ToRole="producto" />
+          <Property Name="Descuento" Type="Int32" />
+          <Property Name="codigoDelProducto" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="false" />
+        </EntityType>
+        <Association Name="FK__producto__catego__59063A47">
+          <End Role="Categorias" Type="Self.Categorias" Multiplicity="0..1" />
+          <End Role="producto" Type="Self.producto" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Categorias">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="producto">
+              <PropertyRef Name="categoriaId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__producto__Estado__5AEE82B9">
+          <End Role="estado" Type="Self.estado" Multiplicity="0..1" />
+          <End Role="producto" Type="Self.producto" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="estado">
+              <PropertyRef Name="Estado1" />
+            </Principal>
+            <Dependent Role="producto">
+              <PropertyRef Name="Estado" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__VentaEnCa__idPro__5EBF139D">
+          <End Role="producto" Type="Self.producto" Multiplicity="0..1" />
+          <End Role="VentaEnCaja" Type="Self.VentaEnCaja" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="producto">
+              <PropertyRef Name="idProducto" />
+            </Principal>
+            <Dependent Role="VentaEnCaja">
+              <PropertyRef Name="idProdicto" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Usuarios__RolId__3D5E1FD2">
+          <End Role="Roles" Type="Self.Roles" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="Usuarios" Type="Self.Usuarios" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Roles">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Usuarios">
+              <PropertyRef Name="RolId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="SeteaEntities1" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="Categorias" EntityType="Self.Categorias" />
+          <EntitySet Name="ClienteCaja" EntityType="Self.ClienteCaja" />
+          <EntitySet Name="Clientes" EntityType="Self.Clientes" />
+          <EntitySet Name="estado" EntityType="Self.estado" />
+          <EntitySet Name="MetodosPago" EntityType="Self.MetodosPago" />
+          <EntitySet Name="producto" EntityType="Self.producto" />
+          <EntitySet Name="Roles" EntityType="Self.Roles" />
+          <EntitySet Name="Usuarios" EntityType="Self.Usuarios" />
+          <EntitySet Name="VentaEnCaja" EntityType="Self.VentaEnCaja" />
+          <AssociationSet Name="FK__producto__catego__59063A47" Association="Self.FK__producto__catego__59063A47">
+            <End Role="Categorias" EntitySet="Categorias" />
+            <End Role="producto" EntitySet="producto" />
+          </AssociationSet>
+          <AssociationSet Name="FK__producto__Estado__5AEE82B9" Association="Self.FK__producto__Estado__5AEE82B9">
+            <End Role="estado" EntitySet="estado" />
+            <End Role="producto" EntitySet="producto" />
+          </AssociationSet>
+          <AssociationSet Name="FK__VentaEnCa__idPro__5EBF139D" Association="Self.FK__VentaEnCa__idPro__5EBF139D">
+            <End Role="producto" EntitySet="producto" />
+            <End Role="VentaEnCaja" EntitySet="VentaEnCaja" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Usuarios__RolId__3D5E1FD2" Association="Self.FK__Usuarios__RolId__3D5E1FD2">
+            <End Role="Roles" EntitySet="Roles" />
+            <End Role="Usuarios" EntitySet="Usuarios" />
+          </AssociationSet>
+          <EntitySet Name="Codigo_De_Productos" EntityType="DBS.Codigo_De_Productos" />
+          <AssociationSet Name="FK__Codigo_De__ID_Pr__7F2BE32F" Association="DBS.FK__Codigo_De__ID_Pr__7F2BE32F">
+            <End Role="producto" EntitySet="producto" />
+            <End Role="Codigo_De_Productos" EntitySet="Codigo_De_Productos" />
+          </AssociationSet>
+          <EntitySet Name="Cliente_RP" EntityType="DBS.Cliente_RP" />
+          <EntitySet Name="Dispositivo_Info_RP" EntityType="DBS.Dispositivo_Info_RP" />
+          <EntitySet Name="Dispositivos_RP" EntityType="DBS.Dispositivos_RP" />
+          <EntitySet Name="Estados_RP" EntityType="DBS.Estados_RP" />
+          <EntitySet Name="Marca_Del_Dispositivo_RP" EntityType="DBS.Marca_Del_Dispositivo_RP" />
+          <EntitySet Name="Reparaciones_RP" EntityType="DBS.Reparaciones_RP" />
+          <EntitySet Name="Tipo_Dispositivos_RP" EntityType="DBS.Tipo_Dispositivos_RP" />
+          <AssociationSet Name="FK__Reparacio__Clien__43D61337" Association="DBS.FK__Reparacio__Clien__43D61337">
+            <End Role="Cliente_RP" EntitySet="Cliente_RP" />
+            <End Role="Reparaciones_RP" EntitySet="Reparaciones_RP" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Dispositi__Info___3E1D39E1" Association="DBS.FK__Dispositi__Info___3E1D39E1">
+            <End Role="Dispositivo_Info_RP" EntitySet="Dispositivo_Info_RP" />
+            <End Role="Dispositivos_RP" EntitySet="Dispositivos_RP" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Dispositi__Marca__3864608B" Association="DBS.FK__Dispositi__Marca__3864608B">
+            <End Role="Marca_Del_Dispositivo_RP" EntitySet="Marca_Del_Dispositivo_RP" />
+            <End Role="Dispositivo_Info_RP" EntitySet="Dispositivo_Info_RP" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Dispositi__Tipo___367C1819" Association="DBS.FK__Dispositi__Tipo___367C1819">
+            <End Role="Tipo_Dispositivos_RP" EntitySet="Tipo_Dispositivos_RP" />
+            <End Role="Dispositivo_Info_RP" EntitySet="Dispositivo_Info_RP" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Reparacio__Dispo__45BE5BA9" Association="DBS.FK__Reparacio__Dispo__45BE5BA9">
+            <End Role="Dispositivos_RP" EntitySet="Dispositivos_RP" />
+            <End Role="Reparaciones_RP" EntitySet="Reparaciones_RP" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Reparacio__Estad__47A6A41B" Association="DBS.FK__Reparacio__Estad__47A6A41B">
+            <End Role="Estados_RP" EntitySet="Estados_RP" />
+            <End Role="Reparaciones_RP" EntitySet="Reparaciones_RP" />
+          </AssociationSet>
+        </EntityContainer>
+        <EntityType Name="Codigo_De_Productos">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="CodigoDelProducto" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="ID_Producto_Enlazado" Type="Int32" />
+          <NavigationProperty Name="producto" Relationship="DBS.FK__Codigo_De__ID_Pr__7F2BE32F" FromRole="Codigo_De_Productos" ToRole="producto" />
+          <Property Name="Fecha_De_Agregacion" Type="DateTime" Precision="3" />
+        </EntityType>
+        <Association Name="FK__Codigo_De__ID_Pr__7F2BE32F">
+          <End Type="DBS.producto" Role="producto" Multiplicity="0..1" />
+          <End Type="DBS.Codigo_De_Productos" Role="Codigo_De_Productos" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="producto">
+              <PropertyRef Name="idProducto" />
+            </Principal>
+            <Dependent Role="Codigo_De_Productos">
+              <PropertyRef Name="ID_Producto_Enlazado" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityType Name="Cliente_RP">
+          <Key>
+            <PropertyRef Name="ID_Cliente_RP" />
+          </Key>
+          <Property Name="ID_Cliente_RP" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Nombre_Cliente_RP" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="Numero_Cliente_RP" Type="String" MaxLength="55" FixedLength="false" Unicode="false" />
+          <Property Name="Correo_Electronico_Cliente_RP" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+          <Property Name="Direccion_Cliente" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+          <Property Name="Fecha_Registro" Type="DateTime" Precision="3" />
+          <NavigationProperty Name="Reparaciones_RP" Relationship="DBS.FK__Reparacio__Clien__43D61337" FromRole="Cliente_RP" ToRole="Reparaciones_RP" />
+        </EntityType>
+        <EntityType Name="Dispositivo_Info_RP">
+          <Key>
+            <PropertyRef Name="ID_Info_Dispositivo" />
+          </Key>
+          <Property Name="ID_Info_Dispositivo" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Tipo_Del_Dispositivo" Type="Int32" />
+          <Property Name="Marca_Del_Dispositivo" Type="Int32" />
+          <NavigationProperty Name="Dispositivos_RP" Relationship="DBS.FK__Dispositi__Info___3E1D39E1" FromRole="Dispositivo_Info_RP" ToRole="Dispositivos_RP" />
+          <NavigationProperty Name="Marca_Del_Dispositivo_RP" Relationship="DBS.FK__Dispositi__Marca__3864608B" FromRole="Dispositivo_Info_RP" ToRole="Marca_Del_Dispositivo_RP" />
+          <NavigationProperty Name="Tipo_Dispositivos_RP" Relationship="DBS.FK__Dispositi__Tipo___367C1819" FromRole="Dispositivo_Info_RP" ToRole="Tipo_Dispositivos_RP" />
+        </EntityType>
+        <EntityType Name="Dispositivos_RP">
+          <Key>
+            <PropertyRef Name="ID_Dispositivo_RP" />
+          </Key>
+          <Property Name="ID_Dispositivo_RP" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Fallo_Encontrado_Del_Dispositivo" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="Descripcion_Del_Problema_De_Parte_Del_Cliente" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="Info_Dispositivo_ID" Type="Int32" />
+          <Property Name="Numero_de_Serie" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="Fecha_Recepcion" Type="DateTime" Precision="3" />
+          <NavigationProperty Name="Dispositivo_Info_RP" Relationship="DBS.FK__Dispositi__Info___3E1D39E1" FromRole="Dispositivos_RP" ToRole="Dispositivo_Info_RP" />
+          <NavigationProperty Name="Reparaciones_RP" Relationship="DBS.FK__Reparacio__Dispo__45BE5BA9" FromRole="Dispositivos_RP" ToRole="Reparaciones_RP" />
+        </EntityType>
+        <EntityType Name="Estados_RP">
+          <Key>
+            <PropertyRef Name="ID_Estado_RP" />
+          </Key>
+          <Property Name="ID_Estado_RP" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Estado" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Descripcion" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+          <Property Name="Fecha_Creacion" Type="DateTime" Precision="3" />
+          <NavigationProperty Name="Reparaciones_RP" Relationship="DBS.FK__Reparacio__Estad__47A6A41B" FromRole="Estados_RP" ToRole="Reparaciones_RP" />
+        </EntityType>
+        <EntityType Name="Marca_Del_Dispositivo_RP">
+          <Key>
+            <PropertyRef Name="ID_Marca_Dispositivo_RP" />
+          </Key>
+          <Property Name="ID_Marca_Dispositivo_RP" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Nombre_De_La_Marca" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="Dispositivo_Info_RP" Relationship="DBS.FK__Dispositi__Marca__3864608B" FromRole="Marca_Del_Dispositivo_RP" ToRole="Dispositivo_Info_RP" />
+        </EntityType>
+        <EntityType Name="Reparaciones_RP">
+          <Key>
+            <PropertyRef Name="ID_Reparacion_RP" />
+          </Key>
+          <Property Name="ID_Reparacion_RP" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Cliente" Type="Int32" />
+          <Property Name="Dispositivo_RP" Type="Int32" />
+          <Property Name="Estado_RP" Type="Int32" />
+          <Property Name="Fecha_De_Ingreso" Type="DateTime" Precision="3" />
+          <Property Name="Fecha_De_Alta" Type="DateTime" Precision="3" />
+          <Property Name="Cobro_Reparacion" Type="Decimal" Precision="18" Scale="0" />
+          <Property Name="Diagnostico_Inicial" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="Notas_Adicionales" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="Cliente_RP" Relationship="DBS.FK__Reparacio__Clien__43D61337" FromRole="Reparaciones_RP" ToRole="Cliente_RP" />
+          <NavigationProperty Name="Dispositivos_RP" Relationship="DBS.FK__Reparacio__Dispo__45BE5BA9" FromRole="Reparaciones_RP" ToRole="Dispositivos_RP" />
+          <NavigationProperty Name="Estados_RP" Relationship="DBS.FK__Reparacio__Estad__47A6A41B" FromRole="Reparaciones_RP" ToRole="Estados_RP" />
+        </EntityType>
+        <EntityType Name="Tipo_Dispositivos_RP">
+          <Key>
+            <PropertyRef Name="ID_Tipo_Dispositivo" />
+          </Key>
+          <Property Name="ID_Tipo_Dispositivo" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Nombre_Tipo" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="Dispositivo_Info_RP" Relationship="DBS.FK__Dispositi__Tipo___367C1819" FromRole="Tipo_Dispositivos_RP" ToRole="Dispositivo_Info_RP" />
+        </EntityType>
+        <Association Name="FK__Reparacio__Clien__43D61337">
+          <End Type="DBS.Cliente_RP" Role="Cliente_RP" Multiplicity="0..1" />
+          <End Type="DBS.Reparaciones_RP" Role="Reparaciones_RP" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Cliente_RP">
+              <PropertyRef Name="ID_Cliente_RP" />
+            </Principal>
+            <Dependent Role="Reparaciones_RP">
+              <PropertyRef Name="Cliente" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Dispositi__Info___3E1D39E1">
+          <End Type="DBS.Dispositivo_Info_RP" Role="Dispositivo_Info_RP" Multiplicity="0..1" />
+          <End Type="DBS.Dispositivos_RP" Role="Dispositivos_RP" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Dispositivo_Info_RP">
+              <PropertyRef Name="ID_Info_Dispositivo" />
+            </Principal>
+            <Dependent Role="Dispositivos_RP">
+              <PropertyRef Name="Info_Dispositivo_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Dispositi__Marca__3864608B">
+          <End Type="DBS.Marca_Del_Dispositivo_RP" Role="Marca_Del_Dispositivo_RP" Multiplicity="0..1" />
+          <End Type="DBS.Dispositivo_Info_RP" Role="Dispositivo_Info_RP" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Marca_Del_Dispositivo_RP">
+              <PropertyRef Name="ID_Marca_Dispositivo_RP" />
+            </Principal>
+            <Dependent Role="Dispositivo_Info_RP">
+              <PropertyRef Name="Marca_Del_Dispositivo" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Dispositi__Tipo___367C1819">
+          <End Type="DBS.Tipo_Dispositivos_RP" Role="Tipo_Dispositivos_RP" Multiplicity="0..1" />
+          <End Type="DBS.Dispositivo_Info_RP" Role="Dispositivo_Info_RP" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Tipo_Dispositivos_RP">
+              <PropertyRef Name="ID_Tipo_Dispositivo" />
+            </Principal>
+            <Dependent Role="Dispositivo_Info_RP">
+              <PropertyRef Name="Tipo_Del_Dispositivo" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Reparacio__Dispo__45BE5BA9">
+          <End Type="DBS.Dispositivos_RP" Role="Dispositivos_RP" Multiplicity="0..1" />
+          <End Type="DBS.Reparaciones_RP" Role="Reparaciones_RP" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Dispositivos_RP">
+              <PropertyRef Name="ID_Dispositivo_RP" />
+            </Principal>
+            <Dependent Role="Reparaciones_RP">
+              <PropertyRef Name="Dispositivo_RP" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Reparacio__Estad__47A6A41B">
+          <End Type="DBS.Estados_RP" Role="Estados_RP" Multiplicity="0..1" />
+          <End Type="DBS.Reparaciones_RP" Role="Reparaciones_RP" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Estados_RP">
+              <PropertyRef Name="ID_Estado_RP" />
+            </Principal>
+            <Dependent Role="Reparaciones_RP">
+              <PropertyRef Name="Estado_RP" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="DBSStoreContainer" CdmEntityContainer="SeteaEntities1">
+          <EntitySetMapping Name="Categorias">
+            <EntityTypeMapping TypeName="DBS.Categorias">
+              <MappingFragment StoreEntitySet="Categorias">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="Nombre" ColumnName="Nombre" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="ClienteCaja">
+            <EntityTypeMapping TypeName="DBS.ClienteCaja">
+              <MappingFragment StoreEntitySet="ClienteCaja">
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="nombre" ColumnName="nombre" />
+                <ScalarProperty Name="fechaRegistro" ColumnName="fechaRegistro" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Clientes">
+            <EntityTypeMapping TypeName="DBS.Clientes">
+              <MappingFragment StoreEntitySet="Clientes">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="Nombre" ColumnName="Nombre" />
+                <ScalarProperty Name="Correo" ColumnName="Correo" />
+                <ScalarProperty Name="Telefono" ColumnName="Telefono" />
+                <ScalarProperty Name="Clasificacion" ColumnName="Clasificacion" />
+                <ScalarProperty Name="FechaRegistro" ColumnName="FechaRegistro" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="estado">
+            <EntityTypeMapping TypeName="DBS.estado">
+              <MappingFragment StoreEntitySet="estado">
+                <ScalarProperty Name="Estado1" ColumnName="Estado" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="MetodosPago">
+            <EntityTypeMapping TypeName="DBS.MetodosPago">
+              <MappingFragment StoreEntitySet="MetodosPago">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="Metodo" ColumnName="Metodo" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="producto">
+            <EntityTypeMapping TypeName="DBS.producto">
+              <MappingFragment StoreEntitySet="producto">
+                <ScalarProperty Name="idProducto" ColumnName="idProducto" />
+                <ScalarProperty Name="nombre" ColumnName="nombre" />
+                <ScalarProperty Name="descripcion" ColumnName="descripcion" />
+                <ScalarProperty Name="PrecioUnidad" ColumnName="PrecioUnidad" />
+                <ScalarProperty Name="cantidadRestante" ColumnName="cantidadRestante" />
+                <ScalarProperty Name="categoriaId" ColumnName="categoriaId" />
+                <ScalarProperty Name="FechaCreacion" ColumnName="FechaCreacion" />
+                <ScalarProperty Name="Estado" ColumnName="Estado" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Roles">
+            <EntityTypeMapping TypeName="DBS.Roles">
+              <MappingFragment StoreEntitySet="Roles">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="Nombre" ColumnName="Nombre" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Usuarios">
+            <EntityTypeMapping TypeName="DBS.Usuarios">
+              <MappingFragment StoreEntitySet="Usuarios">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="Nombre" ColumnName="Nombre" />
+                <ScalarProperty Name="Correo" ColumnName="Correo" />
+                <ScalarProperty Name="Contraseña" ColumnName="Contraseña" />
+                <ScalarProperty Name="RolId" ColumnName="RolId" />
+                <ScalarProperty Name="FechaCreacion" ColumnName="FechaCreacion" />
+                <ScalarProperty Name="Ultima_Vez" ColumnName="Ultima_Vez" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="VentaEnCaja">
+            <EntityTypeMapping TypeName="DBS.VentaEnCaja">
+              <MappingFragment StoreEntitySet="VentaEnCaja">
+                <ScalarProperty Name="codigoDelProducto" ColumnName="codigoDelProducto" />
+                <ScalarProperty Name="Descuento" ColumnName="Descuento" />
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="Nombre" ColumnName="Nombre" />
+                <ScalarProperty Name="ProductoNombre" ColumnName="ProductoNombre" />
+                <ScalarProperty Name="NumeroDelCliente" ColumnName="NumeroDelCliente" />
+                <ScalarProperty Name="idProdicto" ColumnName="idProdicto" />
+                <ScalarProperty Name="FechaVenta" ColumnName="FechaVenta" />
+                <ScalarProperty Name="cantidadProducto" ColumnName="cantidadProducto" />
+                <ScalarProperty Name="PrecioUnidad" ColumnName="PrecioUnidad" />
+                <ScalarProperty Name="precioPorCantidad" ColumnName="precioPorCantidad" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Codigo_De_Productos">
+            <EntityTypeMapping TypeName="DBS.Codigo_De_Productos">
+              <MappingFragment StoreEntitySet="Codigo_De_Productos">
+                <ScalarProperty Name="Fecha_De_Agregacion" ColumnName="Fecha_De_Agregacion" />
+                <ScalarProperty Name="ID_Producto_Enlazado" ColumnName="ID_Producto_Enlazado" />
+                <ScalarProperty Name="CodigoDelProducto" ColumnName="CodigoDelProducto" />
+                <ScalarProperty Name="ID" ColumnName="ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Cliente_RP">
+            <EntityTypeMapping TypeName="DBS.Cliente_RP">
+              <MappingFragment StoreEntitySet="Cliente_RP">
+                <ScalarProperty Name="Fecha_Registro" ColumnName="Fecha_Registro" />
+                <ScalarProperty Name="Direccion_Cliente" ColumnName="Direccion_Cliente" />
+                <ScalarProperty Name="Correo_Electronico_Cliente_RP" ColumnName="Correo_Electronico_Cliente_RP" />
+                <ScalarProperty Name="Numero_Cliente_RP" ColumnName="Numero_Cliente_RP" />
+                <ScalarProperty Name="Nombre_Cliente_RP" ColumnName="Nombre_Cliente_RP" />
+                <ScalarProperty Name="ID_Cliente_RP" ColumnName="ID_Cliente_RP" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Dispositivo_Info_RP">
+            <EntityTypeMapping TypeName="DBS.Dispositivo_Info_RP">
+              <MappingFragment StoreEntitySet="Dispositivo_Info_RP">
+                <ScalarProperty Name="Marca_Del_Dispositivo" ColumnName="Marca_Del_Dispositivo" />
+                <ScalarProperty Name="Tipo_Del_Dispositivo" ColumnName="Tipo_Del_Dispositivo" />
+                <ScalarProperty Name="ID_Info_Dispositivo" ColumnName="ID_Info_Dispositivo" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Dispositivos_RP">
+            <EntityTypeMapping TypeName="DBS.Dispositivos_RP">
+              <MappingFragment StoreEntitySet="Dispositivos_RP">
+                <ScalarProperty Name="Fecha_Recepcion" ColumnName="Fecha_Recepcion" />
+                <ScalarProperty Name="Numero_de_Serie" ColumnName="Numero_de_Serie" />
+                <ScalarProperty Name="Info_Dispositivo_ID" ColumnName="Info_Dispositivo_ID" />
+                <ScalarProperty Name="Descripcion_Del_Problema_De_Parte_Del_Cliente" ColumnName="Descripcion_Del_Problema_De_Parte_Del_Cliente" />
+                <ScalarProperty Name="Fallo_Encontrado_Del_Dispositivo" ColumnName="Fallo_Encontrado_Del_Dispositivo" />
+                <ScalarProperty Name="ID_Dispositivo_RP" ColumnName="ID_Dispositivo_RP" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Estados_RP">
+            <EntityTypeMapping TypeName="DBS.Estados_RP">
+              <MappingFragment StoreEntitySet="Estados_RP">
+                <ScalarProperty Name="Fecha_Creacion" ColumnName="Fecha_Creacion" />
+                <ScalarProperty Name="Descripcion" ColumnName="Descripcion" />
+                <ScalarProperty Name="Estado" ColumnName="Estado" />
+                <ScalarProperty Name="ID_Estado_RP" ColumnName="ID_Estado_RP" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Marca_Del_Dispositivo_RP">
+            <EntityTypeMapping TypeName="DBS.Marca_Del_Dispositivo_RP">
+              <MappingFragment StoreEntitySet="Marca_Del_Dispositivo_RP">
+                <ScalarProperty Name="Nombre_De_La_Marca" ColumnName="Nombre_De_La_Marca" />
+                <ScalarProperty Name="ID_Marca_Dispositivo_RP" ColumnName="ID_Marca_Dispositivo_RP" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Reparaciones_RP">
+            <EntityTypeMapping TypeName="DBS.Reparaciones_RP">
+              <MappingFragment StoreEntitySet="Reparaciones_RP">
+                <ScalarProperty Name="Notas_Adicionales" ColumnName="Notas_Adicionales" />
+                <ScalarProperty Name="Diagnostico_Inicial" ColumnName="Diagnostico_Inicial" />
+                <ScalarProperty Name="Cobro_Reparacion" ColumnName="Cobro_Reparacion" />
+                <ScalarProperty Name="Fecha_De_Alta" ColumnName="Fecha_De_Alta" />
+                <ScalarProperty Name="Fecha_De_Ingreso" ColumnName="Fecha_De_Ingreso" />
+                <ScalarProperty Name="Estado_RP" ColumnName="Estado_RP" />
+                <ScalarProperty Name="Dispositivo_RP" ColumnName="Dispositivo_RP" />
+                <ScalarProperty Name="Cliente" ColumnName="Cliente" />
+                <ScalarProperty Name="ID_Reparacion_RP" ColumnName="ID_Reparacion_RP" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Tipo_Dispositivos_RP">
+            <EntityTypeMapping TypeName="DBS.Tipo_Dispositivos_RP">
+              <MappingFragment StoreEntitySet="Tipo_Dispositivos_RP">
+                <ScalarProperty Name="Nombre_Tipo" ColumnName="Nombre_Tipo" />
+                <ScalarProperty Name="ID_Tipo_Dispositivo" ColumnName="ID_Tipo_Dispositivo" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="false" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="Ninguno" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>

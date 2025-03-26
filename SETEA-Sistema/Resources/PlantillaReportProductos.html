@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="es">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <title>Inventario SETEA</title>
+  </head>
+  <body>
+    <div
+      style="
+        padding: 20px;
+        font-family: Arial, sans-serif;
+        max-width: 800px;
+        border-radius: 10px;
+        margin: 20px auto;
+      "
+    >
+      <!-- Encabezado -->
+      <div style="text-align: center; margin-bottom: 20px">
+        <div style="font-size: 20px; font-weight: bold; margin-bottom: 5px">
+          Servicios Tecnológicos de América
+        </div>
+        <div style="font-size: 12px; color: #555">
+          Yaguate, San Cristóbal, C. La Trinitaria #23<br />
+          Parroquia de Santa Cruz, Yaguate<br />
+          1(849)581-8773<br />
+          @Setea_oficial
+        </div>
+      </div>
+
+      <!-- Tabla de productos -->
+      <table
+        style="width: 100%; border-collapse: collapse; margin-bottom: 20px"
+      >
+        <thead>
+          <tr style="background-color: #f5f5f5">
+            <th style="padding: 8px; border-bottom: 2px solid #ddd">ID</th>
+            <th style="padding: 8px; border-bottom: 2px solid #ddd">Nombre</th>
+            <th style="padding: 8px; border-bottom: 2px solid #ddd">
+              Descripción
+            </th>
+            <th style="padding: 8px; border-bottom: 2px solid #ddd">
+              Precio Unitario
+            </th>
+            <th style="padding: 8px; border-bottom: 2px solid #ddd">Stock</th>
+            <th style="padding: 8px; border-bottom: 2px solid #ddd">
+              Categoría ID
+            </th>
+            <th style="padding: 8px; border-bottom: 2px solid #ddd">
+              Fecha Registro
+            </th>
+          </tr>
+        </thead>
+        <tbody>
+          @Filas
+        </tbody>
+      </table>
+
+      <!-- Total y detalles -->
+      <div style="margin-top: 20px">
+        <div
+          style="display: flex; justify-content: flex-end; margin-bottom: 15px"
+        >
+          <table style="width: 50%; border-collapse: collapse">
+            <tr>
+              <td
+                style="
+                  padding: 8px;
+                  border: 1px solid #ddd;
+                  font-weight: bold;
+                  text-align: right;
+                "
+              >
+                Total Productos:
+              </td>
+              <td
+                style="padding: 8px; border: 1px solid #ddd; text-align: right"
+              >
+                @TotalProductos
+              </td>
+            </tr>
+            <tr>
+              <td
+                style="
+                  padding: 8px;
+                  border: 1px solid #ddd;
+                  font-weight: bold;
+                  text-align: right;
+                "
+              >
+                Valor Total Inventario:
+              </td>
+              <td
+                style="padding: 8px; border: 1px solid #ddd; text-align: right"
+              >
+                @ValorTotal
+              </td>
+            </tr>
+          </table>
+        </div>
+
+        <div style="display: flex; justify-content: space-between">
+          <div>
+            <div style="font-weight: bold; margin-bottom: 5px">
+              REPORTE DE INVENTARIO
+            </div>
+            <div>REF: SET-INV @ID</div>
+          </div>
+          <div>
+            <div style="font-weight: bold; margin-bottom: 5px">
+              FECHA DE GENERACIÓN
+            </div>
+            <div>@Fecha</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </body>
+</html>

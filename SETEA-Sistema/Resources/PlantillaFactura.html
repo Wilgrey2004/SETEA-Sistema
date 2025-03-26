@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="es">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <title>Factura S E T E A</title>
+  </head>
+  <body>
+    <div
+      style="
+        padding: 20px;
+        font-family: Arial, sans-serif;
+        max-width: 800px;
+        border-radius: 10px;
+        margin: 20px auto;
+      "
+    >
+      <!-- Encabezado -->
+      <div style="text-align: center; margin-bottom: 20px">
+        <div style="font-size: 20px; font-weight: bold; margin-bottom: 5px">
+          Servicios Tecnológicos de América
+        </div>
+        <div style="font-size: 12px; color: #555">
+          Yaguate, San Cristóbal, C. La Trinitaria #23<br />
+          Parroquia de Santa Cruz, Yaguate<br />
+          1(849)581-8773<br />
+          @Setea_oficial
+        </div>
+      </div>
+
+      <!-- Tabla de ventas -->
+      <table
+        style="width: 100%; border-collapse: collapse; margin-bottom: 20px"
+      >
+        <thead>
+          <tr style="background-color: #f5f5f5">
+            <th style="padding: 8px; border-bottom: 2px solid #ddd; width: 20%">
+              Nombre Cliente
+            </th>
+            <th style="padding: 8px; border-bottom: 2px solid #ddd; width: 20%">
+              numero de Telefono
+            </th>
+            <th style="padding: 8px; border-bottom: 2px solid #ddd; width: 20%">
+              Nombre Del Producto
+            </th>
+            <th style="padding: 8px; border-bottom: 2px solid #ddd; width: 15%">
+              ID Producto
+            </th>
+            <th style="padding: 8px; border-bottom: 2px solid #ddd; width: 10%">
+              Cantidad
+            </th>
+            <th style="padding: 8px; border-bottom: 2px solid #ddd; width: 15%">
+              Precio Unidad
+            </th>
+            <th style="padding: 8px; border-bottom: 2px solid #ddd; width: 15%">
+              Total x Cantidad
+            </th>
+            <th style="padding: 8px; border-bottom: 2px solid #ddd; width: 25%">
+              Fecha Venta
+            </th>
+          </tr>
+        </thead>
+        <tbody>
+          @Filas
+        </tbody>
+      </table>
+
+      <!-- Total y detalles -->
+      <div style="margin-top: 20px">
+        <div
+          style="display: flex; justify-content: flex-end; margin-bottom: 15px"
+        >
+          <table style="width: 50%; border-collapse: collapse">
+            <tr>
+              <td
+                style="
+                  padding: 8px;
+                  border: 1px solid #ddd;
+                  font-weight: bold;
+                  text-align: right;
+                "
+              >
+                Total:
+              </td>
+              <td
+                style="padding: 8px; border: 1px solid #ddd; text-align: right"
+              >
+                @Total
+              </td>
+            </tr>
+          </table>
+        </div>
+
+        <div style="display: flex; justify-content: space-between">
+          <div>
+            <div style="font-weight: bold; margin-bottom: 5px">
+              Nº DE FACTURA
+            </div>
+            <div>SET00 @ID</div>
+          </div>
+          <div>
+            <div style="font-weight: bold; margin-bottom: 5px">
+              FECHA DE CREACIÓN
+            </div>
+            <div>@Fecha</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </body>
+</html>
