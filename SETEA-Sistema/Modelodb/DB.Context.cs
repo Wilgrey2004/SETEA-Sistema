@@ -42,5 +42,16 @@ namespace SETEA_Sistema.Modelodb
         public virtual DbSet<Marca_Del_Dispositivo_RP> Marca_Del_Dispositivo_RP { get; set; }
         public virtual DbSet<Reparaciones_RP> Reparaciones_RP { get; set; }
         public virtual DbSet<Tipo_Dispositivos_RP> Tipo_Dispositivos_RP { get; set; }
+        public virtual DbSet<Auditoria> Auditoria { get; set; }
+        public virtual DbSet<Backups> Backups { get; set; }
+        public virtual DbSet<Citas> Citas { get; set; }
+        public virtual DbSet<DetallesVenta> DetallesVenta { get; set; }
+        public virtual DbSet<facturaCaja> facturaCaja { get; set; }
+        public virtual DbSet<Inventario> Inventario { get; set; }
+        public virtual DbSet<Productos> Productos { get; set; }
+        public virtual DbSet<Promociones> Promociones { get; set; }
+        public virtual DbSet<PromocionesProductos> PromocionesProductos { get; set; }
+        public virtual DbSet<sysdiagrams> sysdiagrams { get; set; }
+        public virtual DbSet<Ventas> Ventas { get; set; }
     }
 }

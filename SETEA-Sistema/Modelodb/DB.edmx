@@ -5,12 +5,40 @@
     <!-- SSDL content -->
     <edmx:StorageModels>
     <Schema Namespace="DBS.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="Auditoria">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="UsuarioId" Type="int" Nullable="false" />
+          <Property Name="Accion" Type="nvarchar" MaxLength="255" Nullable="false" />
+          <Property Name="Fecha" Type="datetime" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Backups">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Fecha" Type="datetime" Nullable="false" />
+          <Property Name="Tipo" Type="nvarchar" MaxLength="50" />
+          <Property Name="Ubicacion" Type="nvarchar" MaxLength="255" Nullable="false" />
+        </EntityType>
         <EntityType Name="Categorias">
           <Key>
             <PropertyRef Name="Id" />
           </Key>
           <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="Nombre" Type="nvarchar" MaxLength="50" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Citas">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="ClienteId" Type="int" Nullable="false" />
+          <Property Name="Fecha" Type="datetime" Nullable="false" />
+          <Property Name="Servicio" Type="nvarchar" MaxLength="100" Nullable="false" />
+          <Property Name="RecordatorioEnviado" Type="bit" />
         </EntityType>
         <EntityType Name="Cliente_RP">
           <Key>
@@ -50,6 +78,17 @@
           <Property Name="CodigoDelProducto" Type="varchar" MaxLength="100" Nullable="false" />
           <Property Name="ID_Producto_Enlazado" Type="int" />
           <Property Name="Fecha_De_Agregacion" Type="datetime" />
+          <Property Name="Estado_Codigo" Type="varchar" MaxLength="20" />
+        </EntityType>
+        <EntityType Name="DetallesVenta">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="VentaId" Type="int" Nullable="false" />
+          <Property Name="ProductoId" Type="int" Nullable="false" />
+          <Property Name="Cantidad" Type="int" Nullable="false" />
+          <Property Name="PrecioUnitario" Type="decimal" Precision="18" Scale="2" Nullable="false" />
         </EntityType>
         <EntityType Name="Dispositivo_Info_RP">
           <Key>
@@ -85,6 +124,24 @@
           <Property Name="Descripcion" Type="varchar" MaxLength="255" />
           <Property Name="Fecha_Creacion" Type="datetime" />
         </EntityType>
+        <EntityType Name="facturaCaja">
+          <Key>
+            <PropertyRef Name="idFacturaCaja" />
+          </Key>
+          <Property Name="idFacturaCaja" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="id_ClienteCaja" Type="int" />
+          <Property Name="fecha_Compra" Type="datetime" />
+          <Property Name="totalCompra" Type="decimal" Precision="18" Scale="0" />
+        </EntityType>
+        <EntityType Name="Inventario">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="ProductoId" Type="int" Nullable="false" />
+          <Property Name="Cantidad" Type="int" Nullable="false" />
+          <Property Name="StockMinimo" Type="int" Nullable="false" />
+        </EntityType>
         <EntityType Name="Marca_Del_Dispositivo_RP">
           <Key>
             <PropertyRef Name="ID_Marca_Dispositivo_RP" />
@@ -112,6 +169,36 @@
           <Property Name="FechaCreacion" Type="datetime" />
           <Property Name="Estado" Type="varchar" MaxLength="20" />
         </EntityType>
+        <EntityType Name="Productos">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Nombre" Type="nvarchar" MaxLength="100" Nullable="false" />
+          <Property Name="Descripcion" Type="nvarchar" MaxLength="255" />
+          <Property Name="Precio" Type="decimal" Precision="18" Scale="2" Nullable="false" />
+          <Property Name="CategoriaId" Type="int" Nullable="false" />
+          <Property Name="FechaCreacion" Type="datetime" />
+        </EntityType>
+        <EntityType Name="Promociones">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Nombre" Type="nvarchar" MaxLength="100" Nullable="false" />
+          <Property Name="DescuentoPorcentaje" Type="decimal" Precision="5" Scale="2" />
+          <Property Name="FechaInicio" Type="datetime" Nullable="false" />
+          <Property Name="FechaFin" Type="datetime" Nullable="false" />
+          <Property Name="Activa" Type="bit" />
+        </EntityType>
+        <EntityType Name="PromocionesProductos">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="PromocionId" Type="int" Nullable="false" />
+          <Property Name="ProductoId" Type="int" Nullable="false" />
+        </EntityType>
         <EntityType Name="Reparaciones_RP">
           <Key>
             <PropertyRef Name="ID_Reparacion_RP" />
@@ -133,6 +220,16 @@
           <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="Nombre" Type="nvarchar" MaxLength="50" Nullable="false" />
         </EntityType>
+        <EntityType Name="sysdiagrams">
+          <Key>
+            <PropertyRef Name="diagram_id" />
+          </Key>
+          <Property Name="name" Type="nvarchar" MaxLength="128" Nullable="false" />
+          <Property Name="principal_id" Type="int" Nullable="false" />
+          <Property Name="diagram_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="version" Type="int" />
+          <Property Name="definition" Type="varbinary(max)" />
+        </EntityType>
         <EntityType Name="Tipo_Dispositivos_RP">
           <Key>
             <PropertyRef Name="ID_Tipo_Dispositivo" />
@@ -146,7 +243,7 @@
           </Key>
           <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="Nombre" Type="nvarchar" MaxLength="100" Nullable="false" />
-          <Property Name="Correo" Type="nvarchar" MaxLength="200" Nullable="false" />
+          <Property Name="Correo" Type="nvarchar" MaxLength="100" Nullable="false" />
           <Property Name="Contraseña" Type="nvarchar" MaxLength="200" Nullable="false" />
           <Property Name="RolId" Type="int" Nullable="false" />
           <Property Name="FechaCreacion" Type="datetime" />
@@ -157,8 +254,9 @@
             <PropertyRef Name="id" />
           </Key>
           <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-          <Property Name="Nombre" Type="varchar" MaxLength="100" Nullable="false" />
+          <Property Name="Nombre_cliente" Type="varchar" MaxLength="100" Nullable="false" />
           <Property Name="ProductoNombre" Type="varchar" MaxLength="200" Nullable="false" />
+          <Property Name="codigoDelProducto" Type="varchar" MaxLength="100" Nullable="false" />
           <Property Name="NumeroDelCliente" Type="varchar" MaxLength="20" />
           <Property Name="idProdicto" Type="int" />
           <Property Name="FechaVenta" Type="datetime" />
@@ -166,9 +264,54 @@
           <Property Name="Descuento" Type="int" />
           <Property Name="PrecioUnidad" Type="decimal" Precision="18" Scale="0" />
           <Property Name="precioPorCantidad" Type="decimal" Precision="18" Scale="0" />
-          <Property Name="codigoDelProducto" Type="varchar" MaxLength="100" Nullable="false" />
         </EntityType>
-        <Association Name="FK__Codigo_De__ID_Pr__1332DBDC">
+        <EntityType Name="Ventas">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="ClienteId" Type="int" />
+          <Property Name="Fecha" Type="datetime" Nullable="false" />
+          <Property Name="MetodoPagoId" Type="int" Nullable="false" />
+          <Property Name="Total" Type="decimal" Precision="18" Scale="2" Nullable="false" />
+        </EntityType>
+        <Association Name="FK__Auditoria__Usuar__6E01572D">
+          <End Role="Usuarios" Type="Self.Usuarios" Multiplicity="1" />
+          <End Role="Auditoria" Type="Self.Auditoria" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Usuarios">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Auditoria">
+              <PropertyRef Name="UsuarioId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Citas__ClienteId__6754599E">
+          <End Role="Clientes" Type="Self.Clientes" Multiplicity="1" />
+          <End Role="Citas" Type="Self.Citas" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Clientes">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Citas">
+              <PropertyRef Name="ClienteId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Codigo_De__Estad__79FD19BE">
+          <End Role="estado" Type="Self.estado" Multiplicity="0..1" />
+          <End Role="Codigo_De_Productos" Type="Self.Codigo_De_Productos" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="estado">
+              <PropertyRef Name="Estado" />
+            </Principal>
+            <Dependent Role="Codigo_De_Productos">
+              <PropertyRef Name="Estado_Codigo" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Codigo_De__ID_Pr__65F62111">
           <End Role="producto" Type="Self.producto" Multiplicity="0..1" />
           <End Role="Codigo_De_Productos" Type="Self.Codigo_De_Productos" Multiplicity="*" />
           <ReferentialConstraint>
@@ -180,7 +323,33 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__Dispositi__Info___3E1D39E1">
+        <Association Name="FK__DetallesV__Produ__5BE2A6F2">
+          <End Role="Productos" Type="Self.Productos" Multiplicity="1" />
+          <End Role="DetallesVenta" Type="Self.DetallesVenta" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Productos">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="DetallesVenta">
+              <PropertyRef Name="ProductoId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__DetallesV__Venta__5AEE82B9">
+          <End Role="Ventas" Type="Self.Ventas" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="DetallesVenta" Type="Self.DetallesVenta" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Ventas">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="DetallesVenta">
+              <PropertyRef Name="VentaId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Dispositi__Info___56B3DD81">
           <End Role="Dispositivo_Info_RP" Type="Self.Dispositivo_Info_RP" Multiplicity="0..1" />
           <End Role="Dispositivos_RP" Type="Self.Dispositivos_RP" Multiplicity="*" />
           <ReferentialConstraint>
@@ -192,7 +361,7 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__Dispositi__Marca__3864608B">
+        <Association Name="FK__Dispositi__Marca__50FB042B">
           <End Role="Marca_Del_Dispositivo_RP" Type="Self.Marca_Del_Dispositivo_RP" Multiplicity="0..1" />
           <End Role="Dispositivo_Info_RP" Type="Self.Dispositivo_Info_RP" Multiplicity="*" />
           <ReferentialConstraint>
@@ -204,7 +373,7 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__Dispositi__Tipo___367C1819">
+        <Association Name="FK__Dispositi__Tipo___4F12BBB9">
           <End Role="Tipo_Dispositivos_RP" Type="Self.Tipo_Dispositivos_RP" Multiplicity="0..1" />
           <End Role="Dispositivo_Info_RP" Type="Self.Dispositivo_Info_RP" Multiplicity="*" />
           <ReferentialConstraint>
@@ -216,7 +385,33 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__producto__catego__7A672E12">
+        <Association Name="FK__facturaCa__id_Cl__65370702">
+          <End Role="ClienteCaja" Type="Self.ClienteCaja" Multiplicity="0..1" />
+          <End Role="facturaCaja" Type="Self.facturaCaja" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ClienteCaja">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="facturaCaja">
+              <PropertyRef Name="id_ClienteCaja" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Inventari__Produ__5070F446">
+          <End Role="Productos" Type="Self.Productos" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="Inventario" Type="Self.Inventario" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Productos">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Inventario">
+              <PropertyRef Name="ProductoId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__producto__catego__73852659">
           <End Role="Categorias" Type="Self.Categorias" Multiplicity="0..1" />
           <End Role="producto" Type="Self.producto" Multiplicity="*" />
           <ReferentialConstraint>
@@ -228,7 +423,7 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__producto__Estado__7C4F7684">
+        <Association Name="FK__producto__Estado__36470DEF">
           <End Role="estado" Type="Self.estado" Multiplicity="0..1" />
           <End Role="producto" Type="Self.producto" Multiplicity="*" />
           <ReferentialConstraint>
@@ -240,7 +435,47 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__Reparacio__Clien__43D61337">
+        <Association Name="FK__Productos__Categ__4AB81AF0">
+          <End Role="Categorias" Type="Self.Categorias" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="Productos" Type="Self.Productos" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Categorias">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Productos">
+              <PropertyRef Name="CategoriaId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Promocion__Produ__6383C8BA">
+          <End Role="Productos" Type="Self.Productos" Multiplicity="1" />
+          <End Role="PromocionesProductos" Type="Self.PromocionesProductos" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Productos">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="PromocionesProductos">
+              <PropertyRef Name="ProductoId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Promocion__Promo__628FA481">
+          <End Role="Promociones" Type="Self.Promociones" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="PromocionesProductos" Type="Self.PromocionesProductos" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Promociones">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="PromocionesProductos">
+              <PropertyRef Name="PromocionId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Reparacio__Clien__5C6CB6D7">
           <End Role="Cliente_RP" Type="Self.Cliente_RP" Multiplicity="0..1" />
           <End Role="Reparaciones_RP" Type="Self.Reparaciones_RP" Multiplicity="*" />
           <ReferentialConstraint>
@@ -252,7 +487,7 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__Reparacio__Dispo__45BE5BA9">
+        <Association Name="FK__Reparacio__Dispo__5E54FF49">
           <End Role="Dispositivos_RP" Type="Self.Dispositivos_RP" Multiplicity="0..1" />
           <End Role="Reparaciones_RP" Type="Self.Reparaciones_RP" Multiplicity="*" />
           <ReferentialConstraint>
@@ -264,7 +499,7 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__Reparacio__Estad__47A6A41B">
+        <Association Name="FK__Reparacio__Estad__603D47BB">
           <End Role="Estados_RP" Type="Self.Estados_RP" Multiplicity="0..1" />
           <End Role="Reparaciones_RP" Type="Self.Reparaciones_RP" Multiplicity="*" />
           <ReferentialConstraint>
@@ -276,7 +511,7 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__Usuarios__RolId__3D5E1FD2">
+        <Association Name="FK__Usuarios__RolId__3C69FB99">
           <End Role="Roles" Type="Self.Roles" Multiplicity="1">
             <OnDelete Action="Cascade" />
           </End>
@@ -290,7 +525,7 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__VentaEnCa__idPro__0B91BA14">
+        <Association Name="FK__VentaEnCa__idPro__7EC1CEDB">
           <End Role="producto" Type="Self.producto" Multiplicity="0..1" />
           <End Role="VentaEnCaja" Type="Self.VentaEnCaja" Multiplicity="*" />
           <ReferentialConstraint>
@@ -302,67 +537,150 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="FK__Ventas__ClienteI__5535A963">
+          <End Role="Clientes" Type="Self.Clientes" Multiplicity="0..1" />
+          <End Role="Ventas" Type="Self.Ventas" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Clientes">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Ventas">
+              <PropertyRef Name="ClienteId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Ventas__MetodoPa__5629CD9C">
+          <End Role="MetodosPago" Type="Self.MetodosPago" Multiplicity="1" />
+          <End Role="Ventas" Type="Self.Ventas" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="MetodosPago">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Ventas">
+              <PropertyRef Name="MetodoPagoId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <EntityContainer Name="DBSStoreContainer">
+          <EntitySet Name="Auditoria" EntityType="Self.Auditoria" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Backups" EntityType="Self.Backups" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Categorias" EntityType="Self.Categorias" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Citas" EntityType="Self.Citas" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Cliente_RP" EntityType="Self.Cliente_RP" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="ClienteCaja" EntityType="Self.ClienteCaja" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Clientes" EntityType="Self.Clientes" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Codigo_De_Productos" EntityType="Self.Codigo_De_Productos" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="DetallesVenta" EntityType="Self.DetallesVenta" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Dispositivo_Info_RP" EntityType="Self.Dispositivo_Info_RP" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Dispositivos_RP" EntityType="Self.Dispositivos_RP" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="estado" EntityType="Self.estado" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Estados_RP" EntityType="Self.Estados_RP" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="facturaCaja" EntityType="Self.facturaCaja" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Inventario" EntityType="Self.Inventario" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Marca_Del_Dispositivo_RP" EntityType="Self.Marca_Del_Dispositivo_RP" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="MetodosPago" EntityType="Self.MetodosPago" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="producto" EntityType="Self.producto" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Productos" EntityType="Self.Productos" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Promociones" EntityType="Self.Promociones" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="PromocionesProductos" EntityType="Self.PromocionesProductos" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Reparaciones_RP" EntityType="Self.Reparaciones_RP" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Roles" EntityType="Self.Roles" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagrams" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Tipo_Dispositivos_RP" EntityType="Self.Tipo_Dispositivos_RP" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Usuarios" EntityType="Self.Usuarios" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="VentaEnCaja" EntityType="Self.VentaEnCaja" Schema="dbo" store:Type="Tables" />
-          <AssociationSet Name="FK__Codigo_De__ID_Pr__1332DBDC" Association="Self.FK__Codigo_De__ID_Pr__1332DBDC">
+          <EntitySet Name="Ventas" EntityType="Self.Ventas" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="FK__Auditoria__Usuar__6E01572D" Association="Self.FK__Auditoria__Usuar__6E01572D">
+            <End Role="Usuarios" EntitySet="Usuarios" />
+            <End Role="Auditoria" EntitySet="Auditoria" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Citas__ClienteId__6754599E" Association="Self.FK__Citas__ClienteId__6754599E">
+            <End Role="Clientes" EntitySet="Clientes" />
+            <End Role="Citas" EntitySet="Citas" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Codigo_De__Estad__79FD19BE" Association="Self.FK__Codigo_De__Estad__79FD19BE">
+            <End Role="estado" EntitySet="estado" />
+            <End Role="Codigo_De_Productos" EntitySet="Codigo_De_Productos" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Codigo_De__ID_Pr__65F62111" Association="Self.FK__Codigo_De__ID_Pr__65F62111">
             <End Role="producto" EntitySet="producto" />
             <End Role="Codigo_De_Productos" EntitySet="Codigo_De_Productos" />
           </AssociationSet>
-          <AssociationSet Name="FK__Dispositi__Info___3E1D39E1" Association="Self.FK__Dispositi__Info___3E1D39E1">
+          <AssociationSet Name="FK__DetallesV__Produ__5BE2A6F2" Association="Self.FK__DetallesV__Produ__5BE2A6F2">
+            <End Role="Productos" EntitySet="Productos" />
+            <End Role="DetallesVenta" EntitySet="DetallesVenta" />
+          </AssociationSet>
+          <AssociationSet Name="FK__DetallesV__Venta__5AEE82B9" Association="Self.FK__DetallesV__Venta__5AEE82B9">
+            <End Role="Ventas" EntitySet="Ventas" />
+            <End Role="DetallesVenta" EntitySet="DetallesVenta" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Dispositi__Info___56B3DD81" Association="Self.FK__Dispositi__Info___56B3DD81">
             <End Role="Dispositivo_Info_RP" EntitySet="Dispositivo_Info_RP" />
             <End Role="Dispositivos_RP" EntitySet="Dispositivos_RP" />
           </AssociationSet>
-          <AssociationSet Name="FK__Dispositi__Marca__3864608B" Association="Self.FK__Dispositi__Marca__3864608B">
+          <AssociationSet Name="FK__Dispositi__Marca__50FB042B" Association="Self.FK__Dispositi__Marca__50FB042B">
             <End Role="Marca_Del_Dispositivo_RP" EntitySet="Marca_Del_Dispositivo_RP" />
             <End Role="Dispositivo_Info_RP" EntitySet="Dispositivo_Info_RP" />
           </AssociationSet>
-          <AssociationSet Name="FK__Dispositi__Tipo___367C1819" Association="Self.FK__Dispositi__Tipo___367C1819">
+          <AssociationSet Name="FK__Dispositi__Tipo___4F12BBB9" Association="Self.FK__Dispositi__Tipo___4F12BBB9">
             <End Role="Tipo_Dispositivos_RP" EntitySet="Tipo_Dispositivos_RP" />
             <End Role="Dispositivo_Info_RP" EntitySet="Dispositivo_Info_RP" />
           </AssociationSet>
-          <AssociationSet Name="FK__producto__catego__7A672E12" Association="Self.FK__producto__catego__7A672E12">
+          <AssociationSet Name="FK__facturaCa__id_Cl__65370702" Association="Self.FK__facturaCa__id_Cl__65370702">
+            <End Role="ClienteCaja" EntitySet="ClienteCaja" />
+            <End Role="facturaCaja" EntitySet="facturaCaja" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Inventari__Produ__5070F446" Association="Self.FK__Inventari__Produ__5070F446">
+            <End Role="Productos" EntitySet="Productos" />
+            <End Role="Inventario" EntitySet="Inventario" />
+          </AssociationSet>
+          <AssociationSet Name="FK__producto__catego__73852659" Association="Self.FK__producto__catego__73852659">
             <End Role="Categorias" EntitySet="Categorias" />
             <End Role="producto" EntitySet="producto" />
           </AssociationSet>
-          <AssociationSet Name="FK__producto__Estado__7C4F7684" Association="Self.FK__producto__Estado__7C4F7684">
+          <AssociationSet Name="FK__producto__Estado__36470DEF" Association="Self.FK__producto__Estado__36470DEF">
             <End Role="estado" EntitySet="estado" />
             <End Role="producto" EntitySet="producto" />
           </AssociationSet>
-          <AssociationSet Name="FK__Reparacio__Clien__43D61337" Association="Self.FK__Reparacio__Clien__43D61337">
+          <AssociationSet Name="FK__Productos__Categ__4AB81AF0" Association="Self.FK__Productos__Categ__4AB81AF0">
+            <End Role="Categorias" EntitySet="Categorias" />
+            <End Role="Productos" EntitySet="Productos" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Promocion__Produ__6383C8BA" Association="Self.FK__Promocion__Produ__6383C8BA">
+            <End Role="Productos" EntitySet="Productos" />
+            <End Role="PromocionesProductos" EntitySet="PromocionesProductos" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Promocion__Promo__628FA481" Association="Self.FK__Promocion__Promo__628FA481">
+            <End Role="Promociones" EntitySet="Promociones" />
+            <End Role="PromocionesProductos" EntitySet="PromocionesProductos" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Reparacio__Clien__5C6CB6D7" Association="Self.FK__Reparacio__Clien__5C6CB6D7">
             <End Role="Cliente_RP" EntitySet="Cliente_RP" />
             <End Role="Reparaciones_RP" EntitySet="Reparaciones_RP" />
           </AssociationSet>
-          <AssociationSet Name="FK__Reparacio__Dispo__45BE5BA9" Association="Self.FK__Reparacio__Dispo__45BE5BA9">
+          <AssociationSet Name="FK__Reparacio__Dispo__5E54FF49" Association="Self.FK__Reparacio__Dispo__5E54FF49">
             <End Role="Dispositivos_RP" EntitySet="Dispositivos_RP" />
             <End Role="Reparaciones_RP" EntitySet="Reparaciones_RP" />
           </AssociationSet>
-          <AssociationSet Name="FK__Reparacio__Estad__47A6A41B" Association="Self.FK__Reparacio__Estad__47A6A41B">
+          <AssociationSet Name="FK__Reparacio__Estad__603D47BB" Association="Self.FK__Reparacio__Estad__603D47BB">
             <End Role="Estados_RP" EntitySet="Estados_RP" />
             <End Role="Reparaciones_RP" EntitySet="Reparaciones_RP" />
           </AssociationSet>
-          <AssociationSet Name="FK__Usuarios__RolId__3D5E1FD2" Association="Self.FK__Usuarios__RolId__3D5E1FD2">
+          <AssociationSet Name="FK__Usuarios__RolId__3C69FB99" Association="Self.FK__Usuarios__RolId__3C69FB99">
             <End Role="Roles" EntitySet="Roles" />
             <End Role="Usuarios" EntitySet="Usuarios" />
           </AssociationSet>
-          <AssociationSet Name="FK__VentaEnCa__idPro__0B91BA14" Association="Self.FK__VentaEnCa__idPro__0B91BA14">
+          <AssociationSet Name="FK__VentaEnCa__idPro__7EC1CEDB" Association="Self.FK__VentaEnCa__idPro__7EC1CEDB">
             <End Role="producto" EntitySet="producto" />
             <End Role="VentaEnCaja" EntitySet="VentaEnCaja" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Ventas__ClienteI__5535A963" Association="Self.FK__Ventas__ClienteI__5535A963">
+            <End Role="Clientes" EntitySet="Clientes" />
+            <End Role="Ventas" EntitySet="Ventas" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Ventas__MetodoPa__5629CD9C" Association="Self.FK__Ventas__MetodoPa__5629CD9C">
+            <End Role="MetodosPago" EntitySet="MetodosPago" />
+            <End Role="Ventas" EntitySet="Ventas" />
           </AssociationSet>
         </EntityContainer>
       </Schema></edmx:StorageModels>
@@ -376,6 +694,7 @@
           <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="Nombre" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
           <NavigationProperty Name="producto" Relationship="Self.FK__producto__catego__59063A47" FromRole="Categorias" ToRole="producto" />
+          <NavigationProperty Name="Productos" Relationship="DBS.FK__Productos__Categ__4AB81AF0" FromRole="Categorias" ToRole="Productos" />
         </EntityType>
         <EntityType Name="ClienteCaja">
           <Key>
@@ -384,6 +703,7 @@
           <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="nombre" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
           <Property Name="fechaRegistro" Type="DateTime" Precision="3" />
+          <NavigationProperty Name="facturaCaja" Relationship="DBS.FK__facturaCa__id_Cl__65370702" FromRole="ClienteCaja" ToRole="facturaCaja" />
         </EntityType>
         <EntityType Name="Clientes">
           <Key>
@@ -395,6 +715,8 @@
           <Property Name="Telefono" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
           <Property Name="Clasificacion" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
           <Property Name="FechaRegistro" Type="DateTime" Precision="3" />
+          <NavigationProperty Name="Citas" Relationship="DBS.FK__Citas__ClienteId__6754599E" FromRole="Clientes" ToRole="Citas" />
+          <NavigationProperty Name="Ventas" Relationship="DBS.FK__Ventas__ClienteI__5535A963" FromRole="Clientes" ToRole="Ventas" />
         </EntityType>
         <EntityType Name="estado">
           <Key>
@@ -402,6 +724,7 @@
           </Key>
           <Property Name="Estado1" Type="String" MaxLength="20" FixedLength="false" Unicode="false" Nullable="false" />
           <NavigationProperty Name="producto" Relationship="Self.FK__producto__Estado__5AEE82B9" FromRole="estado" ToRole="producto" />
+          <NavigationProperty Name="Codigo_De_Productos" Relationship="DBS.FK__Codigo_De__Estad__79FD19BE" FromRole="estado" ToRole="Codigo_De_Productos" />
         </EntityType>
         <EntityType Name="MetodosPago">
           <Key>
@@ -409,6 +732,7 @@
           </Key>
           <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="Metodo" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <NavigationProperty Name="Ventas" Relationship="DBS.FK__Ventas__MetodoPa__5629CD9C" FromRole="MetodosPago" ToRole="Ventas" />
         </EntityType>
         <EntityType Name="producto">
           <Key>
@@ -441,19 +765,19 @@
           </Key>
           <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="Nombre" Type="String" MaxLength="100" FixedLength="false" Unicode="true" Nullable="false" />
-          <Property Name="Correo" Type="String" MaxLength="200" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Correo" Type="String" MaxLength="100" FixedLength="false" Unicode="true" Nullable="false" />
           <Property Name="Contraseña" Type="String" MaxLength="200" FixedLength="false" Unicode="true" Nullable="false" />
           <Property Name="RolId" Type="Int32" Nullable="false" />
           <Property Name="FechaCreacion" Type="DateTime" Precision="3" />
           <Property Name="Ultima_Vez" Type="DateTime" Precision="3" />
           <NavigationProperty Name="Roles" Relationship="Self.FK__Usuarios__RolId__3D5E1FD2" FromRole="Usuarios" ToRole="Roles" />
+          <NavigationProperty Name="Auditoria" Relationship="DBS.FK__Auditoria__Usuar__6E01572D" FromRole="Usuarios" ToRole="Auditoria" />
         </EntityType>
         <EntityType Name="VentaEnCaja">
           <Key>
             <PropertyRef Name="id" />
           </Key>
           <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="Nombre" Type="String" MaxLength="100" FixedLength="false" Unicode="false" Nullable="false" />
           <Property Name="ProductoNombre" Type="String" MaxLength="200" FixedLength="false" Unicode="false" Nullable="false" />
           <Property Name="NumeroDelCliente" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
           <Property Name="idProdicto" Type="Int32" />
@@ -462,8 +786,9 @@
           <Property Name="PrecioUnidad" Type="Decimal" Precision="18" Scale="0" />
           <Property Name="precioPorCantidad" Type="Decimal" Precision="18" Scale="0" />
           <NavigationProperty Name="producto" Relationship="Self.FK__VentaEnCa__idPro__5EBF139D" FromRole="VentaEnCaja" ToRole="producto" />
-          <Property Name="Descuento" Type="Int32" />
+          <Property Name="Nombre_cliente" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="false" />
           <Property Name="codigoDelProducto" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="Descuento" Type="Int32" />
         </EntityType>
         <Association Name="FK__producto__catego__59063A47">
           <End Role="Categorias" Type="Self.Categorias" Multiplicity="0..1" />
@@ -577,6 +902,65 @@
             <End Role="Estados_RP" EntitySet="Estados_RP" />
             <End Role="Reparaciones_RP" EntitySet="Reparaciones_RP" />
           </AssociationSet>
+          <AssociationSet Name="FK__Codigo_De__Estad__79FD19BE" Association="DBS.FK__Codigo_De__Estad__79FD19BE">
+            <End Role="estado" EntitySet="estado" />
+            <End Role="Codigo_De_Productos" EntitySet="Codigo_De_Productos" />
+          </AssociationSet>
+          <EntitySet Name="Auditoria" EntityType="DBS.Auditoria" />
+          <EntitySet Name="Backups" EntityType="DBS.Backups" />
+          <EntitySet Name="Citas" EntityType="DBS.Citas" />
+          <EntitySet Name="DetallesVenta" EntityType="DBS.DetallesVenta" />
+          <EntitySet Name="facturaCaja" EntityType="DBS.facturaCaja" />
+          <EntitySet Name="Inventario" EntityType="DBS.Inventario" />
+          <EntitySet Name="Productos" EntityType="DBS.Productos" />
+          <EntitySet Name="Promociones" EntityType="DBS.Promociones" />
+          <EntitySet Name="PromocionesProductos" EntityType="DBS.PromocionesProductos" />
+          <EntitySet Name="sysdiagrams" EntityType="DBS.sysdiagrams" />
+          <EntitySet Name="Ventas" EntityType="DBS.Ventas" />
+          <AssociationSet Name="FK__Auditoria__Usuar__6E01572D" Association="DBS.FK__Auditoria__Usuar__6E01572D">
+            <End Role="Usuarios" EntitySet="Usuarios" />
+            <End Role="Auditoria" EntitySet="Auditoria" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Productos__Categ__4AB81AF0" Association="DBS.FK__Productos__Categ__4AB81AF0">
+            <End Role="Categorias" EntitySet="Categorias" />
+            <End Role="Productos" EntitySet="Productos" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Citas__ClienteId__6754599E" Association="DBS.FK__Citas__ClienteId__6754599E">
+            <End Role="Clientes" EntitySet="Clientes" />
+            <End Role="Citas" EntitySet="Citas" />
+          </AssociationSet>
+          <AssociationSet Name="FK__facturaCa__id_Cl__65370702" Association="DBS.FK__facturaCa__id_Cl__65370702">
+            <End Role="ClienteCaja" EntitySet="ClienteCaja" />
+            <End Role="facturaCaja" EntitySet="facturaCaja" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Ventas__ClienteI__5535A963" Association="DBS.FK__Ventas__ClienteI__5535A963">
+            <End Role="Clientes" EntitySet="Clientes" />
+            <End Role="Ventas" EntitySet="Ventas" />
+          </AssociationSet>
+          <AssociationSet Name="FK__DetallesV__Produ__5BE2A6F2" Association="DBS.FK__DetallesV__Produ__5BE2A6F2">
+            <End Role="Productos" EntitySet="Productos" />
+            <End Role="DetallesVenta" EntitySet="DetallesVenta" />
+          </AssociationSet>
+          <AssociationSet Name="FK__DetallesV__Venta__5AEE82B9" Association="DBS.FK__DetallesV__Venta__5AEE82B9">
+            <End Role="Ventas" EntitySet="Ventas" />
+            <End Role="DetallesVenta" EntitySet="DetallesVenta" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Inventari__Produ__5070F446" Association="DBS.FK__Inventari__Produ__5070F446">
+            <End Role="Productos" EntitySet="Productos" />
+            <End Role="Inventario" EntitySet="Inventario" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Ventas__MetodoPa__5629CD9C" Association="DBS.FK__Ventas__MetodoPa__5629CD9C">
+            <End Role="MetodosPago" EntitySet="MetodosPago" />
+            <End Role="Ventas" EntitySet="Ventas" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Promocion__Produ__6383C8BA" Association="DBS.FK__Promocion__Produ__6383C8BA">
+            <End Role="Productos" EntitySet="Productos" />
+            <End Role="PromocionesProductos" EntitySet="PromocionesProductos" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Promocion__Promo__628FA481" Association="DBS.FK__Promocion__Promo__628FA481">
+            <End Role="Promociones" EntitySet="Promociones" />
+            <End Role="PromocionesProductos" EntitySet="PromocionesProductos" />
+          </AssociationSet>
         </EntityContainer>
         <EntityType Name="Codigo_De_Productos">
           <Key>
@@ -587,6 +971,8 @@
           <Property Name="ID_Producto_Enlazado" Type="Int32" />
           <NavigationProperty Name="producto" Relationship="DBS.FK__Codigo_De__ID_Pr__7F2BE32F" FromRole="Codigo_De_Productos" ToRole="producto" />
           <Property Name="Fecha_De_Agregacion" Type="DateTime" Precision="3" />
+          <Property Name="Estado_Codigo" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="estado" Relationship="DBS.FK__Codigo_De__Estad__79FD19BE" FromRole="Codigo_De_Productos" ToRole="estado" />
         </EntityType>
         <Association Name="FK__Codigo_De__ID_Pr__7F2BE32F">
           <End Type="DBS.producto" Role="producto" Multiplicity="0..1" />
@@ -751,6 +1137,280 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="FK__Codigo_De__Estad__79FD19BE">
+          <End Type="DBS.estado" Role="estado" Multiplicity="0..1" />
+          <End Type="DBS.Codigo_De_Productos" Role="Codigo_De_Productos" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="estado">
+              <PropertyRef Name="Estado1" />
+            </Principal>
+            <Dependent Role="Codigo_De_Productos">
+              <PropertyRef Name="Estado_Codigo" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityType Name="Auditoria">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="UsuarioId" Type="Int32" Nullable="false" />
+          <Property Name="Accion" Type="String" Nullable="false" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="Fecha" Type="DateTime" Nullable="false" Precision="3" />
+          <NavigationProperty Name="Usuarios" Relationship="DBS.FK__Auditoria__Usuar__6E01572D" FromRole="Auditoria" ToRole="Usuarios" />
+        </EntityType>
+        <EntityType Name="Backups">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Fecha" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="Tipo" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Ubicacion" Type="String" Nullable="false" MaxLength="255" FixedLength="false" Unicode="true" />
+        </EntityType>
+        <EntityType Name="Citas">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="ClienteId" Type="Int32" Nullable="false" />
+          <Property Name="Fecha" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="Servicio" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="RecordatorioEnviado" Type="Boolean" />
+          <NavigationProperty Name="Clientes" Relationship="DBS.FK__Citas__ClienteId__6754599E" FromRole="Citas" ToRole="Clientes" />
+        </EntityType>
+        <EntityType Name="DetallesVenta">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="VentaId" Type="Int32" Nullable="false" />
+          <Property Name="ProductoId" Type="Int32" Nullable="false" />
+          <Property Name="Cantidad" Type="Int32" Nullable="false" />
+          <Property Name="PrecioUnitario" Type="Decimal" Nullable="false" Precision="18" Scale="2" />
+          <NavigationProperty Name="Productos" Relationship="DBS.FK__DetallesV__Produ__5BE2A6F2" FromRole="DetallesVenta" ToRole="Productos" />
+          <NavigationProperty Name="Ventas" Relationship="DBS.FK__DetallesV__Venta__5AEE82B9" FromRole="DetallesVenta" ToRole="Ventas" />
+        </EntityType>
+        <EntityType Name="facturaCaja">
+          <Key>
+            <PropertyRef Name="idFacturaCaja" />
+          </Key>
+          <Property Name="idFacturaCaja" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="id_ClienteCaja" Type="Int32" />
+          <Property Name="fecha_Compra" Type="DateTime" Precision="3" />
+          <Property Name="totalCompra" Type="Decimal" Precision="18" Scale="0" />
+          <NavigationProperty Name="ClienteCaja" Relationship="DBS.FK__facturaCa__id_Cl__65370702" FromRole="facturaCaja" ToRole="ClienteCaja" />
+        </EntityType>
+        <EntityType Name="Inventario">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="ProductoId" Type="Int32" Nullable="false" />
+          <Property Name="Cantidad" Type="Int32" Nullable="false" />
+          <Property Name="StockMinimo" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Productos" Relationship="DBS.FK__Inventari__Produ__5070F446" FromRole="Inventario" ToRole="Productos" />
+        </EntityType>
+        <EntityType Name="Productos">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Nombre" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="Descripcion" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="Precio" Type="Decimal" Nullable="false" Precision="18" Scale="2" />
+          <Property Name="CategoriaId" Type="Int32" Nullable="false" />
+          <Property Name="FechaCreacion" Type="DateTime" Precision="3" />
+          <NavigationProperty Name="Categorias" Relationship="DBS.FK__Productos__Categ__4AB81AF0" FromRole="Productos" ToRole="Categorias" />
+          <NavigationProperty Name="DetallesVenta" Relationship="DBS.FK__DetallesV__Produ__5BE2A6F2" FromRole="Productos" ToRole="DetallesVenta" />
+          <NavigationProperty Name="Inventario" Relationship="DBS.FK__Inventari__Produ__5070F446" FromRole="Productos" ToRole="Inventario" />
+          <NavigationProperty Name="PromocionesProductos" Relationship="DBS.FK__Promocion__Produ__6383C8BA" FromRole="Productos" ToRole="PromocionesProductos" />
+        </EntityType>
+        <EntityType Name="Promociones">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Nombre" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="DescuentoPorcentaje" Type="Decimal" Precision="5" Scale="2" />
+          <Property Name="FechaInicio" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="FechaFin" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="Activa" Type="Boolean" />
+          <NavigationProperty Name="PromocionesProductos" Relationship="DBS.FK__Promocion__Promo__628FA481" FromRole="Promociones" ToRole="PromocionesProductos" />
+        </EntityType>
+        <EntityType Name="PromocionesProductos">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="PromocionId" Type="Int32" Nullable="false" />
+          <Property Name="ProductoId" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Productos" Relationship="DBS.FK__Promocion__Produ__6383C8BA" FromRole="PromocionesProductos" ToRole="Productos" />
+          <NavigationProperty Name="Promociones" Relationship="DBS.FK__Promocion__Promo__628FA481" FromRole="PromocionesProductos" ToRole="Promociones" />
+        </EntityType>
+        <EntityType Name="sysdiagrams">
+          <Key>
+            <PropertyRef Name="diagram_id" />
+          </Key>
+          <Property Name="name" Type="String" Nullable="false" MaxLength="128" FixedLength="false" Unicode="true" />
+          <Property Name="principal_id" Type="Int32" Nullable="false" />
+          <Property Name="diagram_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="version" Type="Int32" />
+          <Property Name="definition" Type="Binary" MaxLength="Max" FixedLength="false" />
+        </EntityType>
+        <EntityType Name="Ventas">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="ClienteId" Type="Int32" />
+          <Property Name="Fecha" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="MetodoPagoId" Type="Int32" Nullable="false" />
+          <Property Name="Total" Type="Decimal" Nullable="false" Precision="18" Scale="2" />
+          <NavigationProperty Name="Clientes" Relationship="DBS.FK__Ventas__ClienteI__5535A963" FromRole="Ventas" ToRole="Clientes" />
+          <NavigationProperty Name="DetallesVenta" Relationship="DBS.FK__DetallesV__Venta__5AEE82B9" FromRole="Ventas" ToRole="DetallesVenta" />
+          <NavigationProperty Name="MetodosPago" Relationship="DBS.FK__Ventas__MetodoPa__5629CD9C" FromRole="Ventas" ToRole="MetodosPago" />
+        </EntityType>
+        <Association Name="FK__Auditoria__Usuar__6E01572D">
+          <End Type="DBS.Usuarios" Role="Usuarios" Multiplicity="1" />
+          <End Type="DBS.Auditoria" Role="Auditoria" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Usuarios">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Auditoria">
+              <PropertyRef Name="UsuarioId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Productos__Categ__4AB81AF0">
+          <End Type="DBS.Categorias" Role="Categorias" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Type="DBS.Productos" Role="Productos" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Categorias">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Productos">
+              <PropertyRef Name="CategoriaId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Citas__ClienteId__6754599E">
+          <End Type="DBS.Clientes" Role="Clientes" Multiplicity="1" />
+          <End Type="DBS.Citas" Role="Citas" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Clientes">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Citas">
+              <PropertyRef Name="ClienteId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__facturaCa__id_Cl__65370702">
+          <End Type="DBS.ClienteCaja" Role="ClienteCaja" Multiplicity="0..1" />
+          <End Type="DBS.facturaCaja" Role="facturaCaja" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ClienteCaja">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="facturaCaja">
+              <PropertyRef Name="id_ClienteCaja" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Ventas__ClienteI__5535A963">
+          <End Type="DBS.Clientes" Role="Clientes" Multiplicity="0..1" />
+          <End Type="DBS.Ventas" Role="Ventas" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Clientes">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Ventas">
+              <PropertyRef Name="ClienteId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__DetallesV__Produ__5BE2A6F2">
+          <End Type="DBS.Productos" Role="Productos" Multiplicity="1" />
+          <End Type="DBS.DetallesVenta" Role="DetallesVenta" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Productos">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="DetallesVenta">
+              <PropertyRef Name="ProductoId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__DetallesV__Venta__5AEE82B9">
+          <End Type="DBS.Ventas" Role="Ventas" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Type="DBS.DetallesVenta" Role="DetallesVenta" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Ventas">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="DetallesVenta">
+              <PropertyRef Name="VentaId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Inventari__Produ__5070F446">
+          <End Type="DBS.Productos" Role="Productos" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Type="DBS.Inventario" Role="Inventario" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Productos">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Inventario">
+              <PropertyRef Name="ProductoId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Ventas__MetodoPa__5629CD9C">
+          <End Type="DBS.MetodosPago" Role="MetodosPago" Multiplicity="1" />
+          <End Type="DBS.Ventas" Role="Ventas" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="MetodosPago">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Ventas">
+              <PropertyRef Name="MetodoPagoId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Promocion__Produ__6383C8BA">
+          <End Type="DBS.Productos" Role="Productos" Multiplicity="1" />
+          <End Type="DBS.PromocionesProductos" Role="PromocionesProductos" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Productos">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="PromocionesProductos">
+              <PropertyRef Name="ProductoId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Promocion__Promo__628FA481">
+          <End Type="DBS.Promociones" Role="Promociones" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Type="DBS.PromocionesProductos" Role="PromocionesProductos" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Promociones">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="PromocionesProductos">
+              <PropertyRef Name="PromocionId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -839,10 +1499,10 @@
           <EntitySetMapping Name="VentaEnCaja">
             <EntityTypeMapping TypeName="DBS.VentaEnCaja">
               <MappingFragment StoreEntitySet="VentaEnCaja">
-                <ScalarProperty Name="codigoDelProducto" ColumnName="codigoDelProducto" />
                 <ScalarProperty Name="Descuento" ColumnName="Descuento" />
+                <ScalarProperty Name="codigoDelProducto" ColumnName="codigoDelProducto" />
+                <ScalarProperty Name="Nombre_cliente" ColumnName="Nombre_cliente" />
                 <ScalarProperty Name="id" ColumnName="id" />
-                <ScalarProperty Name="Nombre" ColumnName="Nombre" />
                 <ScalarProperty Name="ProductoNombre" ColumnName="ProductoNombre" />
                 <ScalarProperty Name="NumeroDelCliente" ColumnName="NumeroDelCliente" />
                 <ScalarProperty Name="idProdicto" ColumnName="idProdicto" />
@@ -856,6 +1516,7 @@
           <EntitySetMapping Name="Codigo_De_Productos">
             <EntityTypeMapping TypeName="DBS.Codigo_De_Productos">
               <MappingFragment StoreEntitySet="Codigo_De_Productos">
+                <ScalarProperty Name="Estado_Codigo" ColumnName="Estado_Codigo" />
                 <ScalarProperty Name="Fecha_De_Agregacion" ColumnName="Fecha_De_Agregacion" />
                 <ScalarProperty Name="ID_Producto_Enlazado" ColumnName="ID_Producto_Enlazado" />
                 <ScalarProperty Name="CodigoDelProducto" ColumnName="CodigoDelProducto" />
@@ -934,6 +1595,123 @@
               <MappingFragment StoreEntitySet="Tipo_Dispositivos_RP">
                 <ScalarProperty Name="Nombre_Tipo" ColumnName="Nombre_Tipo" />
                 <ScalarProperty Name="ID_Tipo_Dispositivo" ColumnName="ID_Tipo_Dispositivo" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Auditoria">
+            <EntityTypeMapping TypeName="DBS.Auditoria">
+              <MappingFragment StoreEntitySet="Auditoria">
+                <ScalarProperty Name="Fecha" ColumnName="Fecha" />
+                <ScalarProperty Name="Accion" ColumnName="Accion" />
+                <ScalarProperty Name="UsuarioId" ColumnName="UsuarioId" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Backups">
+            <EntityTypeMapping TypeName="DBS.Backups">
+              <MappingFragment StoreEntitySet="Backups">
+                <ScalarProperty Name="Ubicacion" ColumnName="Ubicacion" />
+                <ScalarProperty Name="Tipo" ColumnName="Tipo" />
+                <ScalarProperty Name="Fecha" ColumnName="Fecha" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Citas">
+            <EntityTypeMapping TypeName="DBS.Citas">
+              <MappingFragment StoreEntitySet="Citas">
+                <ScalarProperty Name="RecordatorioEnviado" ColumnName="RecordatorioEnviado" />
+                <ScalarProperty Name="Servicio" ColumnName="Servicio" />
+                <ScalarProperty Name="Fecha" ColumnName="Fecha" />
+                <ScalarProperty Name="ClienteId" ColumnName="ClienteId" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="DetallesVenta">
+            <EntityTypeMapping TypeName="DBS.DetallesVenta">
+              <MappingFragment StoreEntitySet="DetallesVenta">
+                <ScalarProperty Name="PrecioUnitario" ColumnName="PrecioUnitario" />
+                <ScalarProperty Name="Cantidad" ColumnName="Cantidad" />
+                <ScalarProperty Name="ProductoId" ColumnName="ProductoId" />
+                <ScalarProperty Name="VentaId" ColumnName="VentaId" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="facturaCaja">
+            <EntityTypeMapping TypeName="DBS.facturaCaja">
+              <MappingFragment StoreEntitySet="facturaCaja">
+                <ScalarProperty Name="totalCompra" ColumnName="totalCompra" />
+                <ScalarProperty Name="fecha_Compra" ColumnName="fecha_Compra" />
+                <ScalarProperty Name="id_ClienteCaja" ColumnName="id_ClienteCaja" />
+                <ScalarProperty Name="idFacturaCaja" ColumnName="idFacturaCaja" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Inventario">
+            <EntityTypeMapping TypeName="DBS.Inventario">
+              <MappingFragment StoreEntitySet="Inventario">
+                <ScalarProperty Name="StockMinimo" ColumnName="StockMinimo" />
+                <ScalarProperty Name="Cantidad" ColumnName="Cantidad" />
+                <ScalarProperty Name="ProductoId" ColumnName="ProductoId" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Productos">
+            <EntityTypeMapping TypeName="DBS.Productos">
+              <MappingFragment StoreEntitySet="Productos">
+                <ScalarProperty Name="FechaCreacion" ColumnName="FechaCreacion" />
+                <ScalarProperty Name="CategoriaId" ColumnName="CategoriaId" />
+                <ScalarProperty Name="Precio" ColumnName="Precio" />
+                <ScalarProperty Name="Descripcion" ColumnName="Descripcion" />
+                <ScalarProperty Name="Nombre" ColumnName="Nombre" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Promociones">
+            <EntityTypeMapping TypeName="DBS.Promociones">
+              <MappingFragment StoreEntitySet="Promociones">
+                <ScalarProperty Name="Activa" ColumnName="Activa" />
+                <ScalarProperty Name="FechaFin" ColumnName="FechaFin" />
+                <ScalarProperty Name="FechaInicio" ColumnName="FechaInicio" />
+                <ScalarProperty Name="DescuentoPorcentaje" ColumnName="DescuentoPorcentaje" />
+                <ScalarProperty Name="Nombre" ColumnName="Nombre" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="PromocionesProductos">
+            <EntityTypeMapping TypeName="DBS.PromocionesProductos">
+              <MappingFragment StoreEntitySet="PromocionesProductos">
+                <ScalarProperty Name="ProductoId" ColumnName="ProductoId" />
+                <ScalarProperty Name="PromocionId" ColumnName="PromocionId" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="sysdiagrams">
+            <EntityTypeMapping TypeName="DBS.sysdiagrams">
+              <MappingFragment StoreEntitySet="sysdiagrams">
+                <ScalarProperty Name="definition" ColumnName="definition" />
+                <ScalarProperty Name="version" ColumnName="version" />
+                <ScalarProperty Name="diagram_id" ColumnName="diagram_id" />
+                <ScalarProperty Name="principal_id" ColumnName="principal_id" />
+                <ScalarProperty Name="name" ColumnName="name" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Ventas">
+            <EntityTypeMapping TypeName="DBS.Ventas">
+              <MappingFragment StoreEntitySet="Ventas">
+                <ScalarProperty Name="Total" ColumnName="Total" />
+                <ScalarProperty Name="MetodoPagoId" ColumnName="MetodoPagoId" />
+                <ScalarProperty Name="Fecha" ColumnName="Fecha" />
+                <ScalarProperty Name="ClienteId" ColumnName="ClienteId" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

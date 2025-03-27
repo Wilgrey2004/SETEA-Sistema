@@ -18,11 +18,14 @@ namespace SETEA_Sistema.Modelodb
         public estado()
         {
             this.producto = new HashSet<producto>();
+            this.Codigo_De_Productos = new HashSet<Codigo_De_Productos>();
         }
     
         public string Estado1 { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<producto> producto { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<Codigo_De_Productos> Codigo_De_Productos { get; set; }
     }
 }

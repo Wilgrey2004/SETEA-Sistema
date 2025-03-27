@@ -12,25 +12,23 @@ namespace SETEA_Sistema.Modelodb
     using System;
     using System.Collections.Generic;
     
-    public partial class Clientes
+    public partial class Ventas
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
-        public Clientes()
+        public Ventas()
         {
-            this.Citas = new HashSet<Citas>();
-            this.Ventas = new HashSet<Ventas>();
+            this.DetallesVenta = new HashSet<DetallesVenta>();
         }
     
         public int Id { get; set; }
-        public string Nombre { get; set; }
-        public string Correo { get; set; }
-        public string Telefono { get; set; }
-        public string Clasificacion { get; set; }
-        public Nullable<System.DateTime> FechaRegistro { get; set; }
+        public Nullable<int> ClienteId { get; set; }
+        public System.DateTime Fecha { get; set; }
+        public int MetodoPagoId { get; set; }
+        public decimal Total { get; set; }
     
+        public virtual Clientes Clientes { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<Citas> Citas { get; set; }
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<Ventas> Ventas { get; set; }
+        public virtual ICollection<DetallesVenta> DetallesVenta { get; set; }
+        public virtual MetodosPago MetodosPago { get; set; }
     }
 }

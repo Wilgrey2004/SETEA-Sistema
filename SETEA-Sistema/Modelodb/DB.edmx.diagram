@@ -4,16 +4,16 @@
   <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
     <!-- Diagram content (shape and connector positions) -->
     <edmx:Diagrams>
-      <Diagram DiagramId="bb21b802c9d44dcd8a22e47243156e4d" Name="Diagram1" ZoomLevel="74">
+      <Diagram DiagramId="bb21b802c9d44dcd8a22e47243156e4d" Name="Diagram1" ZoomLevel="110">
         <EntityTypeShape EntityType="DBS.Categorias" Width="1.5" PointX="0.75" PointY="1.75" IsExpanded="true" />
         <EntityTypeShape EntityType="DBS.ClienteCaja" Width="1.5" PointX="7.75" PointY="0.75" IsExpanded="true" />
         <EntityTypeShape EntityType="DBS.Clientes" Width="1.5" PointX="7.75" PointY="3.75" IsExpanded="true" />
-        <EntityTypeShape EntityType="DBS.estado" Width="1.5" PointX="0.75" PointY="5.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="DBS.estado" Width="1.5" PointX="0.625" PointY="6.875" IsExpanded="true" />
         <EntityTypeShape EntityType="DBS.MetodosPago" Width="1.5" PointX="7.75" PointY="6.75" IsExpanded="true" />
         <EntityTypeShape EntityType="DBS.producto" Width="1.5" PointX="3" PointY="1" IsExpanded="true" />
         <EntityTypeShape EntityType="DBS.Roles" Width="1.5" PointX="2.75" PointY="6.375" IsExpanded="true" />
         <EntityTypeShape EntityType="DBS.Usuarios" Width="1.5" PointX="5" PointY="6" IsExpanded="true" />
-        <EntityTypeShape EntityType="DBS.VentaEnCaja" Width="1.5" PointX="5.25" PointY="1.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="DBS.VentaEnCaja" Width="2.125" PointX="5.25" PointY="1.125" IsExpanded="true" />
         <AssociationConnector Association="DBS.FK__producto__catego__59063A47" ManuallyRouted="false" />
         <AssociationConnector Association="DBS.FK__producto__Estado__5AEE82B9" ManuallyRouted="false" />
         <AssociationConnector Association="DBS.FK__VentaEnCa__idPro__5EBF139D" ManuallyRouted="false" />
@@ -33,6 +33,29 @@
         <AssociationConnector Association="DBS.FK__Dispositi__Tipo___367C1819" />
         <AssociationConnector Association="DBS.FK__Reparacio__Dispo__45BE5BA9" />
         <AssociationConnector Association="DBS.FK__Reparacio__Estad__47A6A41B" />
+        <AssociationConnector Association="DBS.FK__Codigo_De__Estad__79FD19BE" />
+        <EntityTypeShape EntityType="DBS.Auditoria" Width="1.5" PointX="7.25" PointY="33.375" />
+        <EntityTypeShape EntityType="DBS.Backups" Width="1.5" PointX="10.375" PointY="7.75" />
+        <EntityTypeShape EntityType="DBS.Citas" Width="1.5" PointX="10.375" PointY="0.75" />
+        <EntityTypeShape EntityType="DBS.DetallesVenta" Width="1.5" PointX="8.25" PointY="20.5" />
+        <EntityTypeShape EntityType="DBS.facturaCaja" Width="1.5" PointX="10" PointY="4.375" />
+        <EntityTypeShape EntityType="DBS.Inventario" Width="1.5" PointX="5.25" PointY="26.5" />
+        <EntityTypeShape EntityType="DBS.Productos" Width="1.5" PointX="3" PointY="20.125" />
+        <EntityTypeShape EntityType="DBS.Promociones" Width="1.5" PointX="3" PointY="16.5" />
+        <EntityTypeShape EntityType="DBS.PromocionesProductos" Width="1.5" PointX="5.25" PointY="20.625" />
+        <EntityTypeShape EntityType="DBS.sysdiagrams" Width="1.5" PointX="10.375" PointY="10.75" />
+        <EntityTypeShape EntityType="DBS.Ventas" Width="1.5" PointX="6" PointY="29.375" />
+        <AssociationConnector Association="DBS.FK__Auditoria__Usuar__6E01572D" />
+        <AssociationConnector Association="DBS.FK__Productos__Categ__4AB81AF0" />
+        <AssociationConnector Association="DBS.FK__Citas__ClienteId__6754599E" />
+        <AssociationConnector Association="DBS.FK__facturaCa__id_Cl__65370702" />
+        <AssociationConnector Association="DBS.FK__Ventas__ClienteI__5535A963" />
+        <AssociationConnector Association="DBS.FK__DetallesV__Produ__5BE2A6F2" />
+        <AssociationConnector Association="DBS.FK__DetallesV__Venta__5AEE82B9" />
+        <AssociationConnector Association="DBS.FK__Inventari__Produ__5070F446" />
+        <AssociationConnector Association="DBS.FK__Ventas__MetodoPa__5629CD9C" />
+        <AssociationConnector Association="DBS.FK__Promocion__Produ__6383C8BA" />
+        <AssociationConnector Association="DBS.FK__Promocion__Promo__628FA481" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

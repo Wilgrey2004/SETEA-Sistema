@@ -155,7 +155,7 @@ namespace SETEA_Sistema.Gestion_Productos
                             return;
                         }
                         query2.cantidadRestante++;
-
+                        query2.Estado = "Activo";
                         db.Codigo_De_Productos.Add(newCodigoDeProducto);
                         db.SaveChanges();
                     }

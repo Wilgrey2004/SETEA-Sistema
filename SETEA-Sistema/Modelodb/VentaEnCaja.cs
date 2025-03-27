@@ -15,7 +15,6 @@ namespace SETEA_Sistema.Modelodb
     public partial class VentaEnCaja
     {
         public int id { get; set; }
-        public string Nombre { get; set; }
         public string ProductoNombre { get; set; }
         public string NumeroDelCliente { get; set; }
         public Nullable<int> idProdicto { get; set; }
@@ -23,8 +22,9 @@ namespace SETEA_Sistema.Modelodb
         public Nullable<int> cantidadProducto { get; set; }
         public Nullable<decimal> PrecioUnidad { get; set; }
         public Nullable<decimal> precioPorCantidad { get; set; }
-        public Nullable<int> Descuento { get; set; }
+        public string Nombre_cliente { get; set; }
         public string codigoDelProducto { get; set; }
+        public Nullable<int> Descuento { get; set; }
     
         public virtual producto producto { get; set; }
     }

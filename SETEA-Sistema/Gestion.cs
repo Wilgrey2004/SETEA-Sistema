@@ -1,7 +1,4 @@
-﻿using iTextSharp.text;
-using iTextSharp.text.pdf;
-using iTextSharp.tool.xml;
-using MaterialSkin;
+﻿using MaterialSkin;
 using MaterialSkin.Controls;
 using SETEA_Sistema.Entidades;
 using SETEA_Sistema.Gestion_Productos;
@@ -22,9 +19,10 @@ namespace SETEA_Sistema
         {
 
                 private SeteaEntities1 db;
-                private List<Usuarios> usl = new List<Usuarios>();
+                private BindingList<Usuarios> usl = new BindingList<Usuarios>();
                 private string NumeroTelefonicoCliente = "";
                 List<string> headersUsers = new List<string> { "ID", "Nombre", "Apellido", "Telefono", "Correo", "Fecha Creacion", "Rol" };
+                List<string> headersVentas = new List<string> { "ID", "Nombre Cliente", "Telefono", "Nombre Del Producto", "codigo Del Producto", "id Prodicto", "cantidad Producto", "Precio Unidad", "precio Por Cantidad", "Descuento", "Fecha Venta" };
                 private BindingList<VentaEnCaja> ventaEnCajaLista = new BindingList<VentaEnCaja>();
                 private BindingList<producto> productosLs = new BindingList<producto>();
                 private int idProductoSeleccionado = 0;
@@ -119,19 +117,19 @@ namespace SETEA_Sistema
                         });
                         MyDataProductosCaja.Columns.Add(new DataGridViewTextBoxColumn {
                                 Name = "Nombre Del Producto",
-                                DataPropertyName = "ProductoNombre", // Corregir el typo aquí
+                                DataPropertyName = "ProductoNombre",
                                 HeaderText = "Nombre Del Producto"
                         });
 
                         MyDataProductosCaja.Columns.Add(new DataGridViewTextBoxColumn {
                                 Name = "codigo Del Producto",
-                                DataPropertyName = "codigoDelProducto", // Corregir el typo aquí
+                                DataPropertyName = "codigoDelProducto",
                                 HeaderText = "codigo Del Producto"
                         });
 
                         MyDataProductosCaja.Columns.Add(new DataGridViewTextBoxColumn {
                                 Name = "id Prodicto",
-                                DataPropertyName = "idProdicto", // Asegúrate de que coincide con la propiedad de tu objeto
+                                DataPropertyName = "idProdicto",
                                 HeaderText = "id Prodicto"
                         });
                         MyDataProductosCaja.Columns.Add(new DataGridViewTextBoxColumn {
@@ -164,12 +162,10 @@ namespace SETEA_Sistema
                         MyDataProductosCaja.DataSource = ventaEnCajaLista;
                 }
                 private void ActualizarTablaUser() {
-
-
                         using (db = new SeteaEntities1())
                         {
-                                usl = db.Usuarios.ToList();
-
+                                usl.Clear();
+                                usl = new BindingList<Usuarios>(db.Usuarios.ToList());
                                 if (usl.Count > 0 && usl != null)
                                 {
                                         MyDataUsers.DataSource = usl;
@@ -178,27 +174,43 @@ namespace SETEA_Sistema
 
                         MyDataUsers.Columns["Roles"].Visible = false;
                 }
-                private void GenerarReporteUsuarios() {
+
+                private void GeneradorDePDF<T>( BindingList<T> usl, List<string> Cabeceras_, string Reporte, string NombreDeLaPlantilla )
+                where T : class {
                         GeneradorDePdf generador = new GeneradorDePdf();
                         using (db = new SeteaEntities1())
                         {
-                                var query = db.Usuarios.ToList();
-                                BindingList<Usuarios> usl = new BindingList<Usuarios>(query);
+                                var data = db.Set<T>().ToList();
+                                usl = new BindingList<T>(data);
 
-                                string rutaPlantilla = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "Resources", "PlantillaReporteUsuarios.html");
-                                string rutaSalida = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "Reportes/Usuarios", $"Reporte-{DateTime.Now:yyyyMMddHHmmss}.pdf");
+                                string rutaPlantilla = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "Resources", $"{NombreDeLaPlantilla}.html");
+                                string rutaSalida = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, $"Reportes/{Reporte}", $"Reporte-{DateTime.Now:yyyyMMddHHmmss}.pdf");
 
-                                generador.GenerarPdf(usl, headersUsers, rutaPlantilla, rutaSalida);
+                                generador.GenerarPdf(usl, Cabeceras_, rutaPlantilla, rutaSalida);
                         }
+                }
+
+                private void GenerarReporteUsuarios() {
+                        var Mensaje = MessageBox.Show("Desea generar un reporte de usuarios ?", "Reporte", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
+
+                        if (Mensaje == DialogResult.No)
+                        {
+                                return;
+                        }
+                        GeneradorDePDF(usl, headersUsers, "Usuarios", "PlantillaReporteUsuarios");
+                        MessageBox.Show("Reporte generado con exito", "Reporte", MessageBoxButtons.OK, MessageBoxIcon.Information);
                 }
 
                 private void CargarTablaConRegistrosDiario() {
                         using (db = new SeteaEntities1())
                         {
+                                usl.Clear();
                                 var fechaHoy = DateTime.Today;
-                                usl = db.Usuarios
+                                var query = db.Usuarios
                                         .Where(wh => wh.FechaCreacion.Value == fechaHoy)
                                         .ToList();
+
+                                usl = new BindingList<Usuarios>(query);
 
                                 if (usl != null && usl.Count > 0)
                                 {
@@ -214,11 +226,60 @@ namespace SETEA_Sistema
                 }
 
                 private void CargarTablaProductos() {
+                        using (db = new SeteaEntities1())
+                        {
+                                var query = db.producto.Where(x => x.cantidadRestante != 0).ToList();
 
+                                foreach (var item in query)
+                                {
+                                        if (item.cantidadRestante > 0)
+                                        {
+                                                item.Estado = "Activo";
+
+                                        } else
+                                        {
+                                                item.Estado = "Inactivo";
+                                        }
+                                }
+                                productosLs.Clear();
+                                productosLs = new BindingList<producto>(query);
+                                MyProducDg.DataSource = productosLs;
+                        }
                 }
                 private void CargarTablas() {
                         ActualizarTablaUser();
                         CargarTablaDeCodigos();
+                        CargarLaListaDeProductosYcodigos();
+                        CargarTablaProductos();
+                }
+
+                BindingList<CodigosProductosShowModels1> showsModelsCodigos = new BindingList<CodigosProductosShowModels1>();
+                private void CargarLaListaDeProductosYcodigos() {
+
+                        using (db = new SeteaEntities1())
+                        {
+
+                                var query = db.Codigo_De_Productos
+                                        .Include(x => x.producto)
+                                        .Where(x => x.Estado_Codigo == "Activo")
+                                        .Select(x => new CodigosProductosShowModels1 {
+                                                ID_Del_Codigo = x.ID,
+                                                ID_Del_Producto = x.producto.idProducto,
+                                                Codigo = x.CodigoDelProducto,
+                                                Nombre_Del_Producto = x.producto.nombre,
+                                                Precio_Unidad = x.producto.PrecioUnidad
+
+                                        }).ToList();
+
+                                if (query == null)
+                                {
+                                        return;
+                                }
+                                showsModelsCodigos.Clear();
+                                showsModelsCodigos = new BindingList<CodigosProductosShowModels1>(query);
+                                MyListProductos.DataSource = showsModelsCodigos;
+                        }
+
                 }
 
                 private BindingList<CodigosDeproductosShowsModels> codigosDeProductosList = new BindingList<CodigosDeproductosShowsModels>();
@@ -227,7 +288,7 @@ namespace SETEA_Sistema
                         codigosDeProductosList.Clear();
                         using (db = new SeteaEntities1())
                         {
-                                var query = db.Codigo_De_Productos.Include(x => x.producto)
+                                var query = db.Codigo_De_Productos.Include(x => x.producto).Where(x => x.Estado_Codigo == "Activo")
                                     .Select(x => new CodigosDeproductosShowsModels {
                                             ID_Del_Codigo = x.ID,
                                             ID_Producto = x.ID_Producto_Enlazado,
@@ -291,48 +352,22 @@ namespace SETEA_Sistema
 
 
                 }
-                //private void CargarProductos()
-                //{
-                //    List<string> productosList = new List<string>();
-
-                //    using (db = new SeteaEntities1())
-                //    {
-                //        var query = db.producto.Where(sf => sf.cantidadRestante > 0).ToList();
-                //        // Selecciona solo los nombres de los productos y conviértelos en una lista de strings
-                //        productosList = query
-                //                        .Select(p => p.nombre) // Selecciona solo el nombre
-                //                        .ToList(); // Convierte el resultado en una lista de strings
-
-                //        if (productosList != null)
-                //        {
-                //            MyProductos.DataSource = productosList;
-                //        }
-                //        else
-                //        {
-                //            MessageBox.Show("Los productos no han cargado");
-                //        }
-                //    }
-                //}
                 private void Gestion_Load( object sender, EventArgs e ) {
+                        this.KeyPreview = true;
                         CargarTablas();
-                        ConfiguracionDelDataGrid(MyDataProductosCaja);
-                        ConfiguracionDelDataGrid(ListaDecodigosProductos, 70);
+                        AlterDatagrids();
                         numCantidadProducto.Minimum = 1;
                         // CargarProductos();
                 }
 
-                private void ConfiguracionDelDataGrid( DataGridView MyDataProductosCaja ) {
-                        MyDataProductosCaja.ColumnHeadersVisible = true;
-                        MyDataProductosCaja.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
-                        MyDataProductosCaja.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.EnableResizing;
-                        MyDataProductosCaja.ColumnHeadersHeight = 45;
+                private void AlterDatagrids() {
+                        Configurador_DataGrid.ConfiguracionDelDataGrid(MyDataProductosCaja);
+                        Configurador_DataGrid.ConfiguracionDelDataGrid(ListaDecodigosProductos, 70);
+                        Configurador_DataGrid.ConfiguracionDelDataGrid(MyDataUsers, 50);
+                        Configurador_DataGrid.ConfiguracionDelDataGrid(MyDataProductosCaja, 50);
                 }
-                private void ConfiguracionDelDataGrid( DataGridView MyDataProductosCaja, int Cabeceras ) {
-                        MyDataProductosCaja.ColumnHeadersVisible = true;
-                        MyDataProductosCaja.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
-                        MyDataProductosCaja.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.EnableResizing;
-                        MyDataProductosCaja.ColumnHeadersHeight = Cabeceras;
-                }
+
+
                 private void GestionUsuarios_Click( object sender, EventArgs e ) {
 
                 }
@@ -421,25 +456,46 @@ namespace SETEA_Sistema
 
 
                 private void materialButton6_Click( object sender, EventArgs e ) {
+                        var query = ventaEnCajaLista.FirstOrDefault(x => x.codigoDelProducto == CodigoDelProductoVenta.Text);
 
-                        int descuento_ = MyConversorGenerico.DeStringANumero<int>(ProductoVentaDescuento.Text) <= 0 ? 1 : MyConversorGenerico.DeStringANumero<int>(ProductoVentaDescuento.Text);
+                        if (query != null)
+                        {
+                                MessageBox.Show("Ya hay un producto con ese codigo agregado a la lista", "Advertencia", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                                return;
+                        }
+
+
+
+                        int descuento_ = MyConversorGenerico.DeStringANumero<int>(ProductoVentaDescuento.Text) == 0 ? 0 : MyConversorGenerico.DeStringANumero<int>(ProductoVentaDescuento.Text);
                         decimal precioUnidad_ = MyConversorGenerico.DeStringANumero<decimal>(myProductoPrecio.Text);
                         decimal precioPorCantidad_ = MyConversorGenerico.DeStringANumero<decimal>(txtPrecioTotalPorCantidad.Text);
                         int cantidadProducto_ = Convert.ToInt32(numCantidadProducto.Value);
 
                         NumeroTelefonicoCliente = TelefonoCompraCaja.Text;
-                        // Crear un nuevo objeto VentaEnCaja con los datos del formulario
+                        decimal precioFinalUnidad = descuento_ == 0 ? precioUnidad_ : precioUnidad_ - (precioUnidad_ * (descuento_ / 100m));
+                        int idProducto = 0;
+                        using (db = new SeteaEntities1())
+                        {
+                                var productoNombrePorId = db.producto.FirstOrDefault(x => x.nombre == MyProductos.Text);
+
+                                if (productoNombrePorId != null)
+                                {
+                                        idProducto = productoNombrePorId.idProducto;
+                                }
+                        }
                         VentaEnCaja nuevaVenta = new VentaEnCaja {
-                                idProdicto = idProductoSeleccionado != 0 ? idProductoSeleccionado : 1,
+                                idProdicto = idProducto,
                                 codigoDelProducto = CodigoDelProductoVenta.Text,
-                                Nombre = txtNombreCliente.Text == string.Empty ? "No nombre del Cliente" : txtNombreCliente.Text,
-                                ProductoNombre = NombreProductoSeleccionado,
-                                NumeroDelCliente = NumeroTelefonicoCliente == string.Empty ? "No numero del cliente" : NumeroTelefonicoCliente,
+                                Nombre_cliente = string.IsNullOrEmpty(txtNombreCliente.Text) ? "No nombre del Cliente" : txtNombreCliente.Text,
+                                ProductoNombre = string.IsNullOrEmpty(MyProductos.Text) ? "No nombre del Producto" : MyProductos.Text,
+                                NumeroDelCliente = string.IsNullOrEmpty(NumeroTelefonicoCliente) ? "No numero del cliente" : NumeroTelefonicoCliente,
                                 cantidadProducto = cantidadProducto_,
-                                PrecioUnidad = descuento_ == 0 ? precioUnidad_ : (precioUnidad_ * (descuento_ / 100)),
-                                Descuento = descuento_ == 0 ? 1 : descuento_,
-                                precioPorCantidad = precioPorCantidad_
+                                PrecioUnidad = precioFinalUnidad,
+                                Descuento = descuento_,
+                                precioPorCantidad = precioPorCantidad_,
+                                FechaVenta = DateTime.UtcNow
                         };
+
                         // Agregar el nuevo objeto a la lista
                         ventaEnCajaLista.Add(nuevaVenta);
 
@@ -476,123 +532,17 @@ namespace SETEA_Sistema
                         return;
                 }
 
-                private void GenerarFacturaVentas() {
-                        string nameCliente = txtNombreCliente.Text != null ? txtNombreCliente.Text : "ClienteVacio";
-                        SaveFileDialog saveFile = new SaveFileDialog();
-                        saveFile.FileName = $"Venta al cliente ${nameCliente} de la fecha y hora ${DateTime.Now.ToString("ddmmyyyHHmm")}.pdf";
-                        saveFile.ShowDialog();
-                        string filas = "";
-                        foreach (DataGridViewRow row in MyDataProductosCaja.Rows)
-                        {
-                                if (row.IsNewRow)
-                                        continue; // Omite la fila en blanco que permite agregar nuevos registros.
-                                string nombreCliente = row.Cells["Nombre Cliente"].Value?.ToString() ?? "";
-                                string nombreProducto = row.Cells["Nombre Del Producto"].Value?.ToString() ?? "";
-                                string numeroTelefono = row.Cells["Telefono"].Value?.ToString();
-                                string idProdicto = row.Cells["id Prodicto"].Value?.ToString() ?? "";
-                                string cantidadProducto = row.Cells["cantidad Producto"].Value?.ToString() ?? "";
-                                string precioUnidad = row.Cells["Precio Unidad"].Value?.ToString() ?? "";
-                                string Descuento = row.Cells["Descuento"].Value?.ToString() ?? "";
-                                string precioPorCantidad = row.Cells["precio Por Cantidad"].Value?.ToString() ?? "";
-                                string fechaVenta = row.Cells["Fecha Venta"].Value?.ToString() ?? "";
-                                filas += "<tr>";
-                                filas += $"<td style=\"padding: 8px; border-bottom: 2px solid #ddd; width: 20%\"> {nombreCliente} </td>";
-                                filas += $"<td style=\"padding: 8px; border-bottom: 2px solid #ddd; width: 20%\"> {numeroTelefono} </td>";
-                                filas += $"<td style=\"padding: 8px; border-bottom: 2px solid #ddd; width: 20%\"> {nombreProducto} </td>";
-                                filas += $"<td style=\"padding: 8px; border-bottom: 2px solid #ddd; width: 20%\"> {idProdicto} </td>";
-                                filas += $"<td style=\"padding: 8px; border-bottom: 2px solid #ddd; width: 20%\"> {cantidadProducto} </td>";
-                                filas += $"<td style=\"padding: 8px; border-bottom: 2px solid #ddd; width: 20%\"> {precioUnidad} </td>";
-                                filas += $"<td style=\"padding: 8px; border-bottom: 2px solid #ddd; width: 20%\"> {Descuento} </td>";
-                                filas += $"<td style=\"padding: 8px; border-bottom: 2px solid #ddd; width: 20%\"> {precioPorCantidad} </td>";
-                                filas += $"<td style=\"padding: 8px; border-bottom: 2px solid #ddd; width: 20%\"> {fechaVenta} </td>";
-                                filas += "</tr>";
-                        }
-                        double total = Convert.ToDouble(MyTotalVentaProductos.Text);
-                        string paginaHtml_text = Properties.Resources.PlantillaFactura.ToString();
-                        // Error en el formato (usa "-" en lugar de "/")
-                        paginaHtml_text = paginaHtml_text.Replace("@Fecha", DateTime.Now.ToString("dd-MM-yyyy HH:mm"));
-                        paginaHtml_text = paginaHtml_text.Replace("@Filas", filas);
-                        paginaHtml_text = paginaHtml_text.Replace("@Total", $"<span>{total.ToString("N2")}</span>");
-                        if (saveFile.ShowDialog() == DialogResult.OK)
-                        {
-                                using (FileStream stream = new FileStream(saveFile.FileName, FileMode.Create))
-                                {
-                                        Document pdfDoc = new Document(PageSize.A4, 25, 25, 25, 25);
-                                        PdfWriter writer = PdfWriter.GetInstance(pdfDoc, stream);
-                                        pdfDoc.Open();
-                                        pdfDoc.Add(new Phrase(""));
-                                        iTextSharp.text.Image image = iTextSharp.text.Image.GetInstance(Properties.Resources.image, System.Drawing.Imaging.ImageFormat.Png);
-                                        image.ScaleToFit(80, 90);
-                                        image.Alignment = iTextSharp.text.Image.UNDERLYING;
-                                        image.SetAbsolutePosition(25, 780);
-                                        pdfDoc.Add(image);
-                                        using (StringReader reader = new StringReader(paginaHtml_text))
-                                        {
-                                                XMLWorkerHelper.GetInstance().ParseXHtml(writer, pdfDoc, reader);
-                                        }
-                                        pdfDoc.Close();
-                                        stream.Close();
-                                }
-                        }
-                }
+
 
                 private bool EstaCajaEstaVacia( MaterialTextBox2 textBox ) {
                         return textBox.Text != "";
-                }
-                public void GenerarFacturaP80( DataGridView dgv ) {
-                        SaveFileDialog saveFile = new SaveFileDialog();
-                        saveFile.FileName = $"FacturaP80_{DateTime.Now:ddMMyyyyHHmm}.pdf";
-                        saveFile.Filter = "Archivos PDF|*.pdf";
-                        if (saveFile.ShowDialog() == DialogResult.OK)
-                        {
-                                // Definir tamaño p80: 80mm de ancho ≈ 226.77 puntos; altura fija ajustable según contenido
-                                Rectangle pageSize = new Rectangle(226.77f, 600f);
-                                Document pdfDoc = new Document(pageSize, 10, 10, 10, 10);
-                                using (FileStream stream = new FileStream(saveFile.FileName, FileMode.Create))
-                                {
-                                        PdfWriter writer = PdfWriter.GetInstance(pdfDoc, stream);
-                                        pdfDoc.Open();
-                                        // Encabezado con fuente más pequeña
-                                        pdfDoc.Add(new Paragraph("Factura P80", FontFactory.GetFont("Arial", "", Font.Bold)));
-                                        pdfDoc.Add(new Paragraph($"Fecha: {DateTime.Now:dd-MM-yyyy HH:mm}", FontFactory.GetFont("Arial", 7)));
-                                        pdfDoc.Add(new Paragraph(" ", FontFactory.GetFont("Arial", 6)));
-
-                                        // Crear tabla de 8 columnas
-                                        PdfPTable tabla = new PdfPTable(8);
-                                        tabla.WidthPercentage = 100;
-                                        string[] cabeceras = { "Nom", "Tel", "Produc", "ID", "Cant", "P.U.", "P.Total", "Fecha" };
-                                        foreach (string cab in cabeceras)
-                                        {
-                                                PdfPCell celda = new PdfPCell(new Phrase(cab, FontFactory.GetFont("Arial", "", Font.Bold))) {
-                                                        HorizontalAlignment = Element.ALIGN_CENTER
-                                                };
-                                                tabla.AddCell(celda);
-                                        }
-                                        // Rellenar la tabla con las filas del DataGridView
-                                        foreach (DataGridViewRow row in dgv.Rows)
-                                        {
-                                                if (row.IsNewRow) continue;
-                                                tabla.AddCell(new PdfPCell(new Phrase(row.Cells["Nombre Cliente"].Value?.ToString() ?? "", FontFactory.GetFont("Arial", 6))));
-                                                tabla.AddCell(new PdfPCell(new Phrase(row.Cells["Telefono"].Value?.ToString() ?? "", FontFactory.GetFont("Arial", 6))));
-                                                tabla.AddCell(new PdfPCell(new Phrase(row.Cells["Nombre Del Producto"].Value?.ToString() ?? "", FontFactory.GetFont("Arial", 4))));
-                                                tabla.AddCell(new PdfPCell(new Phrase(row.Cells["id Prodicto"].Value?.ToString() ?? "", FontFactory.GetFont("Arial", 6))));
-                                                tabla.AddCell(new PdfPCell(new Phrase(row.Cells["cantidad Producto"].Value?.ToString() ?? "", FontFactory.GetFont("Arial", 6))));
-                                                tabla.AddCell(new PdfPCell(new Phrase(row.Cells["Precio Unidad"].Value?.ToString() ?? "", FontFactory.GetFont("Arial", 6))));
-                                                tabla.AddCell(new PdfPCell(new Phrase(row.Cells["precio Por Cantidad"].Value?.ToString() ?? "", FontFactory.GetFont("Arial", 6))));
-                                                tabla.AddCell(new PdfPCell(new Phrase(row.Cells["Fecha Venta"].Value?.ToString() ?? "", FontFactory.GetFont("Arial", 4))));
-                                        }
-                                        pdfDoc.Add(tabla);
-                                        // Mostrar el total con fuente pequeña
-                                        pdfDoc.Add(new Paragraph($"Total: {MyTotalVentaProductos.Text}", FontFactory.GetFont("Arial", "", Font.Bold)));
-                                        pdfDoc.Close();
-                                        stream.Close();
-                                }
-                        }
                 }
 
                 private void materialButton3_Click( object sender, EventArgs e ) {
                         using (db = new SeteaEntities1())
                         {
+                                GeneradorDePdf gneradorDePdf = new GeneradorDePdf();
+
                                 if (ventaEnCajaLista.Count > 0)
                                 {
                                         foreach (VentaEnCaja item in ventaEnCajaLista)
@@ -601,24 +551,44 @@ namespace SETEA_Sistema
                                                 item.FechaVenta = DateTime.Now;
                                                 productoActual.cantidadRestante -= item.cantidadProducto;
                                                 db.VentaEnCaja.Add(item);
-                                                db.SaveChanges();
+
                                         }
                                 } else
                                 {
                                         MessageBox.Show("No hay productos que guardar");
                                 }
+
+
+
                                 if (EstaCajaEstaVacia(txtNombreCliente))
                                 {
+
                                         ImpresionRecibo imprimirRecibo = new ImpresionRecibo(MyDataProductosCaja);
                                         imprimirRecibo.Imprimir();
 
+                                        var Mensaje = MessageBox.Show("Desea Guardar un reporte de esta venta ?", "Reporte", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
 
-                                        //GenerarFacturaVentas();
-
+                                        if (Mensaje == DialogResult.No)
+                                        {
+                                                return;
+                                        }
+                                        gneradorDePdf.GenerarPdf(ventaEnCajaLista, headersVentas, "Ventas", "PlantillaFactura", MyTotalVentaProductos.Text);
+                                        MessageBox.Show("Reporte generado con exito", "Reporte", MessageBoxButtons.OK, MessageBoxIcon.Information);
                                         txtNombreCliente.Text = "";
                                         TelefonoCompraCaja.Text = "";
 
+                                        foreach (var item in ventaEnCajaLista)
+                                        {
+                                                var codigoADesactivar = db.Codigo_De_Productos.FirstOrDefault(x => x.CodigoDelProducto == item.codigoDelProducto);
+                                                if (codigoADesactivar != null)
+                                                {
+                                                        codigoADesactivar.Estado_Codigo = "Inactivo";
+                                                }
+                                        }
+
+                                        db.SaveChanges();
                                         ventaEnCajaLista.Clear();
+                                        CargarTablas();
 
                                 } else
                                 {
@@ -634,87 +604,11 @@ namespace SETEA_Sistema
                 }
 
                 private void materialButton7_Click( object sender, EventArgs e ) {
-                        RegistrosVentas rgv = new RegistrosVentas();
-                        Hide();
-                        rgv.ShowDialog();
-                        Show();
+                        MessageBox.Show("En desarrollo");
                 }
 
                 private void GenerarReporteDeProductos() {
-                        SaveFileDialog saveFile = new SaveFileDialog();
-                        saveFile.FileName = $"Reporte_Inventario_{DateTime.Now.ToString("dd_MM_yyyy_HH_mm")}.pdf";
 
-                        string filas = "";
-                        int totalProductos = 0;
-                        decimal valorTotalInventario = 0;
-
-                        foreach (DataGridViewRow row in MyProducDg.Rows) // Asumiendo que tu DataGridView se llama MyProducDg
-                        {
-                                if (row.IsNewRow) continue;
-
-                                // Obtener valores de las celdas
-                                string idProducto = row.Cells["ID Producto"].Value?.ToString() ?? "";
-                                string nombre = row.Cells["Nombre"].Value?.ToString() ?? "";
-
-                                string descripcion = row.Cells["Descripcion"].Value?.ToString() ?? "x--x";
-                                string precioUnidad = row.Cells["Precio Unidad"].Value?.ToString() ?? "0.0";
-                                string cantidad = row.Cells["Cantidad Restante"].Value?.ToString() ?? "1";
-                                string categoriaId = row.Cells["Categoria ID"].Value?.ToString() ?? "";
-                                string fechaCreacion = row.Cells["Fecha Creacion"].Value?.ToString() ?? DateTime.Now.ToString();
-
-                                // Calcular valores para el total
-                                if (decimal.TryParse(precioUnidad, out decimal precio) && int.TryParse(cantidad, out int cant))
-                                {
-                                        valorTotalInventario += precio * cant;
-                                }
-                                totalProductos++;
-
-                                // Construir filas HTML
-                                filas += "<tr>";
-                                filas += $"<td style=\"padding: 8px; border-bottom: 1px solid #ddd\">{idProducto}</td>";
-                                filas += $"<td style=\"padding: 8px; border-bottom: 1px solid #ddd\">{nombre}</td>";
-                                filas += $"<td style=\"padding: 8px; border-bottom: 1px solid #ddd\">{descripcion}</td>";
-                                filas += $"<td style=\"padding: 8px; border-bottom: 1px solid #ddd; text-align: right\">{precio.ToString("N2")}</td>";
-                                filas += $"<td style=\"padding: 8px; border-bottom: 1px solid #ddd; text-align: right\">{cantidad}</td>";
-                                filas += $"<td style=\"padding: 8px; border-bottom: 1px solid #ddd\">{categoriaId}</td>";
-                                filas += $"<td style=\"padding: 8px; border-bottom: 1px solid #ddd\">{fechaCreacion}</td>";
-                                filas += "</tr>";
-                        }
-
-                        string paginaHtml_text = Properties.Resources.PlantillaReportProductos.ToString();
-
-                        // Reemplazar placeholders
-                        paginaHtml_text = paginaHtml_text
-                            .Replace("@Fecha", DateTime.Now.ToString("dd-MM-yyyy HH:mm"))
-                            .Replace("@Filas", filas)
-                            .Replace("@TotalProductos", totalProductos.ToString("N0"))
-                            .Replace("@ValorTotal", valorTotalInventario.ToString("N2"))
-                            .Replace("@ID", Guid.NewGuid().ToString().Substring(0, 8).ToUpper());
-
-                        if (saveFile.ShowDialog() == DialogResult.OK)
-                        {
-                                using (FileStream stream = new FileStream(saveFile.FileName, FileMode.Create))
-                                {
-                                        Document pdfDoc = new Document(PageSize.A4, 25, 25, 25, 25);
-                                        PdfWriter writer = PdfWriter.GetInstance(pdfDoc, stream);
-
-                                        pdfDoc.Open();
-
-                                        // Agregar imagen (ajusta según tu necesidad)
-                                        iTextSharp.text.Image image = iTextSharp.text.Image.GetInstance(Properties.Resources.image, System.Drawing.Imaging.ImageFormat.Png);
-                                        image.ScaleToFit(80, 60);
-                                        image.Alignment = iTextSharp.text.Image.UNDERLYING;
-                                        image.SetAbsolutePosition(25, pdfDoc.PageSize.Height - 80);
-                                        pdfDoc.Add(image);
-
-                                        using (StringReader reader = new StringReader(paginaHtml_text))
-                                        {
-                                                XMLWorkerHelper.GetInstance().ParseXHtml(writer, pdfDoc, reader);
-                                        }
-
-                                        pdfDoc.Close();
-                                }
-                        }
                 }
 
                 private void CargarTodosLosProductosDesdeLaDb() {
@@ -722,10 +616,7 @@ namespace SETEA_Sistema
                         {
                                 var query = db.producto.Where(ws => ws.Estado == "Activo").ToList();
                                 productosLs.Clear();
-                                foreach (var item in query)
-                                {
-                                        productosLs.Add(item);
-                                }
+                                productosLs = new BindingList<producto>(query);
                         }
                 }
 
@@ -871,12 +762,20 @@ namespace SETEA_Sistema
                 private void CodigoDelProductoVenta_KeyDown( object sender, KeyEventArgs e ) {
                         if (e.KeyCode == Keys.Enter)
                         {
+
                                 string codigo = CodigoDelProductoVenta.Text.Trim();
-                                MessageBox.Show($"Codigo Escaneado {codigo} \n ");
+
                                 CodigoDelProductoVenta.Text = codigo;
+
+
                                 CargarProductos(codigo);
+
+                                MessageBox.Show($"Codigo Escaneado {codigo} \n ");
+
                                 e.Handled = true;
                                 e.SuppressKeyPress = true;
+
+
                         }
                 }
 
@@ -896,14 +795,17 @@ namespace SETEA_Sistema
                         Codigos_Agregar_editar codigos_Agregar_Editar = new Codigos_Agregar_editar();
                         Hide();
                         codigos_Agregar_Editar.ShowDialog();
+                        CargarTablas();
                         Show();
-                        //CargarProductos();
                 }
 
                 private void s( object sender, EventArgs e ) {
 
                 }
                 private producto BusacarElObjetoPorElNombre( string NombreDelProducto ) {
+
+                        if (NombreDelProducto == null) return null;
+
                         using (db = new SeteaEntities1())
                         {
                                 var query = db.producto.FirstOrDefault(x => x.nombre == NombreDelProducto);
@@ -919,8 +821,11 @@ namespace SETEA_Sistema
                 }
 
                 private void MyProductos_TextChanged( object sender, EventArgs e ) {
+                        if (MyProductos.Text == null) return;
 
                         var productoCargado = BusacarElObjetoPorElNombre(MyProductos.Text);
+
+                        if (productoCargado == null) return;
 
                         decimal precioUnidad = MyConversorGenerico.DeStringANumero<decimal>(productoCargado.PrecioUnidad.ToString());
 
@@ -962,5 +867,77 @@ namespace SETEA_Sistema
                         }
                 }
 
+                private void MyListProductos_MouseEnter( object sender, EventArgs e ) {
+
+                }
+
+                private void MyListProductos_MouseMove( object sender, MouseEventArgs e ) {
+
+
+                }
+
+                private void MyListProductos_MouseClick( object sender, MouseEventArgs e ) {
+
+                }
+
+                private void MyListProductos_SelectedIndexChanged( object sender, EventArgs e ) {
+
+                }
+
+                private void MyListProductos_Click( object sender, EventArgs e ) {
+                        if (MyListProductos.SelectedItem == null)
+                        {
+                                MessageBox.Show("No ha seleccionado ningún producto");
+                                return;
+                        }
+
+                        var selectedItem = MyListProductos.SelectedItem;
+
+                        if (selectedItem == null)
+                        {
+                                MessageBox.Show("segunda comprovacion No ha seleccionado ningun producto");
+                                return;
+                        }
+
+                        if (selectedItem is CodigosProductosShowModels1 codigoProducto)
+                        {
+                                CodigoDelProductoVenta.Text = codigoProducto.Codigo;
+                                MyProductos.Text = codigoProducto.Nombre_Del_Producto;
+                        }
+                }
+
+                private void dateTimePicker1_ValueChanged( object sender, EventArgs e ) {
+
+
+
+                        using (var db = new SeteaEntities1())
+                        {
+                                DateTime fechaSeleccionada = dateTimePicker1.Value.Date;
+
+                                var query = db.Codigo_De_Productos.Include(x => x.producto)
+                                        .Where(x => x.Estado_Codigo == "Activo" &&
+                                                        DbFunctions.TruncateTime(x.Fecha_De_Agregacion) == fechaSeleccionada)
+                                        .Select(x => new CodigosDeproductosShowsModels {
+                                                ID_Producto = x.producto.idProducto,
+                                                ID_Del_Codigo = x.ID,
+                                                Nombre_Del_Producto = x.producto.nombre,
+                                                Codigo_Del_Producto = x.CodigoDelProducto,
+                                                Precio_Del_Producto = x.producto.PrecioUnidad,
+                                                Cantidad_Restante = x.producto.cantidadRestante,
+                                                Fecha_De_Creacion = x.Fecha_De_Agregacion ?? DateTime.MinValue
+                                        }
+                                );
+                                codigosDeProductosList.Clear();
+                                foreach (var item in query)
+                                {
+                                        codigosDeProductosList.Add(item);
+                                }
+                                ListaDecodigosProductos.DataSource = codigosDeProductosList;
+                        }
+                }
+
+                private void materialButton20_Click( object sender, EventArgs e ) {
+                        CargarTablas();
+                }
         }
 }

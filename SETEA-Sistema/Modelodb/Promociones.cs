@@ -12,25 +12,22 @@ namespace SETEA_Sistema.Modelodb
     using System;
     using System.Collections.Generic;
     
-    public partial class Clientes
+    public partial class Promociones
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
-        public Clientes()
+        public Promociones()
         {
-            this.Citas = new HashSet<Citas>();
-            this.Ventas = new HashSet<Ventas>();
+            this.PromocionesProductos = new HashSet<PromocionesProductos>();
         }
     
         public int Id { get; set; }
         public string Nombre { get; set; }
-        public string Correo { get; set; }
-        public string Telefono { get; set; }
-        public string Clasificacion { get; set; }
-        public Nullable<System.DateTime> FechaRegistro { get; set; }
+        public Nullable<decimal> DescuentoPorcentaje { get; set; }
+        public System.DateTime FechaInicio { get; set; }
+        public System.DateTime FechaFin { get; set; }
+        public Nullable<bool> Activa { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<Citas> Citas { get; set; }
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<Ventas> Ventas { get; set; }
+        public virtual ICollection<PromocionesProductos> PromocionesProductos { get; set; }
     }
 }

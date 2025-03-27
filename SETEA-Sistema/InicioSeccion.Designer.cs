@@ -78,7 +78,7 @@
                         this.UserCorreo.HidePromptOnLeave = false;
                         this.UserCorreo.HideSelection = true;
                         this.UserCorreo.InsertKeyMode = System.Windows.Forms.InsertKeyMode.Default;
-                        this.UserCorreo.LeadingIcon = null;
+                        this.UserCorreo.LeadingIcon = global::SETEA_Sistema.Properties.Resources.avatar;
                         this.UserCorreo.Location = new System.Drawing.Point(95, 162);
                         this.UserCorreo.Mask = "";
                         this.UserCorreo.MaxLength = 32767;
@@ -119,7 +119,7 @@
                         this.UserPass.HidePromptOnLeave = false;
                         this.UserPass.HideSelection = true;
                         this.UserPass.InsertKeyMode = System.Windows.Forms.InsertKeyMode.Default;
-                        this.UserPass.LeadingIcon = null;
+                        this.UserPass.LeadingIcon = global::SETEA_Sistema.Properties.Resources.avatar_de_usuario;
                         this.UserPass.Location = new System.Drawing.Point(95, 280);
                         this.UserPass.Mask = "";
                         this.UserPass.MaxLength = 32767;

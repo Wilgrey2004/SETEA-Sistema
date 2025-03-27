@@ -14,8 +14,17 @@ namespace SETEA_Sistema.Modelodb
     
     public partial class ClienteCaja
     {
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
+        public ClienteCaja()
+        {
+            this.facturaCaja = new HashSet<facturaCaja>();
+        }
+    
         public int id { get; set; }
         public string nombre { get; set; }
         public Nullable<System.DateTime> fechaRegistro { get; set; }
+    
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<facturaCaja> facturaCaja { get; set; }
     }
 }

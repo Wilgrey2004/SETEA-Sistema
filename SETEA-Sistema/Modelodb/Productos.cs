@@ -12,25 +12,29 @@ namespace SETEA_Sistema.Modelodb
     using System;
     using System.Collections.Generic;
     
-    public partial class Clientes
+    public partial class Productos
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
-        public Clientes()
+        public Productos()
         {
-            this.Citas = new HashSet<Citas>();
-            this.Ventas = new HashSet<Ventas>();
+            this.DetallesVenta = new HashSet<DetallesVenta>();
+            this.Inventario = new HashSet<Inventario>();
+            this.PromocionesProductos = new HashSet<PromocionesProductos>();
         }
     
         public int Id { get; set; }
         public string Nombre { get; set; }
-        public string Correo { get; set; }
-        public string Telefono { get; set; }
-        public string Clasificacion { get; set; }
-        public Nullable<System.DateTime> FechaRegistro { get; set; }
+        public string Descripcion { get; set; }
+        public decimal Precio { get; set; }
+        public int CategoriaId { get; set; }
+        public Nullable<System.DateTime> FechaCreacion { get; set; }
     
+        public virtual Categorias Categorias { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<Citas> Citas { get; set; }
+        public virtual ICollection<DetallesVenta> DetallesVenta { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<Ventas> Ventas { get; set; }
+        public virtual ICollection<Inventario> Inventario { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<PromocionesProductos> PromocionesProductos { get; set; }
     }
 }

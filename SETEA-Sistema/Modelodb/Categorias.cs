@@ -18,6 +18,7 @@ namespace SETEA_Sistema.Modelodb
         public Categorias()
         {
             this.producto = new HashSet<producto>();
+            this.Productos = new HashSet<Productos>();
         }
     
         public int Id { get; set; }
@@ -25,5 +26,7 @@ namespace SETEA_Sistema.Modelodb
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<producto> producto { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<Productos> Productos { get; set; }
     }
 }

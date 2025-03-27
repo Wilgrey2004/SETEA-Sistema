@@ -12,15 +12,13 @@ namespace SETEA_Sistema.Modelodb
     using System;
     using System.Collections.Generic;
     
-    public partial class Codigo_De_Productos
+    public partial class Auditoria
     {
-        public int ID { get; set; }
-        public string CodigoDelProducto { get; set; }
-        public Nullable<int> ID_Producto_Enlazado { get; set; }
-        public Nullable<System.DateTime> Fecha_De_Agregacion { get; set; }
-        public string Estado_Codigo { get; set; }
+        public int Id { get; set; }
+        public int UsuarioId { get; set; }
+        public string Accion { get; set; }
+        public System.DateTime Fecha { get; set; }
     
-        public virtual producto producto { get; set; }
-        public virtual estado estado { get; set; }
+        public virtual Usuarios Usuarios { get; set; }
     }
 }

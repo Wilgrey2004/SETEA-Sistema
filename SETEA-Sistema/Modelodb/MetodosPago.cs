@@ -14,7 +14,16 @@ namespace SETEA_Sistema.Modelodb
     
     public partial class MetodosPago
     {
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
+        public MetodosPago()
+        {
+            this.Ventas = new HashSet<Ventas>();
+        }
+    
         public int Id { get; set; }
         public string Metodo { get; set; }
+    
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<Ventas> Ventas { get; set; }
     }
 }

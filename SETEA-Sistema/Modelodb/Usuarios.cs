@@ -14,6 +14,12 @@ namespace SETEA_Sistema.Modelodb
     
     public partial class Usuarios
     {
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
+        public Usuarios()
+        {
+            this.Auditoria = new HashSet<Auditoria>();
+        }
+    
         public int Id { get; set; }
         public string Nombre { get; set; }
         public string Correo { get; set; }
@@ -23,5 +29,7 @@ namespace SETEA_Sistema.Modelodb
         public Nullable<System.DateTime> Ultima_Vez { get; set; }
     
         public virtual Roles Roles { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<Auditoria> Auditoria { get; set; }
     }
 }
