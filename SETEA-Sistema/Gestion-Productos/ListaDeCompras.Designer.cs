@@ -33,7 +33,6 @@
                         this.materialCard1 = new MaterialSkin.Controls.MaterialCard();
                         this.materialLabel7 = new MaterialSkin.Controls.MaterialLabel();
                         this.txtCantidadRestante = new MaterialSkin.Controls.MaterialMaskedTextBox();
-                        this.materialButton5 = new MaterialSkin.Controls.MaterialButton();
                         this.materialLabel6 = new MaterialSkin.Controls.MaterialLabel();
                         this.ProductoName = new MaterialSkin.Controls.MaterialComboBox();
                         this.materialButton4 = new MaterialSkin.Controls.MaterialButton();
@@ -48,32 +47,32 @@
                         this.materialLabel1 = new MaterialSkin.Controls.MaterialLabel();
                         this.MyDataProductosAgotados = new System.Windows.Forms.DataGridView();
                         this.tabPage2 = new System.Windows.Forms.TabPage();
+                        this.materialButton10 = new MaterialSkin.Controls.MaterialButton();
+                        this.materialButton9 = new MaterialSkin.Controls.MaterialButton();
+                        this.materialButton7 = new MaterialSkin.Controls.MaterialButton();
+                        this.materialLabel9 = new MaterialSkin.Controls.MaterialLabel();
+                        this.materialCard2 = new MaterialSkin.Controls.MaterialCard();
+                        this.CantidadNewProduct = new System.Windows.Forms.NumericUpDown();
+                        this.materialButton8 = new MaterialSkin.Controls.MaterialButton();
+                        this.materialLabel13 = new MaterialSkin.Controls.MaterialLabel();
+                        this.materialButton6 = new MaterialSkin.Controls.MaterialButton();
+                        this.PrecioNewProducto = new MaterialSkin.Controls.MaterialMaskedTextBox();
+                        this.NameNewProducto = new MaterialSkin.Controls.MaterialMaskedTextBox();
+                        this.materialLabel12 = new MaterialSkin.Controls.MaterialLabel();
+                        this.materialLabel11 = new MaterialSkin.Controls.MaterialLabel();
+                        this.materialLabel10 = new MaterialSkin.Controls.MaterialLabel();
                         this.materialLabel8 = new MaterialSkin.Controls.MaterialLabel();
                         this.ListaDeComprasVariada = new System.Windows.Forms.DataGridView();
                         this.imageList1 = new System.Windows.Forms.ImageList(this.components);
-                        this.materialCard2 = new MaterialSkin.Controls.MaterialCard();
-                        this.materialLabel9 = new MaterialSkin.Controls.MaterialLabel();
-                        this.materialLabel10 = new MaterialSkin.Controls.MaterialLabel();
-                        this.materialLabel11 = new MaterialSkin.Controls.MaterialLabel();
-                        this.materialLabel12 = new MaterialSkin.Controls.MaterialLabel();
-                        this.NameNewProducto = new MaterialSkin.Controls.MaterialMaskedTextBox();
-                        this.PrecioNewProducto = new MaterialSkin.Controls.MaterialMaskedTextBox();
-                        this.materialButton6 = new MaterialSkin.Controls.MaterialButton();
-                        this.materialLabel13 = new MaterialSkin.Controls.MaterialLabel();
-                        this.materialButton7 = new MaterialSkin.Controls.MaterialButton();
-                        this.materialButton8 = new MaterialSkin.Controls.MaterialButton();
-                        this.materialButton9 = new MaterialSkin.Controls.MaterialButton();
-                        this.CantidadNewProduct = new System.Windows.Forms.NumericUpDown();
-                        this.materialButton10 = new MaterialSkin.Controls.MaterialButton();
                         this.materialTabControl1.SuspendLayout();
                         this.tabPage1.SuspendLayout();
                         this.materialCard1.SuspendLayout();
                         ((System.ComponentModel.ISupportInitialize)(this.Cantidad)).BeginInit();
                         ((System.ComponentModel.ISupportInitialize)(this.MyDataProductosAgotados)).BeginInit();
                         this.tabPage2.SuspendLayout();
-                        ((System.ComponentModel.ISupportInitialize)(this.ListaDeComprasVariada)).BeginInit();
                         this.materialCard2.SuspendLayout();
                         ((System.ComponentModel.ISupportInitialize)(this.CantidadNewProduct)).BeginInit();
+                        ((System.ComponentModel.ISupportInitialize)(this.ListaDeComprasVariada)).BeginInit();
                         this.SuspendLayout();
                         // 
                         // materialTabControl1
@@ -120,7 +119,6 @@
                         this.materialCard1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(255)))), ((int)(((byte)(255)))));
                         this.materialCard1.Controls.Add(this.materialLabel7);
                         this.materialCard1.Controls.Add(this.txtCantidadRestante);
-                        this.materialCard1.Controls.Add(this.materialButton5);
                         this.materialCard1.Controls.Add(this.materialLabel6);
                         this.materialCard1.Controls.Add(this.ProductoName);
                         this.materialCard1.Depth = 0;
@@ -138,7 +136,7 @@
                         this.materialLabel7.AutoSize = true;
                         this.materialLabel7.Depth = 0;
                         this.materialLabel7.Font = new System.Drawing.Font("Roboto", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel);
-                        this.materialLabel7.Location = new System.Drawing.Point(290, 5);
+                        this.materialLabel7.Location = new System.Drawing.Point(301, 31);
                         this.materialLabel7.MouseState = MaterialSkin.MouseState.HOVER;
                         this.materialLabel7.Name = "materialLabel7";
                         this.materialLabel7.Size = new System.Drawing.Size(135, 19);
@@ -159,7 +157,7 @@
                         this.txtCantidadRestante.HideSelection = true;
                         this.txtCantidadRestante.InsertKeyMode = System.Windows.Forms.InsertKeyMode.Default;
                         this.txtCantidadRestante.LeadingIcon = null;
-                        this.txtCantidadRestante.Location = new System.Drawing.Point(293, 27);
+                        this.txtCantidadRestante.Location = new System.Drawing.Point(304, 53);
                         this.txtCantidadRestante.Mask = "";
                         this.txtCantidadRestante.MaxLength = 32767;
                         this.txtCantidadRestante.MouseState = MaterialSkin.MouseState.OUT;
@@ -187,32 +185,12 @@
                         this.txtCantidadRestante.UseSystemPasswordChar = false;
                         this.txtCantidadRestante.ValidatingType = null;
                         // 
-                        // materialButton5
-                        // 
-                        this.materialButton5.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
-                        this.materialButton5.Density = MaterialSkin.Controls.MaterialButton.MaterialButtonDensity.Default;
-                        this.materialButton5.Depth = 0;
-                        this.materialButton5.HighEmphasis = true;
-                        this.materialButton5.Icon = null;
-                        this.materialButton5.Location = new System.Drawing.Point(8, 84);
-                        this.materialButton5.Margin = new System.Windows.Forms.Padding(4, 6, 4, 6);
-                        this.materialButton5.MouseState = MaterialSkin.MouseState.HOVER;
-                        this.materialButton5.Name = "materialButton5";
-                        this.materialButton5.NoAccentTextColor = System.Drawing.Color.Empty;
-                        this.materialButton5.Size = new System.Drawing.Size(88, 36);
-                        this.materialButton5.TabIndex = 17;
-                        this.materialButton5.Text = "Agregar";
-                        this.materialButton5.Type = MaterialSkin.Controls.MaterialButton.MaterialButtonType.Contained;
-                        this.materialButton5.UseAccentColor = false;
-                        this.materialButton5.UseVisualStyleBackColor = true;
-                        this.materialButton5.Click += new System.EventHandler(this.materialButton5_Click);
-                        // 
                         // materialLabel6
                         // 
                         this.materialLabel6.AutoSize = true;
                         this.materialLabel6.Depth = 0;
                         this.materialLabel6.Font = new System.Drawing.Font("Roboto", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel);
-                        this.materialLabel6.Location = new System.Drawing.Point(4, 4);
+                        this.materialLabel6.Location = new System.Drawing.Point(15, 30);
                         this.materialLabel6.MouseState = MaterialSkin.MouseState.HOVER;
                         this.materialLabel6.Name = "materialLabel6";
                         this.materialLabel6.Size = new System.Drawing.Size(250, 19);
@@ -233,7 +211,7 @@
                         this.ProductoName.FormattingEnabled = true;
                         this.ProductoName.IntegralHeight = false;
                         this.ProductoName.ItemHeight = 43;
-                        this.ProductoName.Location = new System.Drawing.Point(8, 26);
+                        this.ProductoName.Location = new System.Drawing.Point(19, 52);
                         this.ProductoName.MaxDropDownItems = 4;
                         this.ProductoName.MouseState = MaterialSkin.MouseState.OUT;
                         this.ProductoName.Name = "ProductoName";
@@ -279,7 +257,7 @@
                         this.materialLabel4.AutoSize = true;
                         this.materialLabel4.Depth = 0;
                         this.materialLabel4.Font = new System.Drawing.Font("Roboto", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel);
-                        this.materialLabel4.Location = new System.Drawing.Point(479, 401);
+                        this.materialLabel4.Location = new System.Drawing.Point(480, 401);
                         this.materialLabel4.MouseState = MaterialSkin.MouseState.HOVER;
                         this.materialLabel4.Name = "materialLabel4";
                         this.materialLabel4.Size = new System.Drawing.Size(317, 19);
@@ -288,9 +266,9 @@
                         // 
                         // Cantidad
                         // 
-                        this.Cantidad.Location = new System.Drawing.Point(684, 305);
+                        this.Cantidad.Location = new System.Drawing.Point(706, 295);
                         this.Cantidad.Name = "Cantidad";
-                        this.Cantidad.Size = new System.Drawing.Size(267, 20);
+                        this.Cantidad.Size = new System.Drawing.Size(112, 20);
                         this.Cantidad.TabIndex = 7;
                         this.Cantidad.ValueChanged += new System.EventHandler(this.Cantidad_ValueChanged);
                         // 
@@ -313,7 +291,7 @@
                         this.materialButton3.Depth = 0;
                         this.materialButton3.HighEmphasis = true;
                         this.materialButton3.Icon = null;
-                        this.materialButton3.Location = new System.Drawing.Point(479, 295);
+                        this.materialButton3.Location = new System.Drawing.Point(480, 295);
                         this.materialButton3.Margin = new System.Windows.Forms.Padding(4, 6, 4, 6);
                         this.materialButton3.MouseState = MaterialSkin.MouseState.HOVER;
                         this.materialButton3.Name = "materialButton3";
@@ -333,7 +311,7 @@
                         this.materialButton2.Depth = 0;
                         this.materialButton2.HighEmphasis = true;
                         this.materialButton2.Icon = null;
-                        this.materialButton2.Location = new System.Drawing.Point(476, 228);
+                        this.materialButton2.Location = new System.Drawing.Point(480, 228);
                         this.materialButton2.Margin = new System.Windows.Forms.Padding(4, 6, 4, 6);
                         this.materialButton2.MouseState = MaterialSkin.MouseState.HOVER;
                         this.materialButton2.Name = "materialButton2";
@@ -353,7 +331,7 @@
                         this.materialButton1.Depth = 0;
                         this.materialButton1.HighEmphasis = true;
                         this.materialButton1.Icon = null;
-                        this.materialButton1.Location = new System.Drawing.Point(479, 426);
+                        this.materialButton1.Location = new System.Drawing.Point(480, 426);
                         this.materialButton1.Margin = new System.Windows.Forms.Padding(4, 6, 4, 6);
                         this.materialButton1.MouseState = MaterialSkin.MouseState.HOVER;
                         this.materialButton1.Name = "materialButton1";
@@ -424,35 +402,78 @@
                         this.tabPage2.Text = "Compras Adicionales";
                         this.tabPage2.UseVisualStyleBackColor = true;
                         // 
-                        // materialLabel8
+                        // materialButton10
                         // 
-                        this.materialLabel8.AutoSize = true;
-                        this.materialLabel8.Depth = 0;
-                        this.materialLabel8.Font = new System.Drawing.Font("Roboto Medium", 20F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Pixel);
-                        this.materialLabel8.FontType = MaterialSkin.MaterialSkinManager.fontType.H6;
-                        this.materialLabel8.Location = new System.Drawing.Point(536, 9);
-                        this.materialLabel8.MouseState = MaterialSkin.MouseState.HOVER;
-                        this.materialLabel8.Name = "materialLabel8";
-                        this.materialLabel8.Size = new System.Drawing.Size(149, 24);
-                        this.materialLabel8.TabIndex = 2;
-                        this.materialLabel8.Text = "Lista De Compra";
+                        this.materialButton10.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
+                        this.materialButton10.Density = MaterialSkin.Controls.MaterialButton.MaterialButtonDensity.Default;
+                        this.materialButton10.Depth = 0;
+                        this.materialButton10.HighEmphasis = true;
+                        this.materialButton10.Icon = null;
+                        this.materialButton10.Location = new System.Drawing.Point(10, 431);
+                        this.materialButton10.Margin = new System.Windows.Forms.Padding(4, 6, 4, 6);
+                        this.materialButton10.MouseState = MaterialSkin.MouseState.HOVER;
+                        this.materialButton10.Name = "materialButton10";
+                        this.materialButton10.NoAccentTextColor = System.Drawing.Color.Empty;
+                        this.materialButton10.Size = new System.Drawing.Size(216, 36);
+                        this.materialButton10.TabIndex = 21;
+                        this.materialButton10.Text = "Generar Pdf Con La Lista";
+                        this.materialButton10.Type = MaterialSkin.Controls.MaterialButton.MaterialButtonType.Contained;
+                        this.materialButton10.UseAccentColor = false;
+                        this.materialButton10.UseVisualStyleBackColor = true;
+                        this.materialButton10.Click += new System.EventHandler(this.materialButton10_Click);
                         // 
-                        // ListaDeComprasVariada
+                        // materialButton9
                         // 
-                        this.ListaDeComprasVariada.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-                        this.ListaDeComprasVariada.Location = new System.Drawing.Point(536, 36);
-                        this.ListaDeComprasVariada.Name = "ListaDeComprasVariada";
-                        this.ListaDeComprasVariada.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-                        this.ListaDeComprasVariada.Size = new System.Drawing.Size(444, 497);
-                        this.ListaDeComprasVariada.TabIndex = 1;
-                        this.ListaDeComprasVariada.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.ListaDeComprasVariada_CellClick);
+                        this.materialButton9.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
+                        this.materialButton9.Density = MaterialSkin.Controls.MaterialButton.MaterialButtonDensity.Default;
+                        this.materialButton9.Depth = 0;
+                        this.materialButton9.HighEmphasis = true;
+                        this.materialButton9.Icon = null;
+                        this.materialButton9.Location = new System.Drawing.Point(10, 383);
+                        this.materialButton9.Margin = new System.Windows.Forms.Padding(4, 6, 4, 6);
+                        this.materialButton9.MouseState = MaterialSkin.MouseState.HOVER;
+                        this.materialButton9.Name = "materialButton9";
+                        this.materialButton9.NoAccentTextColor = System.Drawing.Color.Empty;
+                        this.materialButton9.Size = new System.Drawing.Size(116, 36);
+                        this.materialButton9.TabIndex = 20;
+                        this.materialButton9.Text = "Vaciar Lista";
+                        this.materialButton9.Type = MaterialSkin.Controls.MaterialButton.MaterialButtonType.Contained;
+                        this.materialButton9.UseAccentColor = false;
+                        this.materialButton9.UseVisualStyleBackColor = true;
+                        this.materialButton9.Click += new System.EventHandler(this.materialButton9_Click);
                         // 
-                        // imageList1
+                        // materialButton7
                         // 
-                        this.imageList1.ImageStream = ((System.Windows.Forms.ImageListStreamer)(resources.GetObject("imageList1.ImageStream")));
-                        this.imageList1.TransparentColor = System.Drawing.Color.Transparent;
-                        this.imageList1.Images.SetKeyName(0, "lista-de-verificacion.png");
-                        this.imageList1.Images.SetKeyName(1, "ListaIcon2.png");
+                        this.materialButton7.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
+                        this.materialButton7.Density = MaterialSkin.Controls.MaterialButton.MaterialButtonDensity.Default;
+                        this.materialButton7.Depth = 0;
+                        this.materialButton7.HighEmphasis = true;
+                        this.materialButton7.Icon = null;
+                        this.materialButton7.Location = new System.Drawing.Point(10, 335);
+                        this.materialButton7.Margin = new System.Windows.Forms.Padding(4, 6, 4, 6);
+                        this.materialButton7.MouseState = MaterialSkin.MouseState.HOVER;
+                        this.materialButton7.Name = "materialButton7";
+                        this.materialButton7.NoAccentTextColor = System.Drawing.Color.Empty;
+                        this.materialButton7.Size = new System.Drawing.Size(350, 36);
+                        this.materialButton7.TabIndex = 19;
+                        this.materialButton7.Text = "Eliminar Producto De La Lista De Compras";
+                        this.materialButton7.Type = MaterialSkin.Controls.MaterialButton.MaterialButtonType.Contained;
+                        this.materialButton7.UseAccentColor = false;
+                        this.materialButton7.UseVisualStyleBackColor = true;
+                        this.materialButton7.Click += new System.EventHandler(this.materialButton7_Click);
+                        // 
+                        // materialLabel9
+                        // 
+                        this.materialLabel9.AutoSize = true;
+                        this.materialLabel9.Depth = 0;
+                        this.materialLabel9.Font = new System.Drawing.Font("Roboto Medium", 20F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Pixel);
+                        this.materialLabel9.FontType = MaterialSkin.MaterialSkinManager.fontType.H6;
+                        this.materialLabel9.Location = new System.Drawing.Point(6, 9);
+                        this.materialLabel9.MouseState = MaterialSkin.MouseState.HOVER;
+                        this.materialLabel9.Name = "materialLabel9";
+                        this.materialLabel9.Size = new System.Drawing.Size(87, 24);
+                        this.materialLabel9.TabIndex = 4;
+                        this.materialLabel9.Text = "Acciones ";
                         // 
                         // materialCard2
                         // 
@@ -476,98 +497,65 @@
                         this.materialCard2.Size = new System.Drawing.Size(509, 288);
                         this.materialCard2.TabIndex = 3;
                         // 
-                        // materialLabel9
+                        // CantidadNewProduct
                         // 
-                        this.materialLabel9.AutoSize = true;
-                        this.materialLabel9.Depth = 0;
-                        this.materialLabel9.Font = new System.Drawing.Font("Roboto Medium", 20F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Pixel);
-                        this.materialLabel9.FontType = MaterialSkin.MaterialSkinManager.fontType.H6;
-                        this.materialLabel9.Location = new System.Drawing.Point(6, 9);
-                        this.materialLabel9.MouseState = MaterialSkin.MouseState.HOVER;
-                        this.materialLabel9.Name = "materialLabel9";
-                        this.materialLabel9.Size = new System.Drawing.Size(87, 24);
-                        this.materialLabel9.TabIndex = 4;
-                        this.materialLabel9.Text = "Acciones ";
+                        this.CantidadNewProduct.Location = new System.Drawing.Point(242, 132);
+                        this.CantidadNewProduct.Name = "CantidadNewProduct";
+                        this.CantidadNewProduct.Size = new System.Drawing.Size(250, 20);
+                        this.CantidadNewProduct.TabIndex = 20;
                         // 
-                        // materialLabel10
+                        // materialButton8
                         // 
-                        this.materialLabel10.AutoSize = true;
-                        this.materialLabel10.Depth = 0;
-                        this.materialLabel10.Font = new System.Drawing.Font("Roboto Medium", 20F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Pixel);
-                        this.materialLabel10.FontType = MaterialSkin.MaterialSkinManager.fontType.H6;
-                        this.materialLabel10.Location = new System.Drawing.Point(17, 65);
-                        this.materialLabel10.MouseState = MaterialSkin.MouseState.HOVER;
-                        this.materialLabel10.Name = "materialLabel10";
-                        this.materialLabel10.Size = new System.Drawing.Size(192, 24);
-                        this.materialLabel10.TabIndex = 5;
-                        this.materialLabel10.Text = "Nombre Del Producto";
+                        this.materialButton8.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
+                        this.materialButton8.Density = MaterialSkin.Controls.MaterialButton.MaterialButtonDensity.Default;
+                        this.materialButton8.Depth = 0;
+                        this.materialButton8.HighEmphasis = true;
+                        this.materialButton8.Icon = null;
+                        this.materialButton8.Location = new System.Drawing.Point(117, 242);
+                        this.materialButton8.Margin = new System.Windows.Forms.Padding(4, 6, 4, 6);
+                        this.materialButton8.MouseState = MaterialSkin.MouseState.HOVER;
+                        this.materialButton8.Name = "materialButton8";
+                        this.materialButton8.NoAccentTextColor = System.Drawing.Color.Empty;
+                        this.materialButton8.Size = new System.Drawing.Size(140, 36);
+                        this.materialButton8.TabIndex = 19;
+                        this.materialButton8.Text = "Reiniciar Cajas";
+                        this.materialButton8.Type = MaterialSkin.Controls.MaterialButton.MaterialButtonType.Contained;
+                        this.materialButton8.UseAccentColor = false;
+                        this.materialButton8.UseVisualStyleBackColor = true;
+                        this.materialButton8.Click += new System.EventHandler(this.materialButton8_Click);
                         // 
-                        // materialLabel11
+                        // materialLabel13
                         // 
-                        this.materialLabel11.AutoSize = true;
-                        this.materialLabel11.Depth = 0;
-                        this.materialLabel11.Font = new System.Drawing.Font("Roboto Medium", 20F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Pixel);
-                        this.materialLabel11.FontType = MaterialSkin.MaterialSkinManager.fontType.H6;
-                        this.materialLabel11.Location = new System.Drawing.Point(17, 132);
-                        this.materialLabel11.MouseState = MaterialSkin.MouseState.HOVER;
-                        this.materialLabel11.Name = "materialLabel11";
-                        this.materialLabel11.Size = new System.Drawing.Size(200, 24);
-                        this.materialLabel11.TabIndex = 6;
-                        this.materialLabel11.Text = "Cantidad Del Prodicto ";
+                        this.materialLabel13.AutoSize = true;
+                        this.materialLabel13.Depth = 0;
+                        this.materialLabel13.Font = new System.Drawing.Font("Roboto Medium", 20F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Pixel);
+                        this.materialLabel13.FontType = MaterialSkin.MaterialSkinManager.fontType.H6;
+                        this.materialLabel13.Location = new System.Drawing.Point(14, 14);
+                        this.materialLabel13.MouseState = MaterialSkin.MouseState.HOVER;
+                        this.materialLabel13.Name = "materialLabel13";
+                        this.materialLabel13.Size = new System.Drawing.Size(166, 24);
+                        this.materialLabel13.TabIndex = 5;
+                        this.materialLabel13.Text = "Agregar A La Lista";
                         // 
-                        // materialLabel12
+                        // materialButton6
                         // 
-                        this.materialLabel12.AutoSize = true;
-                        this.materialLabel12.Depth = 0;
-                        this.materialLabel12.Font = new System.Drawing.Font("Roboto Medium", 20F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Pixel);
-                        this.materialLabel12.FontType = MaterialSkin.MaterialSkinManager.fontType.H6;
-                        this.materialLabel12.Location = new System.Drawing.Point(17, 197);
-                        this.materialLabel12.MouseState = MaterialSkin.MouseState.HOVER;
-                        this.materialLabel12.Name = "materialLabel12";
-                        this.materialLabel12.Size = new System.Drawing.Size(154, 24);
-                        this.materialLabel12.TabIndex = 7;
-                        this.materialLabel12.Text = "Precio De Unidad";
-                        // 
-                        // NameNewProducto
-                        // 
-                        this.NameNewProducto.AllowPromptAsInput = true;
-                        this.NameNewProducto.AnimateReadOnly = false;
-                        this.NameNewProducto.AsciiOnly = false;
-                        this.NameNewProducto.BackgroundImageLayout = System.Windows.Forms.ImageLayout.None;
-                        this.NameNewProducto.BeepOnError = false;
-                        this.NameNewProducto.CutCopyMaskFormat = System.Windows.Forms.MaskFormat.IncludeLiterals;
-                        this.NameNewProducto.Depth = 0;
-                        this.NameNewProducto.Font = new System.Drawing.Font("Roboto", 16F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel);
-                        this.NameNewProducto.HidePromptOnLeave = false;
-                        this.NameNewProducto.HideSelection = true;
-                        this.NameNewProducto.InsertKeyMode = System.Windows.Forms.InsertKeyMode.Default;
-                        this.NameNewProducto.LeadingIcon = null;
-                        this.NameNewProducto.Location = new System.Drawing.Point(242, 52);
-                        this.NameNewProducto.Mask = "";
-                        this.NameNewProducto.MaxLength = 32767;
-                        this.NameNewProducto.MouseState = MaterialSkin.MouseState.OUT;
-                        this.NameNewProducto.Name = "NameNewProducto";
-                        this.NameNewProducto.PasswordChar = '\0';
-                        this.NameNewProducto.PrefixSuffixText = null;
-                        this.NameNewProducto.PromptChar = '_';
-                        this.NameNewProducto.ReadOnly = false;
-                        this.NameNewProducto.RejectInputOnFirstFailure = false;
-                        this.NameNewProducto.ResetOnPrompt = true;
-                        this.NameNewProducto.ResetOnSpace = true;
-                        this.NameNewProducto.RightToLeft = System.Windows.Forms.RightToLeft.No;
-                        this.NameNewProducto.SelectedText = "";
-                        this.NameNewProducto.SelectionLength = 0;
-                        this.NameNewProducto.SelectionStart = 0;
-                        this.NameNewProducto.ShortcutsEnabled = true;
-                        this.NameNewProducto.Size = new System.Drawing.Size(250, 48);
-                        this.NameNewProducto.SkipLiterals = true;
-                        this.NameNewProducto.TabIndex = 8;
-                        this.NameNewProducto.TabStop = false;
-                        this.NameNewProducto.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
-                        this.NameNewProducto.TextMaskFormat = System.Windows.Forms.MaskFormat.IncludeLiterals;
-                        this.NameNewProducto.TrailingIcon = null;
-                        this.NameNewProducto.UseSystemPasswordChar = false;
-                        this.NameNewProducto.ValidatingType = null;
+                        this.materialButton6.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
+                        this.materialButton6.Density = MaterialSkin.Controls.MaterialButton.MaterialButtonDensity.Default;
+                        this.materialButton6.Depth = 0;
+                        this.materialButton6.HighEmphasis = true;
+                        this.materialButton6.Icon = null;
+                        this.materialButton6.Location = new System.Drawing.Point(21, 242);
+                        this.materialButton6.Margin = new System.Windows.Forms.Padding(4, 6, 4, 6);
+                        this.materialButton6.MouseState = MaterialSkin.MouseState.HOVER;
+                        this.materialButton6.Name = "materialButton6";
+                        this.materialButton6.NoAccentTextColor = System.Drawing.Color.Empty;
+                        this.materialButton6.Size = new System.Drawing.Size(88, 36);
+                        this.materialButton6.TabIndex = 18;
+                        this.materialButton6.Text = "Agregar";
+                        this.materialButton6.Type = MaterialSkin.Controls.MaterialButton.MaterialButtonType.Contained;
+                        this.materialButton6.UseAccentColor = false;
+                        this.materialButton6.UseVisualStyleBackColor = true;
+                        this.materialButton6.Click += new System.EventHandler(this.materialButton6_Click);
                         // 
                         // PrecioNewProducto
                         // 
@@ -610,125 +598,115 @@
                         this.PrecioNewProducto.UseSystemPasswordChar = false;
                         this.PrecioNewProducto.ValidatingType = null;
                         // 
-                        // materialButton6
+                        // NameNewProducto
                         // 
-                        this.materialButton6.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
-                        this.materialButton6.Density = MaterialSkin.Controls.MaterialButton.MaterialButtonDensity.Default;
-                        this.materialButton6.Depth = 0;
-                        this.materialButton6.HighEmphasis = true;
-                        this.materialButton6.Icon = null;
-                        this.materialButton6.Location = new System.Drawing.Point(21, 242);
-                        this.materialButton6.Margin = new System.Windows.Forms.Padding(4, 6, 4, 6);
-                        this.materialButton6.MouseState = MaterialSkin.MouseState.HOVER;
-                        this.materialButton6.Name = "materialButton6";
-                        this.materialButton6.NoAccentTextColor = System.Drawing.Color.Empty;
-                        this.materialButton6.Size = new System.Drawing.Size(88, 36);
-                        this.materialButton6.TabIndex = 18;
-                        this.materialButton6.Text = "Agregar";
-                        this.materialButton6.Type = MaterialSkin.Controls.MaterialButton.MaterialButtonType.Contained;
-                        this.materialButton6.UseAccentColor = false;
-                        this.materialButton6.UseVisualStyleBackColor = true;
-                        this.materialButton6.Click += new System.EventHandler(this.materialButton6_Click);
+                        this.NameNewProducto.AllowPromptAsInput = true;
+                        this.NameNewProducto.AnimateReadOnly = false;
+                        this.NameNewProducto.AsciiOnly = false;
+                        this.NameNewProducto.BackgroundImageLayout = System.Windows.Forms.ImageLayout.None;
+                        this.NameNewProducto.BeepOnError = false;
+                        this.NameNewProducto.CutCopyMaskFormat = System.Windows.Forms.MaskFormat.IncludeLiterals;
+                        this.NameNewProducto.Depth = 0;
+                        this.NameNewProducto.Font = new System.Drawing.Font("Microsoft Sans Serif", 16F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel);
+                        this.NameNewProducto.HidePromptOnLeave = false;
+                        this.NameNewProducto.HideSelection = true;
+                        this.NameNewProducto.InsertKeyMode = System.Windows.Forms.InsertKeyMode.Default;
+                        this.NameNewProducto.LeadingIcon = null;
+                        this.NameNewProducto.Location = new System.Drawing.Point(242, 52);
+                        this.NameNewProducto.Mask = "";
+                        this.NameNewProducto.MaxLength = 32767;
+                        this.NameNewProducto.MouseState = MaterialSkin.MouseState.OUT;
+                        this.NameNewProducto.Name = "NameNewProducto";
+                        this.NameNewProducto.PasswordChar = '\0';
+                        this.NameNewProducto.PrefixSuffixText = null;
+                        this.NameNewProducto.PromptChar = '_';
+                        this.NameNewProducto.ReadOnly = false;
+                        this.NameNewProducto.RejectInputOnFirstFailure = false;
+                        this.NameNewProducto.ResetOnPrompt = true;
+                        this.NameNewProducto.ResetOnSpace = true;
+                        this.NameNewProducto.RightToLeft = System.Windows.Forms.RightToLeft.No;
+                        this.NameNewProducto.SelectedText = "";
+                        this.NameNewProducto.SelectionLength = 0;
+                        this.NameNewProducto.SelectionStart = 0;
+                        this.NameNewProducto.ShortcutsEnabled = true;
+                        this.NameNewProducto.Size = new System.Drawing.Size(250, 48);
+                        this.NameNewProducto.SkipLiterals = true;
+                        this.NameNewProducto.TabIndex = 8;
+                        this.NameNewProducto.TabStop = false;
+                        this.NameNewProducto.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+                        this.NameNewProducto.TextMaskFormat = System.Windows.Forms.MaskFormat.IncludeLiterals;
+                        this.NameNewProducto.TrailingIcon = null;
+                        this.NameNewProducto.UseSystemPasswordChar = false;
+                        this.NameNewProducto.ValidatingType = null;
                         // 
-                        // materialLabel13
+                        // materialLabel12
                         // 
-                        this.materialLabel13.AutoSize = true;
-                        this.materialLabel13.Depth = 0;
-                        this.materialLabel13.Font = new System.Drawing.Font("Roboto Medium", 20F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Pixel);
-                        this.materialLabel13.FontType = MaterialSkin.MaterialSkinManager.fontType.H6;
-                        this.materialLabel13.Location = new System.Drawing.Point(14, 14);
-                        this.materialLabel13.MouseState = MaterialSkin.MouseState.HOVER;
-                        this.materialLabel13.Name = "materialLabel13";
-                        this.materialLabel13.Size = new System.Drawing.Size(166, 24);
-                        this.materialLabel13.TabIndex = 5;
-                        this.materialLabel13.Text = "Agregar A La Lista";
+                        this.materialLabel12.AutoSize = true;
+                        this.materialLabel12.Depth = 0;
+                        this.materialLabel12.Font = new System.Drawing.Font("Roboto Medium", 20F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Pixel);
+                        this.materialLabel12.FontType = MaterialSkin.MaterialSkinManager.fontType.H6;
+                        this.materialLabel12.Location = new System.Drawing.Point(17, 197);
+                        this.materialLabel12.MouseState = MaterialSkin.MouseState.HOVER;
+                        this.materialLabel12.Name = "materialLabel12";
+                        this.materialLabel12.Size = new System.Drawing.Size(154, 24);
+                        this.materialLabel12.TabIndex = 7;
+                        this.materialLabel12.Text = "Precio De Unidad";
                         // 
-                        // materialButton7
+                        // materialLabel11
                         // 
-                        this.materialButton7.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
-                        this.materialButton7.Density = MaterialSkin.Controls.MaterialButton.MaterialButtonDensity.Default;
-                        this.materialButton7.Depth = 0;
-                        this.materialButton7.HighEmphasis = true;
-                        this.materialButton7.Icon = null;
-                        this.materialButton7.Location = new System.Drawing.Point(10, 335);
-                        this.materialButton7.Margin = new System.Windows.Forms.Padding(4, 6, 4, 6);
-                        this.materialButton7.MouseState = MaterialSkin.MouseState.HOVER;
-                        this.materialButton7.Name = "materialButton7";
-                        this.materialButton7.NoAccentTextColor = System.Drawing.Color.Empty;
-                        this.materialButton7.Size = new System.Drawing.Size(350, 36);
-                        this.materialButton7.TabIndex = 19;
-                        this.materialButton7.Text = "Eliminar Producto De La Lista De Compras";
-                        this.materialButton7.Type = MaterialSkin.Controls.MaterialButton.MaterialButtonType.Contained;
-                        this.materialButton7.UseAccentColor = false;
-                        this.materialButton7.UseVisualStyleBackColor = true;
-                        this.materialButton7.Click += new System.EventHandler(this.materialButton7_Click);
+                        this.materialLabel11.AutoSize = true;
+                        this.materialLabel11.Depth = 0;
+                        this.materialLabel11.Font = new System.Drawing.Font("Roboto Medium", 20F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Pixel);
+                        this.materialLabel11.FontType = MaterialSkin.MaterialSkinManager.fontType.H6;
+                        this.materialLabel11.Location = new System.Drawing.Point(17, 132);
+                        this.materialLabel11.MouseState = MaterialSkin.MouseState.HOVER;
+                        this.materialLabel11.Name = "materialLabel11";
+                        this.materialLabel11.Size = new System.Drawing.Size(200, 24);
+                        this.materialLabel11.TabIndex = 6;
+                        this.materialLabel11.Text = "Cantidad Del Prodicto ";
                         // 
-                        // materialButton8
+                        // materialLabel10
                         // 
-                        this.materialButton8.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
-                        this.materialButton8.Density = MaterialSkin.Controls.MaterialButton.MaterialButtonDensity.Default;
-                        this.materialButton8.Depth = 0;
-                        this.materialButton8.HighEmphasis = true;
-                        this.materialButton8.Icon = null;
-                        this.materialButton8.Location = new System.Drawing.Point(117, 242);
-                        this.materialButton8.Margin = new System.Windows.Forms.Padding(4, 6, 4, 6);
-                        this.materialButton8.MouseState = MaterialSkin.MouseState.HOVER;
-                        this.materialButton8.Name = "materialButton8";
-                        this.materialButton8.NoAccentTextColor = System.Drawing.Color.Empty;
-                        this.materialButton8.Size = new System.Drawing.Size(140, 36);
-                        this.materialButton8.TabIndex = 19;
-                        this.materialButton8.Text = "Reiniciar Cajas";
-                        this.materialButton8.Type = MaterialSkin.Controls.MaterialButton.MaterialButtonType.Contained;
-                        this.materialButton8.UseAccentColor = false;
-                        this.materialButton8.UseVisualStyleBackColor = true;
-                        this.materialButton8.Click += new System.EventHandler(this.materialButton8_Click);
+                        this.materialLabel10.AutoSize = true;
+                        this.materialLabel10.Depth = 0;
+                        this.materialLabel10.Font = new System.Drawing.Font("Roboto Medium", 20F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Pixel);
+                        this.materialLabel10.FontType = MaterialSkin.MaterialSkinManager.fontType.H6;
+                        this.materialLabel10.Location = new System.Drawing.Point(17, 65);
+                        this.materialLabel10.MouseState = MaterialSkin.MouseState.HOVER;
+                        this.materialLabel10.Name = "materialLabel10";
+                        this.materialLabel10.Size = new System.Drawing.Size(192, 24);
+                        this.materialLabel10.TabIndex = 5;
+                        this.materialLabel10.Text = "Nombre Del Producto";
                         // 
-                        // materialButton9
+                        // materialLabel8
                         // 
-                        this.materialButton9.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
-                        this.materialButton9.Density = MaterialSkin.Controls.MaterialButton.MaterialButtonDensity.Default;
-                        this.materialButton9.Depth = 0;
-                        this.materialButton9.HighEmphasis = true;
-                        this.materialButton9.Icon = null;
-                        this.materialButton9.Location = new System.Drawing.Point(10, 383);
-                        this.materialButton9.Margin = new System.Windows.Forms.Padding(4, 6, 4, 6);
-                        this.materialButton9.MouseState = MaterialSkin.MouseState.HOVER;
-                        this.materialButton9.Name = "materialButton9";
-                        this.materialButton9.NoAccentTextColor = System.Drawing.Color.Empty;
-                        this.materialButton9.Size = new System.Drawing.Size(116, 36);
-                        this.materialButton9.TabIndex = 20;
-                        this.materialButton9.Text = "Vaciar Lista";
-                        this.materialButton9.Type = MaterialSkin.Controls.MaterialButton.MaterialButtonType.Contained;
-                        this.materialButton9.UseAccentColor = false;
-                        this.materialButton9.UseVisualStyleBackColor = true;
-                        this.materialButton9.Click += new System.EventHandler(this.materialButton9_Click);
+                        this.materialLabel8.AutoSize = true;
+                        this.materialLabel8.Depth = 0;
+                        this.materialLabel8.Font = new System.Drawing.Font("Roboto Medium", 20F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Pixel);
+                        this.materialLabel8.FontType = MaterialSkin.MaterialSkinManager.fontType.H6;
+                        this.materialLabel8.Location = new System.Drawing.Point(536, 9);
+                        this.materialLabel8.MouseState = MaterialSkin.MouseState.HOVER;
+                        this.materialLabel8.Name = "materialLabel8";
+                        this.materialLabel8.Size = new System.Drawing.Size(149, 24);
+                        this.materialLabel8.TabIndex = 2;
+                        this.materialLabel8.Text = "Lista De Compra";
                         // 
-                        // CantidadNewProduct
+                        // ListaDeComprasVariada
                         // 
-                        this.CantidadNewProduct.Location = new System.Drawing.Point(242, 132);
-                        this.CantidadNewProduct.Name = "CantidadNewProduct";
-                        this.CantidadNewProduct.Size = new System.Drawing.Size(250, 20);
-                        this.CantidadNewProduct.TabIndex = 20;
+                        this.ListaDeComprasVariada.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+                        this.ListaDeComprasVariada.Location = new System.Drawing.Point(536, 36);
+                        this.ListaDeComprasVariada.Name = "ListaDeComprasVariada";
+                        this.ListaDeComprasVariada.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
+                        this.ListaDeComprasVariada.Size = new System.Drawing.Size(444, 497);
+                        this.ListaDeComprasVariada.TabIndex = 1;
+                        this.ListaDeComprasVariada.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.ListaDeComprasVariada_CellClick);
                         // 
-                        // materialButton10
+                        // imageList1
                         // 
-                        this.materialButton10.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
-                        this.materialButton10.Density = MaterialSkin.Controls.MaterialButton.MaterialButtonDensity.Default;
-                        this.materialButton10.Depth = 0;
-                        this.materialButton10.HighEmphasis = true;
-                        this.materialButton10.Icon = null;
-                        this.materialButton10.Location = new System.Drawing.Point(10, 431);
-                        this.materialButton10.Margin = new System.Windows.Forms.Padding(4, 6, 4, 6);
-                        this.materialButton10.MouseState = MaterialSkin.MouseState.HOVER;
-                        this.materialButton10.Name = "materialButton10";
-                        this.materialButton10.NoAccentTextColor = System.Drawing.Color.Empty;
-                        this.materialButton10.Size = new System.Drawing.Size(216, 36);
-                        this.materialButton10.TabIndex = 21;
-                        this.materialButton10.Text = "Generar Pdf Con La Lista";
-                        this.materialButton10.Type = MaterialSkin.Controls.MaterialButton.MaterialButtonType.Contained;
-                        this.materialButton10.UseAccentColor = false;
-                        this.materialButton10.UseVisualStyleBackColor = true;
-                        this.materialButton10.Click += new System.EventHandler(this.materialButton10_Click);
+                        this.imageList1.ImageStream = ((System.Windows.Forms.ImageListStreamer)(resources.GetObject("imageList1.ImageStream")));
+                        this.imageList1.TransparentColor = System.Drawing.Color.Transparent;
+                        this.imageList1.Images.SetKeyName(0, "lista-de-verificacion.png");
+                        this.imageList1.Images.SetKeyName(1, "ListaIcon2.png");
                         // 
                         // ListaDeCompras
                         // 
@@ -750,10 +728,10 @@
                         ((System.ComponentModel.ISupportInitialize)(this.MyDataProductosAgotados)).EndInit();
                         this.tabPage2.ResumeLayout(false);
                         this.tabPage2.PerformLayout();
-                        ((System.ComponentModel.ISupportInitialize)(this.ListaDeComprasVariada)).EndInit();
                         this.materialCard2.ResumeLayout(false);
                         this.materialCard2.PerformLayout();
                         ((System.ComponentModel.ISupportInitialize)(this.CantidadNewProduct)).EndInit();
+                        ((System.ComponentModel.ISupportInitialize)(this.ListaDeComprasVariada)).EndInit();
                         this.ResumeLayout(false);
 
                 }
@@ -776,7 +754,6 @@
                 private MaterialSkin.Controls.MaterialButton materialButton4;
                 private MaterialSkin.Controls.MaterialLabel materialLabel5;
                 private MaterialSkin.Controls.MaterialCard materialCard1;
-                private MaterialSkin.Controls.MaterialButton materialButton5;
                 private MaterialSkin.Controls.MaterialLabel materialLabel6;
                 private MaterialSkin.Controls.MaterialComboBox ProductoName;
                 private MaterialSkin.Controls.MaterialLabel materialLabel7;

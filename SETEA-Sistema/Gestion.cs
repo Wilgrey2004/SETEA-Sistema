@@ -4,6 +4,7 @@ using SETEA_Sistema.Entidades;
 using SETEA_Sistema.Gestion_Productos;
 using SETEA_Sistema.Modelodb;
 using SETEA_Sistema.Utilidades;
+using SETEA_Sistema.Utilidades.ReturnsBindingList;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -106,9 +107,9 @@ namespace SETEA_Sistema
                         MyDataProductosCaja.Columns.Clear();
 
                         MyDataProductosCaja.Columns.Add(new DataGridViewTextBoxColumn {
-                                Name = "Nombre Cliente",
-                                DataPropertyName = "Nombre",   // Propiedad de tu objeto VentaEnCaja
-                                HeaderText = "Nombre Cliente"
+                                Name = "Nombre_cliente",
+                                DataPropertyName = "Nombre_cliente",   // Propiedad de tu objeto VentaEnCaja
+                                HeaderText = "Nombre cliente"
                         });
                         MyDataProductosCaja.Columns.Add(new DataGridViewTextBoxColumn {
                                 Name = "Telefono",
@@ -175,20 +176,8 @@ namespace SETEA_Sistema
                         MyDataUsers.Columns["Roles"].Visible = false;
                 }
 
-                private void GeneradorDePDF<T>( BindingList<T> usl, List<string> Cabeceras_, string Reporte, string NombreDeLaPlantilla )
-                where T : class {
-                        GeneradorDePdf generador = new GeneradorDePdf();
-                        using (db = new SeteaEntities1())
-                        {
-                                var data = db.Set<T>().ToList();
-                                usl = new BindingList<T>(data);
+                
 
-                                string rutaPlantilla = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "Resources", $"{NombreDeLaPlantilla}.html");
-                                string rutaSalida = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, $"Reportes/{Reporte}", $"Reporte-{DateTime.Now:yyyyMMddHHmmss}.pdf");
-
-                                generador.GenerarPdf(usl, Cabeceras_, rutaPlantilla, rutaSalida);
-                        }
-                }
 
                 private void GenerarReporteUsuarios() {
                         var Mensaje = MessageBox.Show("Desea generar un reporte de usuarios ?", "Reporte", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
@@ -197,7 +186,7 @@ namespace SETEA_Sistema
                         {
                                 return;
                         }
-                        GeneradorDePDF(usl, headersUsers, "Usuarios", "PlantillaReporteUsuarios");
+                        GeneradorDePdf.GeneradorDePDFS(usl, headersUsers, "Usuarios", "PlantillaReporteUsuarios");
                         MessageBox.Show("Reporte generado con exito", "Reporte", MessageBoxButtons.OK, MessageBoxIcon.Information);
                 }
 
@@ -286,33 +275,21 @@ namespace SETEA_Sistema
 
                 private void CargarTablaDeCodigos() {
                         codigosDeProductosList.Clear();
-                        using (db = new SeteaEntities1())
+                        GetBindingListcodigosShowModels getBindingListCodigos = new GetBindingListcodigosShowModels();
+                        var query = getBindingListCodigos.GetBindingList();
+
+                        if (query == null)
                         {
-                                var query = db.Codigo_De_Productos.Include(x => x.producto).Where(x => x.Estado_Codigo == "Activo")
-                                    .Select(x => new CodigosDeproductosShowsModels {
-                                            ID_Del_Codigo = x.ID,
-                                            ID_Producto = x.ID_Producto_Enlazado,
-                                            Nombre_Del_Producto = x.producto.nombre,
-                                            Codigo_Del_Producto = x.CodigoDelProducto,
-                                            Cantidad_Restante = x.producto.cantidadRestante,
-                                            Precio_Del_Producto = x.producto.PrecioUnidad,
-                                            Fecha_De_Creacion = (DateTime)x.Fecha_De_Agregacion
-
-                                    }).ToList();
-
-                                if (query == null)
-                                {
-                                        MessageBox.Show("Aun no hay codigos de productos agregados...", "Codigos de producto", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                                        return;
-                                }
-
-                                foreach (var item in query)
-                                {
-                                        codigosDeProductosList.Add(item);
-                                }
-
-                                ListaDecodigosProductos.DataSource = codigosDeProductosList;
+                                MessageBox.Show("Aun no hay codigos de productos agregados...", "Codigos de producto", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                                return;
                         }
+
+                        foreach (var item in query)
+                        {
+                                codigosDeProductosList.Add(item);
+                        }
+                        ListaDecodigosProductos.DataSource = codigosDeProductosList;
+
                 }
 
                 private void CargarProductos( string codigo ) {
@@ -484,11 +461,12 @@ namespace SETEA_Sistema
                                 }
                         }
                         VentaEnCaja nuevaVenta = new VentaEnCaja {
+
                                 idProdicto = idProducto,
                                 codigoDelProducto = CodigoDelProductoVenta.Text,
-                                Nombre_cliente = string.IsNullOrEmpty(txtNombreCliente.Text) ? "No nombre del Cliente" : txtNombreCliente.Text,
+                                Nombre_cliente = txtNombreCliente.Text == string.Empty ? "No nombre del cliente" : txtNombreCliente.Text,
                                 ProductoNombre = string.IsNullOrEmpty(MyProductos.Text) ? "No nombre del Producto" : MyProductos.Text,
-                                NumeroDelCliente = string.IsNullOrEmpty(NumeroTelefonicoCliente) ? "No numero del cliente" : NumeroTelefonicoCliente,
+                                NumeroDelCliente = string.IsNullOrEmpty(NumeroTelefonicoCliente) ? "No numero" : NumeroTelefonicoCliente,
                                 cantidadProducto = cantidadProducto_,
                                 PrecioUnidad = precioFinalUnidad,
                                 Descuento = descuento_,
@@ -538,6 +516,7 @@ namespace SETEA_Sistema
                         return textBox.Text != "";
                 }
 
+
                 private void materialButton3_Click( object sender, EventArgs e ) {
                         using (db = new SeteaEntities1())
                         {
@@ -547,9 +526,16 @@ namespace SETEA_Sistema
                                 {
                                         foreach (VentaEnCaja item in ventaEnCajaLista)
                                         {
-                                                producto productoActual = db.producto.FirstOrDefault(sf => sf.idProducto == item.idProdicto);
+                                                producto productoActual = db.producto.FirstOrDefault(sf => sf.idProducto == item.idProdicto); // Verifica el nombre correcto
                                                 item.FechaVenta = DateTime.Now;
-                                                productoActual.cantidadRestante -= item.cantidadProducto;
+                                                if (productoActual.cantidadRestante < item.cantidadProducto)
+                                                {
+                                                        MessageBox.Show($"No hay suficiente cantidad del producto {productoActual.nombre}");
+                                                        return;
+                                                } else
+                                                {
+                                                        productoActual.cantidadRestante -= item.cantidadProducto;
+                                                }
                                                 db.VentaEnCaja.Add(item);
 
                                         }
@@ -557,46 +543,44 @@ namespace SETEA_Sistema
                                 {
                                         MessageBox.Show("No hay productos que guardar");
                                 }
-
-
-
-                                if (EstaCajaEstaVacia(txtNombreCliente))
+                                ImpresionRecibo imprimirRecibo = new ImpresionRecibo(MyDataProductosCaja);
+                                imprimirRecibo.Imprimir();
+                                var Mensaje = MessageBox.Show("Desea Guardar un reporte de esta venta ?", "Reporte", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
+                                if (Mensaje == DialogResult.No)
                                 {
-
-                                        ImpresionRecibo imprimirRecibo = new ImpresionRecibo(MyDataProductosCaja);
-                                        imprimirRecibo.Imprimir();
-
-                                        var Mensaje = MessageBox.Show("Desea Guardar un reporte de esta venta ?", "Reporte", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
-
-                                        if (Mensaje == DialogResult.No)
-                                        {
-                                                return;
-                                        }
-                                        gneradorDePdf.GenerarPdf(ventaEnCajaLista, headersVentas, "Ventas", "PlantillaFactura", MyTotalVentaProductos.Text);
-                                        MessageBox.Show("Reporte generado con exito", "Reporte", MessageBoxButtons.OK, MessageBoxIcon.Information);
-                                        txtNombreCliente.Text = "";
-                                        TelefonoCompraCaja.Text = "";
-
-                                        foreach (var item in ventaEnCajaLista)
-                                        {
-                                                var codigoADesactivar = db.Codigo_De_Productos.FirstOrDefault(x => x.CodigoDelProducto == item.codigoDelProducto);
-                                                if (codigoADesactivar != null)
-                                                {
-                                                        codigoADesactivar.Estado_Codigo = "Inactivo";
-                                                }
-                                        }
-
-                                        db.SaveChanges();
-                                        ventaEnCajaLista.Clear();
-                                        CargarTablas();
-
-                                } else
-                                {
-                                        MessageBox.Show("Recuerde agregar el nombre del Cliente....");
                                         return;
                                 }
+                                GetBindingListVentaModelsShow getVenshow = new GetBindingListVentaModelsShow();
+                                var nuevaLista = getVenshow.GetBindingListApartirDeOtra(ventaEnCajaLista);
+                                GeneradorDePdf.GeneradorDePDFS(nuevaLista, headersVentas, "Ventas", "PlantillaFactura", MyConversorGenerico.DeStringANumero<decimal>(MyTotalVentaProductos.Text));
+                                MessageBox.Show("Reporte generado con exito", "Reporte", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                                foreach (var item in ventaEnCajaLista)
+                                {
+                                        var codigoADesactivar = db.Codigo_De_Productos.FirstOrDefault(x => x.CodigoDelProducto == item.codigoDelProducto);
+                                        if (codigoADesactivar != null)
+                                        {
+                                                codigoADesactivar.Estado_Codigo = "Inactivo";
+                                        }
+                                }
 
-                                //GenerarFacturaP80(MyDataProductosCaja);
+                                try
+                                {
+                                        db.SaveChanges();
+                                } catch (System.Data.Entity.Validation.DbEntityValidationException ex)
+                                {
+                                        foreach (var errors in ex.EntityValidationErrors)
+                                        {
+                                                foreach (var error in errors.ValidationErrors)
+                                                {
+                                                        MessageBox.Show($"Error en {error.PropertyName}: {error.ErrorMessage}");
+                                                }
+                                        }
+                                        throw; // Opcional: relanzar para ver el error completo en depuración
+                                }
+                                txtNombreCliente.Text = "";
+                                TelefonoCompraCaja.Text = "";
+                                ventaEnCajaLista.Clear();
+                                CargarTablas();
 
 
 
@@ -604,11 +588,46 @@ namespace SETEA_Sistema
                 }
 
                 private void materialButton7_Click( object sender, EventArgs e ) {
-                        MessageBox.Show("En desarrollo");
+                        Gestion_Ventas gv = new Gestion_Ventas();
+                        Hide();
+                        gv.ShowDialog();
+                        Show();
                 }
+                private List<string> HeadersProductos = new List<string> { "ID", "Nombre", "Descripcion", "Cantidad", "Precio", "Categoria", "Estado", "Fecha" };
+
+
 
                 private void GenerarReporteDeProductos() {
+                        var mensajeAprovar = MessageBox.Show("Desea generar un reporte de productos ?", "Reporte", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
 
+                        if (mensajeAprovar == DialogResult.No)
+                        {
+                                return;
+                        }
+                        decimal? totalProductosGanancia = 0;
+                        GetBindingListProductoShowsModels GetBindingListPro = new GetBindingListProductoShowsModels();
+                        BindingList<ProductoReporteModelShows> productosReporte = new BindingList<ProductoReporteModelShows>(GetBindingListPro.GetBindingList());
+                        foreach (var item in productosReporte)
+                        {
+                                totalProductosGanancia += item.Precio_Unidad;
+                        }
+                        string totalString = totalProductosGanancia.ToString();
+                        GeneradorDePdf.GeneradorDePDFS(productosReporte, HeadersProductos, "Productos", "PlantillaReportProductos", totalProductosGanancia);
+                        MessageBox.Show("Reporte generado con exito", "Reporte", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                }
+
+                List<string> HeaderCodigos = new List<string> { "ID Codigo", "ID Del producto", "Nombre del producto", "Codigo", "Cantidad restante", "Precio unidad", "Fecha de creacio" };
+
+                private void GenerarReporteDeCodigo() {
+                        var mensajeAprovar = MessageBox.Show("Desea generar un reporte de Codigos ?", "Reporte", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
+
+                        if (mensajeAprovar == DialogResult.No)
+                        {
+                                return;
+                        }
+
+                        GeneradorDePdf.GeneradorDePDFS(codigosDeProductosList, HeaderCodigos, "Codigos", "PlantillaReportProductos");
+                        MessageBox.Show("Reporte generado con exito", "Reporte", MessageBoxButtons.OK, MessageBoxIcon.Information);
                 }
 
                 private void CargarTodosLosProductosDesdeLaDb() {
@@ -625,23 +644,19 @@ namespace SETEA_Sistema
                 }
 
                 private void Fecha_ValueChanged( object sender, EventArgs e ) {
-                        if (Fecha.Value == null)
-                        {
-                                return;
-                        }
                         using (var db = new SeteaEntities1())
                         {
                                 DateTime fechaSeleccionada = Fecha.Value.Date;
+                                // Se filtran productos que coincidan con la fecha y estén activos
                                 var query = db.producto
-                                    .Where(v => DbFunctions.TruncateTime(v.FechaCreacion) == fechaSeleccionada)
-                                    .ToList(); // Ejecutar la consulta
-                                productosLs.Clear();
-                                foreach (var item in query)
-                                {
-                                        productosLs.Add(item);
-                                }
+                                                .Where(v => DbFunctions.TruncateTime(v.FechaCreacion) == fechaSeleccionada && v.cantidadRestante > 0)
+                                                .ToList();
+                                // Se crea la lista de BindingList a partir de los resultados filtrados
+                                productosLs = new BindingList<producto>(query);
+                                MyProducDg.DataSource = productosLs;
                         }
                 }
+
                 private void materialButton11_Click( object sender, EventArgs e ) {
                         CargarTodosLosProductosDesdeLaDb();
                 }
@@ -685,6 +700,7 @@ namespace SETEA_Sistema
                         Hide();
                         agregarEditar.ShowDialog();
                         ModificarDataGridProductos();
+                        CargarTablas();
                         Show();
                 }
 
@@ -735,7 +751,7 @@ namespace SETEA_Sistema
                         using (var db = new SeteaEntities1()) // Se crea la instancia correctamente
                         {
 
-                                var query = db.producto.Where(ws => ws.nombre.Contains(ProductoNombreFind.Text) && ws.Estado == "Activo");
+                                var query = db.producto.Where(ws => ws.nombre.Contains(BuscarPorCodigo.Text) && ws.Estado == "Activo");
                                 productosLs.Clear();
                                 foreach (var item in query)
                                 {
@@ -794,13 +810,10 @@ namespace SETEA_Sistema
                 private void materialButton13_Click( object sender, EventArgs e ) {
                         Codigos_Agregar_editar codigos_Agregar_Editar = new Codigos_Agregar_editar();
                         Hide();
+                        codigos_Agregar_Editar.Encabezado.Text.Replace("@acciones", "Agregar");
                         codigos_Agregar_Editar.ShowDialog();
                         CargarTablas();
                         Show();
-                }
-
-                private void s( object sender, EventArgs e ) {
-
                 }
                 private producto BusacarElObjetoPorElNombre( string NombreDelProducto ) {
 
@@ -938,6 +951,127 @@ namespace SETEA_Sistema
 
                 private void materialButton20_Click( object sender, EventArgs e ) {
                         CargarTablas();
+                }
+
+                private void materialButton15_Click( object sender, EventArgs e ) {
+                        if (IdDelCodigoseleccionado == 0)
+                        {
+                                MessageBox.Show("No ha seleccionado ningun codigo");
+                                return;
+                        }
+
+                        var mensajeAprovar = MessageBox.Show("Desea Editar el codigo con el id " + IdDelCodigoseleccionado + "?", "Desactivar", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
+
+                        if (mensajeAprovar == DialogResult.No)
+                        {
+                                return;
+                        }
+
+                        Codigos_Agregar_editar codigos_Agregar_Editar = new Codigos_Agregar_editar(IdDelCodigoseleccionado);
+                        Hide();
+                        codigos_Agregar_Editar.idCargada = IdDelCodigoseleccionado;
+
+                        codigos_Agregar_Editar.ShowDialog();
+                        CargarTablas();
+                        Show();
+
+                }
+                int IdDelCodigoseleccionado = 0;
+                private void ListaDecodigosProductos_CellClick( object sender, DataGridViewCellEventArgs e ) {
+
+                        try
+                        {
+                                IdDelCodigoseleccionado = (int)this.ListaDecodigosProductos.Rows[e.RowIndex].Cells["ID_Del_Codigo"].Value;
+                                MessageBox.Show($"Has Seleccionado el codigo con el ID: {IdDelCodigoseleccionado}", "Seleccion", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                        } catch (Exception err)
+                        {
+                                MessageBox.Show("Error al obtener el ID: " + err.Message);
+                        }
+
+                }
+
+                private void materialButton14_Click( object sender, EventArgs e ) {
+                        if (IdDelCodigoseleccionado == 0)
+                        {
+                                MessageBox.Show("No ha seleccionado ningun codigo");
+                                return;
+                        }
+
+                        var mensajeAprovar = MessageBox.Show("Desea Eliminar el codigo con el id " + IdDelCodigoseleccionado + "?", "Desactivar", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
+
+                        if (mensajeAprovar == DialogResult.No)
+                        {
+                                return;
+                        }
+
+                        using (var db = new SeteaEntities1())
+                        {
+                                var codigo = db.Codigo_De_Productos.Include(x => x.producto).FirstOrDefault(x => x.ID == IdDelCodigoseleccionado);
+                                if (codigo == null)
+                                {
+                                        return;
+                                }
+                                codigo.Estado_Codigo = "Inactivo";
+                                codigo.producto.cantidadRestante--;
+                                db.SaveChanges();
+                        }
+                        CargarTablas();
+                }
+
+                private void materialTextBox21_TextChanged( object sender, EventArgs e ) {
+                        using (db = new SeteaEntities1())
+                        {
+                                // Limpia la lista
+                                usl.Clear();
+
+                                // Filtra los resultados directamente desde la base de datos
+
+                                var query = db.Usuarios.Where(x => x.Nombre.Contains(materialTextBox21.Text) || x.Correo.Contains(materialTextBox21.Text)).ToList();
+
+
+                                //Agrega los resultados a la lista de paroductos//
+
+                                usl = new BindingList<Usuarios>(query);
+                                MyDataUsers.DataSource = usl;
+                        }
+
+
+                }
+
+                private void materialButton21_Click( object sender, EventArgs e ) {
+                        CargarTablas();
+                }
+
+                private void materialButton22_Click( object sender, EventArgs e ) {
+                        CargarTablas();
+                }
+
+                private void materialLabel30_Click( object sender, EventArgs e ) {
+
+                }
+
+                private void ProductoNombreFind_TextChanged( object sender, EventArgs e ) {
+                        using (db = new SeteaEntities1())
+                        {
+
+                                var query = db.producto.Where(x => x.nombre.Contains(ProductoNombreFind.Text) && x.cantidadRestante > 0).ToList();
+                                if (query == null)
+                                {
+                                        MessageBox.Show("No se encontraron productos con el nombre proporcionado.", "Advertencia", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                                        return;
+                                }
+                                productosLs.Clear();
+                                productosLs = new BindingList<producto>(query);
+                                MyProducDg.DataSource = productosLs;
+                        }
+                }
+
+                private void ProductoNombreFind_TextAlignChanged( object sender, EventArgs e ) {
+
+                }
+
+                private void materialButton16_Click( object sender, EventArgs e ) {
+                        GenerarReporteDeCodigo();
                 }
         }
 }

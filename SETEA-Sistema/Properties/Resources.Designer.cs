@@ -103,6 +103,26 @@ namespace SETEA_Sistema.Properties {
         /// <summary>
         ///   Busca un recurso adaptado de tipo System.Drawing.Bitmap.
         /// </summary>
+        public static System.Drawing.Bitmap busqueda_de_lupa {
+            get {
+                object obj = ResourceManager.GetObject("busqueda-de-lupa", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Busca un recurso adaptado de tipo System.Drawing.Bitmap.
+        /// </summary>
+        public static System.Drawing.Bitmap busqueda_de_lupa1 {
+            get {
+                object obj = ResourceManager.GetObject("busqueda-de-lupa1", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Busca un recurso adaptado de tipo System.Drawing.Bitmap.
+        /// </summary>
         public static System.Drawing.Bitmap etiquetas_de_productos {
             get {
                 object obj = ResourceManager.GetObject("etiquetas-de-productos", resourceCulture);
@@ -126,6 +146,16 @@ namespace SETEA_Sistema.Properties {
         public static System.Drawing.Bitmap image {
             get {
                 object obj = ResourceManager.GetObject("image", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Busca un recurso adaptado de tipo System.Drawing.Bitmap.
+        /// </summary>
+        public static System.Drawing.Bitmap inventarioIco {
+            get {
+                object obj = ResourceManager.GetObject("inventarioIco", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
@@ -468,6 +498,16 @@ namespace SETEA_Sistema.Properties {
         public static System.Drawing.Bitmap producto_de_codigo_de_barras {
             get {
                 object obj = ResourceManager.GetObject("producto-de-codigo-de-barras", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Busca un recurso adaptado de tipo System.Drawing.Bitmap.
+        /// </summary>
+        public static System.Drawing.Bitmap producto_de_codigo_de_barras1 {
+            get {
+                object obj = ResourceManager.GetObject("producto-de-codigo-de-barras1", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }

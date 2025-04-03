@@ -1,13 +1,9 @@
-﻿using MigraDoc.DocumentObjectModel;
-using MigraDoc.DocumentObjectModel.Tables; // Para Table, Row, etc.
-using MigraDoc.Rendering;                  // Para PdfDocumentRenderer
-using SelectPdf;
+﻿using SelectPdf;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.IO;
 using System.Reflection;
-using System.Security.Cryptography;
 using System.Text;
 
 namespace SETEA_Sistema.Utilidades
@@ -16,8 +12,45 @@ namespace SETEA_Sistema.Utilidades
         {
                 // string resourcesPath = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "Resources");
                 //string filePath = Path.Combine(resourcesPath, "MiReporte.pdf");
+                public static void GeneradorDePDFS<T>( BindingList<T> usl, List<string> Cabeceras_, string Reporte, string NombreDeLaPlantilla )
+                    where T : class {
 
-                public void GenerarPdf<T>( BindingList<T> datos, List<string> cabeceras, string rutaPlantilla, string rutaSalida ) {
+
+                        // No consultamos la BD si T no es una entidad del contexto
+                        string rutaPlantilla = Path.Combine(
+                            AppDomain.CurrentDomain.BaseDirectory,
+                            "Resources",
+                            $"{NombreDeLaPlantilla}.html"
+                        );
+
+                        string rutaSalida = Path.Combine(
+                            AppDomain.CurrentDomain.BaseDirectory,
+                            $"Reportes/{Reporte}",
+                            $"Reporte-{DateTime.Now:yyyyMMddHHmmss}.pdf"
+                        );
+
+                        GenerarPdf(usl, Cabeceras_, rutaPlantilla, rutaSalida);
+                }
+                public static void GeneradorDePDFS<T>( BindingList<T> usl, List<string> Cabeceras_, string Reporte, string NombreDeLaPlantilla, decimal? total )
+                    where T : class {
+                        GeneradorDePdf generador = new GeneradorDePdf();
+
+                        // No consultamos la BD si T no es una entidad del contexto
+                        string rutaPlantilla = Path.Combine(
+                            AppDomain.CurrentDomain.BaseDirectory,
+                            "Resources",
+                            $"{NombreDeLaPlantilla}.html"
+                        );
+
+                        string rutaSalida = Path.Combine(
+                            AppDomain.CurrentDomain.BaseDirectory,
+                            $"Reportes/{Reporte}",
+                            $"Reporte-{DateTime.Now:yyyyMMddHHmmss}.pdf"
+                        );
+
+                        GenerarPdf(usl, Cabeceras_, rutaPlantilla, rutaSalida, total.ToString());
+                }
+                private static void GenerarPdf<T>( BindingList<T> datos, List<string> cabeceras, string rutaPlantilla, string rutaSalida ) {
                         // Verificar la existencia de la plantilla HTML
                         if (!File.Exists(rutaPlantilla))
                         {
@@ -35,20 +68,21 @@ namespace SETEA_Sistema.Utilidades
 
                         foreach (var item in cabeceras)
                         {
-                                infoCabeceras += $"<th style = \"padding: 8px; border-bottom: 2px solid #ddd; width: 20%\">{item}</th>";
+                                infoCabeceras += $"<th style = \"padding: 8px; border-bottom: 2px solid #ddd; width:20%;\">{item}</th>";
                         }
 
                         cabecerasHtml = cabecerasHtml.Replace("@filas", infoCabeceras);
 
                         foreach (var item in datos)
                         {
-                                sbFilas.AppendLine("<tr>");
+                                sbFilas.AppendLine("<tr style='border-bottom: 2px solid #ccc;'>"); // Línea debajo de cada fila
                                 foreach (var propiedad in propiedades)
                                 {
                                         object valor = propiedad.GetValue(item, null);
-                                        sbFilas.AppendLine($"<td>{valor?.ToString() ?? string.Empty}</td>");
+                                        sbFilas.AppendLine($"<td style='padding: 10px; border: 1px solid #ddd; text-align: center; border-bottom: 2px solid #ccc; width: min-content;'>{valor?.ToString() ?? string.Empty}</td>");
                                 }
                                 sbFilas.AppendLine("</tr>");
+
                         }
 
                         // Reemplazar los marcadores en la plantilla
@@ -56,7 +90,7 @@ namespace SETEA_Sistema.Utilidades
                         plantillaHtml = plantillaHtml.Replace("@Fecha", DateTime.Now.ToString("dd/MM/yyyy"));
                         plantillaHtml = plantillaHtml.Replace("@Cabeceras", cabecerasHtml);
                         plantillaHtml = plantillaHtml.Replace("@Total", "0.00");
-                        plantillaHtml = plantillaHtml.Replace("@ID","00001111");
+                        plantillaHtml = plantillaHtml.Replace("@ID", "00001111");
 
 
                         // Convertir el HTML a PDF utilizando SelectPdf
@@ -67,7 +101,7 @@ namespace SETEA_Sistema.Utilidades
                         documento.Save(rutaSalida);
                         documento.Close();
                 }
-         public void GenerarPdf<T>( BindingList<T> datos, List<string> cabeceras, string rutaPlantilla, string rutaSalida,string total ) {
+                private static void GenerarPdf<T>( BindingList<T> datos, List<string> cabeceras, string rutaPlantilla, string rutaSalida, string total ) {
                         // Verificar la existencia de la plantilla HTML
                         if (!File.Exists(rutaPlantilla))
                         {
@@ -92,11 +126,11 @@ namespace SETEA_Sistema.Utilidades
 
                         foreach (var item in datos)
                         {
-                                sbFilas.AppendLine("<tr>");
+                                sbFilas.AppendLine("<tr style='border-bottom: 2px solid #ccc;'>"); // Línea debajo de cada fila
                                 foreach (var propiedad in propiedades)
                                 {
                                         object valor = propiedad.GetValue(item, null);
-                                        sbFilas.AppendLine($"<td>{valor?.ToString() ?? string.Empty}</td>");
+                                        sbFilas.AppendLine($"<td style='padding: 10px; border: 1px solid #ddd; text-align: center; border-bottom: 2px solid #ccc; width: min-content;'>{valor?.ToString() ?? string.Empty}</td>");
                                 }
                                 sbFilas.AppendLine("</tr>");
                         }
@@ -106,7 +140,8 @@ namespace SETEA_Sistema.Utilidades
                         plantillaHtml = plantillaHtml.Replace("@Fecha", DateTime.Now.ToString("dd/MM/yyyy"));
                         plantillaHtml = plantillaHtml.Replace("@Cabeceras", cabecerasHtml);
                         plantillaHtml = plantillaHtml.Replace("@Total", total);
-                        plantillaHtml = plantillaHtml.Replace("@ID","00001111");
+                        plantillaHtml = plantillaHtml.Replace("@ValorTotal", total);
+                        plantillaHtml = plantillaHtml.Replace("@ID", "00001111");
 
 
                         // Convertir el HTML a PDF utilizando SelectPdf

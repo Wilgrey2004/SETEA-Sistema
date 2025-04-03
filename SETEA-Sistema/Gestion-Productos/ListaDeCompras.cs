@@ -1,16 +1,15 @@
-﻿using iTextSharp.text;
-using iTextSharp.text.pdf;
-using iTextSharp.tool.xml;
-using MaterialSkin;
+﻿using MaterialSkin;
 using MaterialSkin.Controls;
+using SETEA_Sistema.Entidades;
 using SETEA_Sistema.Modelodb;
 using SETEA_Sistema.Modelodb.ModelEntity;
+using SETEA_Sistema.Utilidades;
+using SETEA_Sistema.Utilidades.ReturnsBindingList;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
 using System.Drawing;
-using System.IO;
 using System.Linq;
 using System.Windows.Forms;
 
@@ -18,23 +17,8 @@ namespace SETEA_Sistema.Gestion_Productos
 {
         public partial class ListaDeCompras : MaterialForm
         {
-               
-                List<string> cabeceraProductosAgotados1 = new List<string>
-                {
-                    "ID Producto",
-                    "Nombre",
-                    "Precio Unitario",
-                    "Cantidad"
-                };
 
-                List<string> CabeceraDeProductosAComprar = new List<string>
-                {
-                        "ID",
-                        "Nombre",
-                        "Precio Unidad",
-                        "Cantidad"
-                };
-                private BindingList<producto> ProductosAgotados = new BindingList<producto>();
+                private BindingList<ProductoReporteModelShows> ProductosAgotados = new BindingList<ProductoReporteModelShows>();
                 private BindingList<ProductoAComprar> ProductosAComprarlst = new BindingList<ProductoAComprar>();
                 private SeteaEntities1 db;
 
@@ -60,11 +44,7 @@ namespace SETEA_Sistema.Gestion_Productos
                                     Accent.LightBlue200,
                                     TextShade.WHITE
                                 );
-                        CargarLasColumnasEnDataGridProductosAgotados(MyDataProductosAgotados, ProductosAgotados);
-                        CargarLaEstructucturaYLosProductosAComprar(ListaDeComprasVariada,ProductosAComprarlst);
-
-
-
+                        ListaDeComprasVariada.DataSource = ProductosAComprarlst;
                 }
 
                 private void ListaDeCompras_Load( object sender, EventArgs e ) {
@@ -104,90 +84,46 @@ namespace SETEA_Sistema.Gestion_Productos
                         }
                 }
 
-                private void CargarLasColumnasEnDataGridProductosAgotados( DataGridView MyProducDg, BindingList<producto> lista ) {
-                        MyProducDg.AutoGenerateColumns = false;
-                        MyProducDg.Columns.Clear();
-                        MyProducDg.Columns.Add(new DataGridViewTextBoxColumn {
-                                Name = "ID Producto",
-                                DataPropertyName = "idProducto",
-                                HeaderText = "ID Producto"
-                        });
 
-                        MyProducDg.Columns.Add(new DataGridViewTextBoxColumn {
-                                Name = "Nombre",
-                                DataPropertyName = "nombre",
-                                HeaderText = "Nombre"
-                        });
 
-                        MyProducDg.Columns.Add(new DataGridViewTextBoxColumn {
-                                Name = "Precio Unidad",
-                                DataPropertyName = "precioUnidad",
-                                HeaderText = "Precio Unitario"
-                        });
-
-                        MyProducDg.Columns.Add(new DataGridViewTextBoxColumn {
-                                Name = "Cantidad Restante",
-                                DataPropertyName = "cantidadRestante",
-                                HeaderText = "Cantidad Restante"
-                        });
-
-                        MyProducDg.DataSource = lista;
-                }
-                 private void CargarLaEstructucturaYLosProductosAComprar( DataGridView MyProducDg, BindingList<ProductoAComprar> lista ) {
-                        MyProducDg.AutoGenerateColumns = false;
-                        MyProducDg.Columns.Clear();
-                        MyProducDg.Columns.Add(new DataGridViewTextBoxColumn {
-                                Name = "ID",
-                                DataPropertyName = "ID",
-                                HeaderText = "ID "
-                        });
-
-                        MyProducDg.Columns.Add(new DataGridViewTextBoxColumn {
-                                Name = "Nombre",
-                                DataPropertyName = "nombre",
-                                HeaderText = "Nombre"
-                        });
-
-                        MyProducDg.Columns.Add(new DataGridViewTextBoxColumn {
-                                Name = "Precio De Unidad",
-                                DataPropertyName = "PrecioDeUnidad",
-                                HeaderText = "Precio De Unidad"
-                        });
-
-                        MyProducDg.Columns.Add(new DataGridViewTextBoxColumn {
-                                Name = "Cantidad A Comprar",
-                                DataPropertyName = "CantidadAComprar",
-                                HeaderText = "Cantidad A Comprar"
-                        });
-
-                        MyProducDg.DataSource = lista;
-                }
-
-                private void MueveLosProductosDeUnaListaNormalAUnaBindingListProductos( List<producto> listaNormal, BindingList<producto> listaBinding ) {
-                        listaBinding.Clear();
-                        foreach (var item in listaNormal)
-                        {
-                                listaBinding.Add(item);
-                                // Inicializa la cantidad en 0 si no existe
-                                if (!_cantidadesAComprar.ContainsKey(item.idProducto))
-                                {
-                                        _cantidadesAComprar.Add(item.idProducto, 0);
-                                }
-                        }
-                }
                 private void ObtenerTodosLosProductosAgotados() {
-                        using (db = new SeteaEntities1())
+                        try
                         {
-                                var query = db.producto.Where(sw => sw.cantidadRestante == 0).ToList();
-                                MueveLosProductosDeUnaListaNormalAUnaBindingListProductos(query, ProductosAgotados);
+                                GetBindingListProductoShowsModels getBProductos = new GetBindingListProductoShowsModels();
+                                var query = getBProductos.GetBindingListProductosPorCantidad(0);
+                                if (query == null)
+                                {
+                                        MessageBox.Show("No se encontraron productos agotados");
+                                        return;
+                                }
+
+                                ProductosAgotados.Clear();
+
+                                foreach (var producto in query)
+                                {
+                                        ProductosAgotados.Add(producto);
+                                }
+
+                                MyDataProductosAgotados.DataSource = ProductosAgotados;
+
+                        } catch (Exception ex)
+                        {
+                                MessageBox.Show($"Error al cargar productos agotados: {ex.Message}");
+                                Close();
+                                return;
                         }
+
                 }
 
                 private void ObtenerTodosLosProductosConUnaCantidadMenor( int Cantidad ) {
-                        using (db = new SeteaEntities1())
+                        ProductosAgotados.Clear();
+
+                        GetBindingListProductoShowsModels getBProductos = new GetBindingListProductoShowsModels();
+                        var query = getBProductos.GetBindingListProductosPorCantidad(Cantidad);
+
+                        foreach (var producto in query)
                         {
-                                var query = db.producto.Where(sw => sw.cantidadRestante <= Cantidad).ToList();
-                                MueveLosProductosDeUnaListaNormalAUnaBindingListProductos(query, ProductosAgotados);
+                                ProductosAgotados.Add(producto);
                         }
                 }
 
@@ -231,163 +167,32 @@ namespace SETEA_Sistema.Gestion_Productos
                 }
 
                 private void materialButton1_Click( object sender, EventArgs e ) {
-                        GenerarPdfApartirDelDatagrid(MyDataProductosAgotados, cabeceraProductosAgotados1);
+                        GenerarPdfApartirDelDatagrid();
+                }
+                private List<string> HeadersProductos = new List<string> { "ID", "Nombre", "Descripcion", "Cantidad", "Precio", "Categoria", "Estado", "Fecha" };
+
+                private void GenerarPdfApartirDelDatagrid() {
+                        var MensajeResponder = MessageBox.Show("¿Quieres generar el PDF de la lista de productos agotados?", "Generar PDF", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
+                        if (MensajeResponder == DialogResult.No)
+                        {
+                                return;
+                        }
+                        GetBindingListProductoShowsModels getBProductos = new GetBindingListProductoShowsModels();
+                        GeneradorDePdf.GeneradorDePDFS(ProductosAgotados, HeadersProductos, "ListaDeProductos", "PlantillaReportProductosAgotados");
+                        MessageBox.Show("Se ha generado el PDF", "PDF Generado", MessageBoxButtons.OK, MessageBoxIcon.Information);
                 }
 
-                private void GenerarPdfApartirDelDatagrid( DataGridView MyProducDg, List<string> listaDeCabeceras ) {
-                        SaveFileDialog saveFile = new SaveFileDialog();
-                        saveFile.FileName = $"Lista_De_Productos-fecha_y_hora-{DateTime.Now.ToString("dd_MM_yyyy_HH_mm")}.pdf";
-
-                        string cabeceras = $"<tr style=\"background-color: #f5f5f5\"> @AquiVanLasCabeceras </tr>";
-                        string headersHechos = "";
-                        string filas = "";
-                        int totalProductos = 0;
-
-
-                        foreach (string cabecera in cabeceraProductosAgotados1)
+                List<string> HeadersProductosAComprar = new List<string> { "ID", "Nombre", "Cantidad A Comprar", "Precio de Unidad" };
+                private void GenerarPdfApartirDelDatagridListaDeProductos() {
+                        var MensajeResponder = MessageBox.Show("¿Quieres generar el PDF de la lista?", "Generar PDF", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
+                        if (MensajeResponder == DialogResult.No)
                         {
-                                headersHechos += $"<th style=\"padding: 8px; border-bottom: 2px solid #ddd\">{cabecera}</th>";
+                                return;
                         }
-
-                        cabeceras = cabeceras.Replace("@AquiVanLasCabeceras", headersHechos != null ? headersHechos : "No hay Cabeceras");
-
-                        foreach (DataGridViewRow row in MyProducDg.Rows) // Asumiendo que tu DataGridView se llama MyProducDg
-                        {
-                                if (row.IsNewRow) continue;
-
-                                // Obtener valores de las celdas
-                                string idProducto = row.Cells["ID Producto"].Value?.ToString() ?? "";
-                                string nombre = row.Cells["Nombre"].Value?.ToString() ?? "";
-
-                                string precioUnidad = row.Cells["Precio Unidad"].Value?.ToString() ?? "0.0";
-                                string cantidad = row.Cells["Cantidad Restante"].Value?.ToString() ?? "1";
-
-
-                                // Calcular valores para el total
-
-                                totalProductos++;
-
-                                // Construir filas HTML
-                                filas += "<tr>";
-                                filas += $"<td style=\"padding: 8px; border-bottom: 1px solid #ddd\">{idProducto}</td>";
-                                filas += $"<td style=\"padding: 8px; border-bottom: 1px solid #ddd\">{nombre}</td>";
-                                filas += $"<td style=\"padding: 8px; border-bottom: 1px solid #ddd; text-align: center\">{precioUnidad.ToString()}</td>";
-                                filas += $"<td style=\"padding: 8px; border-bottom: 1px solid #ddd; text-align: center\">{cantidad}</td>";
-                                filas += "</tr>";
-                        }
-
-                        string paginaHtml_text = Properties.Resources.PlantillaListaDeCompras.ToString();
-
-                        // Reemplazar placeholders
-                        paginaHtml_text = paginaHtml_text
-                            .Replace("@Cabecera", cabeceras)
-                            .Replace("@Filas", filas);
-
-
-
-                        if (saveFile.ShowDialog() == DialogResult.OK)
-                        {
-                                using (FileStream stream = new FileStream(saveFile.FileName, FileMode.Create))
-                                {
-                                        Document pdfDoc = new Document(PageSize.A4, 25, 25, 25, 25);
-                                        PdfWriter writer = PdfWriter.GetInstance(pdfDoc, stream);
-
-                                        pdfDoc.Open();
-
-                                        // Agregar imagen (ajusta según tu necesidad)
-                                        iTextSharp.text.Image image = iTextSharp.text.Image.GetInstance(Properties.Resources.image, System.Drawing.Imaging.ImageFormat.Png);
-                                        image.ScaleToFit(80, 60);
-                                        image.Alignment = iTextSharp.text.Image.UNDERLYING;
-                                        image.SetAbsolutePosition(25, pdfDoc.PageSize.Height - 80);
-                                        pdfDoc.Add(image);
-
-                                        using (StringReader reader = new StringReader(paginaHtml_text))
-                                        {
-                                                XMLWorkerHelper.GetInstance().ParseXHtml(writer, pdfDoc, reader);
-                                        }
-
-                                        pdfDoc.Close();
-                                }
-                        }
+                        GeneradorDePdf.GeneradorDePDFS(ProductosAComprarlst, HeadersProductosAComprar, "LustaDeComprasVarias", "PlantillaReportProductosAgotados");
+                        MessageBox.Show("Se ha generado el PDF", "PDF Generado", MessageBoxButtons.OK, MessageBoxIcon.Information);
                 }
 
-
-                private void GenerarPdfApartirDelDatagridListaDeProductos( DataGridView MyProducDg, List<string> listaDeCabeceras ) {
-                        SaveFileDialog saveFile = new SaveFileDialog();
-                        saveFile.FileName = $"Lista_De_Productos-fecha_y_hora-{DateTime.Now.ToString("dd_MM_yyyy_HH_mm")}.pdf";
-
-                        string cabeceras = $"<tr style=\"background-color: #f5f5f5\"> @AquiVanLasCabeceras </tr>";
-                        string headersHechos = "";
-                        string filas = "";
-                        int totalProductos = 0;
-
-
-                        foreach (string cabecera in cabeceraProductosAgotados1)
-                        {
-                                headersHechos += $"<th style=\"padding: 8px; border-bottom: 2px solid #ddd\">{cabecera}</th>";
-                        }
-
-                        cabeceras = cabeceras.Replace("@AquiVanLasCabeceras", headersHechos != null ? headersHechos : "No hay Cabeceras");
-
-                        foreach (DataGridViewRow row in MyProducDg.Rows) // Asumiendo que tu DataGridView se llama MyProducDg
-                        {
-                                if (row.IsNewRow) continue;
-
-                                // Obtener valores de las celdas
-                                string idProducto = row.Cells["ID"].Value?.ToString() ?? "";
-                                string nombre = row.Cells["Nombre"].Value?.ToString() ?? "";
-
-                                string precioUnidad = row.Cells["Precio De Unidad"].Value?.ToString() ?? "0.0";
-                                string cantidad = row.Cells["Cantidad A Comprar"].Value?.ToString() ?? "1";
-
-
-                                // Calcular valores para el total
-
-                                totalProductos++;
-
-                                // Construir filas HTML
-                                filas += "<tr>";
-                                filas += $"<td style=\"padding: 8px; border-bottom: 1px solid #ddd\">{idProducto}</td>";
-                                filas += $"<td style=\"padding: 8px; border-bottom: 1px solid #ddd\">{nombre}</td>";
-                                filas += $"<td style=\"padding: 8px; border-bottom: 1px solid #ddd; text-align: center\">{precioUnidad.ToString()}</td>";
-                                filas += $"<td style=\"padding: 8px; border-bottom: 1px solid #ddd; text-align: center\">{cantidad}</td>";
-                                filas += "</tr>";
-                        }
-
-                        string paginaHtml_text = Properties.Resources.PlantillaListaDeCompras.ToString();
-
-                        // Reemplazar placeholders
-                        paginaHtml_text = paginaHtml_text
-                            .Replace("@Cabecera", cabeceras)
-                            .Replace("@Filas", filas);
-
-
-
-                        if (saveFile.ShowDialog() == DialogResult.OK)
-                        {
-                                using (FileStream stream = new FileStream(saveFile.FileName, FileMode.Create))
-                                {
-                                        Document pdfDoc = new Document(PageSize.A4, 25, 25, 25, 25);
-                                        PdfWriter writer = PdfWriter.GetInstance(pdfDoc, stream);
-
-                                        pdfDoc.Open();
-
-                                        // Agregar imagen (ajusta según tu necesidad)
-                                        iTextSharp.text.Image image = iTextSharp.text.Image.GetInstance(Properties.Resources.image, System.Drawing.Imaging.ImageFormat.Png);
-                                        image.ScaleToFit(80, 60);
-                                        image.Alignment = iTextSharp.text.Image.UNDERLYING;
-                                        image.SetAbsolutePosition(25, pdfDoc.PageSize.Height - 80);
-                                        pdfDoc.Add(image);
-
-                                        using (StringReader reader = new StringReader(paginaHtml_text))
-                                        {
-                                                XMLWorkerHelper.GetInstance().ParseXHtml(writer, pdfDoc, reader);
-                                        }
-
-                                        pdfDoc.Close();
-                                }
-                        }
-                }
 
 
                 private void MyDataProductosAgotados_CellContentClick( object sender, DataGridViewCellEventArgs e ) {
@@ -398,7 +203,7 @@ namespace SETEA_Sistema.Gestion_Productos
                 private void MyDataProductosAgotados_CellClick( object sender, DataGridViewCellEventArgs e ) {
                         if (e.RowIndex >= 0)
                         {
-                                id = (int)MyDataProductosAgotados.Rows[e.RowIndex].Cells["ID Producto"].Value;
+                                id = (int)MyDataProductosAgotados.Rows[e.RowIndex].Cells[0].Value;
                                 MessageBox.Show($"Has Seleccionado el producto con el ID: {id}", "Seleccion", MessageBoxButtons.OK, MessageBoxIcon.Information);
                         }
                 }
@@ -421,29 +226,20 @@ namespace SETEA_Sistema.Gestion_Productos
                                                                     MessageBoxButtons.YesNo,
                                                                     MessageBoxIcon.Error);
 
-                                if (resultado == DialogResult.Yes)
+                                if (resultado == DialogResult.No)
                                 {
-                                        // Modificado: Buscar en la lista existente en lugar de la base de datos
-                                        producto productoAEliminar = ProductosAgotados.FirstOrDefault(p => p.idProducto == id);
-
-                                        if (productoAEliminar != null)
-                                        {
-                                                ProductosAgotados.Remove(productoAEliminar);
-                                                ActualizarLista();
-                                        } else
-                                        {
-                                                MessageBox.Show("El producto no existe en la lista",
-                                                            "Error",
-                                                            MessageBoxButtons.OK,
-                                                            MessageBoxIcon.Warning);
-                                        }
+                                        MessageBox.Show("No se ha borrado el producto", "Error", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                                        return;
                                 }
+
+                                ProductosAgotados.Remove(ProductosAgotados.FirstOrDefault(sf => sf.ID_Producto == id));
+                                MessageBox.Show("Se ha borrado el producto", "Borrado", MessageBoxButtons.OK, MessageBoxIcon.Information);
                         } else
                         {
                                 MessageBox.Show("Selecciona un producto primero",
-                                               "Error",
-                                               MessageBoxButtons.OK,
-                                               MessageBoxIcon.Error);
+                                        "Error",
+                                        MessageBoxButtons.OK,
+                                        MessageBoxIcon.Error);
                         }
                 }
 
@@ -480,54 +276,15 @@ namespace SETEA_Sistema.Gestion_Productos
                         CargarLaCantidadRestanteEnElComboboxSegunElProducto();
                 }
 
-                private void AgregarProductoAUnaListaBiln( string proName, BindingList<producto> list ) {
-                        using (db = new SeteaEntities1())
-                        {
-                                var query = db.producto.FirstOrDefault(sf => sf.nombre == proName);
-                                if (query != null)
-                                {
-                                        list.Add(query);
-                                }
-                        }
-                }
+
                 private void materialButton5_Click( object sender, EventArgs e ) {
-                        AgregarProductoAUnaListaBiln(ProductoName.Text, ProductosAgotados);
+
                 }
 
 
 
                 private void MyDataProductosAgotados_CellFormatting( object sender, DataGridViewCellFormattingEventArgs e ) {
-                        if (MyDataProductosAgotados.Columns[e.ColumnIndex].Name == "Cantidad A Comprar" && e.RowIndex >= 0)
-                        {
-                                var row = MyDataProductosAgotados.Rows[e.RowIndex];
 
-                                if (!row.IsNewRow)
-                                {
-                                        var cell = row.Cells["ID Producto"];
-
-                                        if (cell != null)
-                                        {
-                                                var cellValue = cell.Value;
-
-                                                if (cellValue != null)
-                                                {
-                                                        int rowId = (int)cellValue;
-
-                                                        if (_cantidadesAComprar.TryGetValue(rowId, out int cantidad))
-                                                        {
-                                                                e.Value = cantidad;
-                                                                e.FormattingApplied = true;
-                                                        }
-                                                } else
-                                                {
-                                                        MessageBox.Show("El valor de la celda 'ID Producto' es nulo.");
-                                                }
-                                        } else
-                                        {
-                                                MessageBox.Show("La celda 'ID Producto' no existe.");
-                                        }
-                                }
-                        }
                 }
 
 
@@ -556,7 +313,7 @@ namespace SETEA_Sistema.Gestion_Productos
                 private void materialButton6_Click( object sender, EventArgs e ) {
                         if (!TodasLosDatosEstanLlenos())
                         {
-                                MessageBox.Show("Tienes que rellenar toda la informacion solicitada antes de clicar en aceptar","Error",MessageBoxButtons.OK,MessageBoxIcon.Error);
+                                MessageBox.Show("Tienes que rellenar toda la informacion solicitada antes de clicar en aceptar", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
                                 return;
                         }
 
@@ -566,7 +323,7 @@ namespace SETEA_Sistema.Gestion_Productos
 
                         proNewAComprar.CantidadAComprar = CantidadNewProduct.Value;
 
-                        if(decimal.TryParse(PrecioNewProducto.Text, out decimal cantidad))
+                        if (decimal.TryParse(PrecioNewProducto.Text, out decimal cantidad))
                         {
                                 proNewAComprar.PrecioDeUnidad = cantidad;
                         } else
@@ -575,7 +332,7 @@ namespace SETEA_Sistema.Gestion_Productos
                                 return;
                         }
 
-                        
+
                         ProductosAComprarlst.Add(proNewAComprar);
                 }
                 private void LimpiarTodasLasCajas() {
@@ -584,24 +341,24 @@ namespace SETEA_Sistema.Gestion_Productos
                         CantidadNewProduct.Value = 0;
                 }
                 private void materialButton8_Click( object sender, EventArgs e ) {
-                        
-                                LimpiarTodasLasCajas();
-                                return;
-                        
+
+                        LimpiarTodasLasCajas();
+                        return;
+
                 }
 
                 private void materialButton9_Click( object sender, EventArgs e ) {
-                    ProductosAComprarlst.Clear();
+                        ProductosAComprarlst.Clear();
                 }
 
                 private void materialButton7_Click( object sender, EventArgs e ) {
                         if (ElIdEsMayorACero(id2))
                         {
                                 var query = ProductosAComprarlst.FirstOrDefault(sf => sf.id == id2);
-                                if(query != null)
+                                if (query != null)
                                 {
                                         ProductosAComprarlst.Remove(query);
-                                        CargarLaEstructucturaYLosProductosAComprar(ListaDeComprasVariada, ProductosAComprarlst);
+
                                 } else
                                 {
                                         MessageBox.Show($"No se logro Eliminar el producto", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
@@ -624,7 +381,7 @@ namespace SETEA_Sistema.Gestion_Productos
                 }
 
                 private void materialButton10_Click( object sender, EventArgs e ) {
-                        GenerarPdfApartirDelDatagridListaDeProductos(ListaDeComprasVariada, CabeceraDeProductosAComprar);
+                        GenerarPdfApartirDelDatagridListaDeProductos();
                 }
         }
 }

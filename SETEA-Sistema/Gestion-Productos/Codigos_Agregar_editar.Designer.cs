@@ -40,7 +40,7 @@
                         this.materialLabel3 = new MaterialSkin.Controls.MaterialLabel();
                         this.MyCodigoDeBarras = new MaterialSkin.Controls.MaterialTextBox2();
                         this.materialLabel2 = new MaterialSkin.Controls.MaterialLabel();
-                        this.materialLabel1 = new MaterialSkin.Controls.MaterialLabel();
+                        this.Encabezado = new MaterialSkin.Controls.MaterialLabel();
                         this.materialCard1.SuspendLayout();
                         ((System.ComponentModel.ISupportInitialize)(this.MyListaDeCodigos)).BeginInit();
                         ((System.ComponentModel.ISupportInitialize)(this.MyListaDeProductos)).BeginInit();
@@ -60,7 +60,7 @@
                         this.materialCard1.Controls.Add(this.materialLabel3);
                         this.materialCard1.Controls.Add(this.MyCodigoDeBarras);
                         this.materialCard1.Controls.Add(this.materialLabel2);
-                        this.materialCard1.Controls.Add(this.materialLabel1);
+                        this.materialCard1.Controls.Add(this.Encabezado);
                         this.materialCard1.Depth = 0;
                         this.materialCard1.Dock = System.Windows.Forms.DockStyle.Fill;
                         this.materialCard1.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(222)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))));
@@ -80,6 +80,7 @@
                         this.MyListaDeCodigos.Size = new System.Drawing.Size(434, 291);
                         this.MyListaDeCodigos.TabIndex = 12;
                         this.MyListaDeCodigos.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.MyListaDeCodigos_CellClick);
+                        this.MyListaDeCodigos.DataError += new System.Windows.Forms.DataGridViewDataErrorEventHandler(this.MyListaDeCodigos_DataError);
                         // 
                         // materialLabel6
                         // 
@@ -175,7 +176,7 @@
                         this.MyIdSeleccionadoTxt.Depth = 0;
                         this.MyIdSeleccionadoTxt.Font = new System.Drawing.Font("Microsoft Sans Serif", 16F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel);
                         this.MyIdSeleccionadoTxt.HideSelection = true;
-                        this.MyIdSeleccionadoTxt.LeadingIcon = null;
+                        this.MyIdSeleccionadoTxt.LeadingIcon = global::SETEA_Sistema.Properties.Resources.inventarioIco;
                         this.MyIdSeleccionadoTxt.Location = new System.Drawing.Point(20, 260);
                         this.MyIdSeleccionadoTxt.MaxLength = 32767;
                         this.MyIdSeleccionadoTxt.MouseState = MaterialSkin.MouseState.OUT;
@@ -216,8 +217,8 @@
                         this.MyCodigoDeBarras.Depth = 0;
                         this.MyCodigoDeBarras.Font = new System.Drawing.Font("Microsoft Sans Serif", 16F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel);
                         this.MyCodigoDeBarras.HideSelection = true;
-                        this.MyCodigoDeBarras.LeadingIcon = null;
-                        this.MyCodigoDeBarras.Location = new System.Drawing.Point(20, 180);
+                        this.MyCodigoDeBarras.LeadingIcon = global::SETEA_Sistema.Properties.Resources.producto_de_codigo_de_barras1;
+                        this.MyCodigoDeBarras.Location = new System.Drawing.Point(20, 163);
                         this.MyCodigoDeBarras.MaxLength = 32767;
                         this.MyCodigoDeBarras.MouseState = MaterialSkin.MouseState.OUT;
                         this.MyCodigoDeBarras.Name = "MyCodigoDeBarras";
@@ -243,25 +244,25 @@
                         this.materialLabel2.AutoSize = true;
                         this.materialLabel2.Depth = 0;
                         this.materialLabel2.Font = new System.Drawing.Font("Roboto", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel);
-                        this.materialLabel2.Location = new System.Drawing.Point(17, 158);
+                        this.materialLabel2.Location = new System.Drawing.Point(23, 141);
                         this.materialLabel2.MouseState = MaterialSkin.MouseState.HOVER;
                         this.materialLabel2.Name = "materialLabel2";
                         this.materialLabel2.Size = new System.Drawing.Size(123, 19);
                         this.materialLabel2.TabIndex = 1;
                         this.materialLabel2.Text = "Codigo De barras";
                         // 
-                        // materialLabel1
+                        // Encabezado
                         // 
-                        this.materialLabel1.AutoSize = true;
-                        this.materialLabel1.Depth = 0;
-                        this.materialLabel1.Font = new System.Drawing.Font("Roboto", 24F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Pixel);
-                        this.materialLabel1.FontType = MaterialSkin.MaterialSkinManager.fontType.H5;
-                        this.materialLabel1.Location = new System.Drawing.Point(17, 14);
-                        this.materialLabel1.MouseState = MaterialSkin.MouseState.HOVER;
-                        this.materialLabel1.Name = "materialLabel1";
-                        this.materialLabel1.Size = new System.Drawing.Size(178, 29);
-                        this.materialLabel1.TabIndex = 0;
-                        this.materialLabel1.Text = "Codigo @accion";
+                        this.Encabezado.AutoSize = true;
+                        this.Encabezado.Depth = 0;
+                        this.Encabezado.Font = new System.Drawing.Font("Roboto", 24F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Pixel);
+                        this.Encabezado.FontType = MaterialSkin.MaterialSkinManager.fontType.H5;
+                        this.Encabezado.Location = new System.Drawing.Point(17, 14);
+                        this.Encabezado.MouseState = MaterialSkin.MouseState.HOVER;
+                        this.Encabezado.Name = "Encabezado";
+                        this.Encabezado.Size = new System.Drawing.Size(178, 29);
+                        this.Encabezado.TabIndex = 0;
+                        this.Encabezado.Text = "Codigo @accion";
                         // 
                         // Codigos_Agregar_editar
                         // 
@@ -284,7 +285,6 @@
         #endregion
 
         private MaterialSkin.Controls.MaterialCard materialCard1;
-        private MaterialSkin.Controls.MaterialLabel materialLabel1;
         private MaterialSkin.Controls.MaterialTextBox2 MyCodigoDeBarras;
         private MaterialSkin.Controls.MaterialLabel materialLabel2;
         private MaterialSkin.Controls.MaterialLabel materialLabel4;
@@ -296,5 +296,6 @@
         private System.Windows.Forms.DataGridView MyListaDeProductos;
         private System.Windows.Forms.DataGridView MyListaDeCodigos;
         private MaterialSkin.Controls.MaterialLabel materialLabel6;
-    }
+                public MaterialSkin.Controls.MaterialLabel Encabezado;
+        }
 }

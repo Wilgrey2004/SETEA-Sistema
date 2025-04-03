@@ -417,7 +417,9 @@
     </Compile>
     <Compile Include="Entidades\CodigosDeproductosShowsModels.cs" />
     <Compile Include="Entidades\CodigosProductosShowModels.cs" />
+    <Compile Include="Entidades\ProductoReporteModelShows.cs" />
     <Compile Include="Entidades\ProductoShowModels.cs" />
+    <Compile Include="Entidades\VentaShowModels.cs" />
     <Compile Include="Gestion-Productos\Agregar_Editar_Producto.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -429,6 +431,12 @@
     </Compile>
     <Compile Include="Gestion-Productos\Codigos_Agregar_editar.Designer.cs">
       <DependentUpon>Codigos_Agregar_editar.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Gestion-Productos\Gestion_Ventas.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Gestion-Productos\Gestion_Ventas.Designer.cs">
+      <DependentUpon>Gestion_Ventas.cs</DependentUpon>
     </Compile>
     <Compile Include="Gestion-Productos\ListaDeCompras.cs">
       <SubType>Form</SubType>
@@ -448,6 +456,7 @@
     <Compile Include="InicioSeccion.Designer.cs">
       <DependentUpon>InicioSeccion.cs</DependentUpon>
     </Compile>
+    <Compile Include="Interfaces\GenericReturnBinlingList.cs" />
     <Compile Include="Modelodb\Auditoria.cs">
       <DependentUpon>DB.tt</DependentUpon>
     </Compile>
@@ -561,6 +570,9 @@
     <Compile Include="Utilidades\GeneradorDePedf.cs" />
     <Compile Include="Utilidades\ImpresionRecibo.cs" />
     <Compile Include="Utilidades\MyConversorGenerico.cs" />
+    <Compile Include="Utilidades\ReturnsBindingList\GetBindingListcodigosShowModels.cs" />
+    <Compile Include="Utilidades\ReturnsBindingList\GetBindingListProductoShowsModels.cs" />
+    <Compile Include="Utilidades\ReturnsBindingList\GetBindingListVentaModelsShow.cs" />
     <EmbeddedResource Include="CreacionUsuario.resx">
       <DependentUpon>CreacionUsuario.cs</DependentUpon>
     </EmbeddedResource>
@@ -569,6 +581,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Gestion-Productos\Codigos_Agregar_editar.resx">
       <DependentUpon>Codigos_Agregar_editar.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Gestion-Productos\Gestion_Ventas.resx">
+      <DependentUpon>Gestion_Ventas.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Gestion-Productos\ListaDeCompras.resx">
       <DependentUpon>ListaDeCompras.cs</DependentUpon>
@@ -624,6 +639,8 @@
     <None Include="Imagenes\Iconos\oferta-especial.png" />
     <None Include="Imagenes\Iconos\bruto.png" />
     <None Include="Imagenes\Iconos\todos.png" />
+    <None Include="Imagenes\Iconos\inventarioIco.png" />
+    <None Include="Imagenes\Iconos\busqueda-de-lupa.png" />
     <Content Include="LogoSeteaHD.ico" />
     <Content Include="Modelodb\DB.Context.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
