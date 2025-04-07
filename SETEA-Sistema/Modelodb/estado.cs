@@ -27,9 +27,5 @@ namespace SETEA_Sistema.Modelodb
         public virtual ICollection<producto> producto { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Codigo_De_Productos> Codigo_De_Productos { get; set; }
-
-                public override string ToString() {
-                    return $"  {Estado1}";
-                }
     }
 }

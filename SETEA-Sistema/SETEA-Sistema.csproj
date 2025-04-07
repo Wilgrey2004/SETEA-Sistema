@@ -415,10 +415,14 @@
     <Compile Include="CreacionUsuario.Designer.cs">
       <DependentUpon>CreacionUsuario.cs</DependentUpon>
     </Compile>
+    <Compile Include="Entidades\ClienteEntityComboboBoxShow.cs" />
     <Compile Include="Entidades\CodigosDeproductosShowsModels.cs" />
     <Compile Include="Entidades\CodigosProductosShowModels.cs" />
+    <Compile Include="Entidades\DispositivosComboboxShowModels.cs" />
+    <Compile Include="Entidades\EstadosEntityComboboxModelsShow.cs" />
     <Compile Include="Entidades\ProductoReporteModelShows.cs" />
     <Compile Include="Entidades\ProductoShowModels.cs" />
+    <Compile Include="Entidades\ReparacionesRPShowModels.cs" />
     <Compile Include="Entidades\VentaShowModels.cs" />
     <Compile Include="Gestion-Productos\Agregar_Editar_Producto.cs">
       <SubType>Form</SubType>
@@ -560,6 +564,36 @@
     </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="SeccionRP\Cliente_Show_RPS.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="SeccionRP\Cliente_Show_RPS.Designer.cs">
+      <DependentUpon>Cliente_Show_RPS.cs</DependentUpon>
+    </Compile>
+    <Compile Include="SeccionRP\Dispositivo_Informacion_RP.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="SeccionRP\Dispositivo_Informacion_RP.Designer.cs">
+      <DependentUpon>Dispositivo_Informacion_RP.cs</DependentUpon>
+    </Compile>
+    <Compile Include="SeccionRP\Estados_RP.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="SeccionRP\Estados_RP.Designer.cs">
+      <DependentUpon>Estados_RP.cs</DependentUpon>
+    </Compile>
+    <Compile Include="SeccionRP\Marcas_RP_Show.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="SeccionRP\Marcas_RP_Show.Designer.cs">
+      <DependentUpon>Marcas_RP_Show.cs</DependentUpon>
+    </Compile>
+    <Compile Include="SeccionRP\Tipo_De_Dispositivo_Show_RP.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="SeccionRP\Tipo_De_Dispositivo_Show_RP.Designer.cs">
+      <DependentUpon>Tipo_De_Dispositivo_Show_RP.cs</DependentUpon>
+    </Compile>
     <Compile Include="UsuariosAcciones.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -571,8 +605,12 @@
     <Compile Include="Utilidades\ImpresionRecibo.cs" />
     <Compile Include="Utilidades\MyConversorGenerico.cs" />
     <Compile Include="Utilidades\ReturnsBindingList\GetBindingListcodigosShowModels.cs" />
+    <Compile Include="Utilidades\ReturnsBindingList\GetBindingListDispositivosCombobox.cs" />
+    <Compile Include="Utilidades\ReturnsBindingList\GetBindingListEstadoComboboxModelsShow.cs" />
     <Compile Include="Utilidades\ReturnsBindingList\GetBindingListProductoShowsModels.cs" />
+    <Compile Include="Utilidades\ReturnsBindingList\GetBindingListReparacionesRP.cs" />
     <Compile Include="Utilidades\ReturnsBindingList\GetBindingListVentaModelsShow.cs" />
+    <Compile Include="Utilidades\ReturnsBindingList\GetBinlingLIstClientesComboboxShow.cs" />
     <EmbeddedResource Include="CreacionUsuario.resx">
       <DependentUpon>CreacionUsuario.cs</DependentUpon>
     </EmbeddedResource>
@@ -604,6 +642,21 @@
       <DependentUpon>Resources.resx</DependentUpon>
       <DesignTime>True</DesignTime>
     </Compile>
+    <EmbeddedResource Include="SeccionRP\Cliente_Show_RPS.resx">
+      <DependentUpon>Cliente_Show_RPS.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="SeccionRP\Dispositivo_Informacion_RP.resx">
+      <DependentUpon>Dispositivo_Informacion_RP.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="SeccionRP\Estados_RP.resx">
+      <DependentUpon>Estados_RP.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="SeccionRP\Marcas_RP_Show.resx">
+      <DependentUpon>Marcas_RP_Show.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="SeccionRP\Tipo_De_Dispositivo_Show_RP.resx">
+      <DependentUpon>Tipo_De_Dispositivo_Show_RP.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="UsuariosAcciones.resx">
       <DependentUpon>UsuariosAcciones.cs</DependentUpon>
     </EmbeddedResource>
@@ -641,6 +694,14 @@
     <None Include="Imagenes\Iconos\todos.png" />
     <None Include="Imagenes\Iconos\inventarioIco.png" />
     <None Include="Imagenes\Iconos\busqueda-de-lupa.png" />
+    <None Include="Imagenes\Iconos\Dispositivos.png" />
+    <None Include="Imagenes\Iconos\TiposDeispositivos.png" />
+    <None Include="Imagenes\Iconos\marca-comercial.png" />
+    <None Include="Imagenes\Iconos\Clientes.png" />
+    <None Include="Imagenes\Iconos\gmail.png" />
+    <None Include="Imagenes\Iconos\mapas-y-banderas.png" />
+    <None Include="Imagenes\Iconos\escoba.png" />
+    <None Include="Imagenes\Iconos\Estados.png" />
     <Content Include="LogoSeteaHD.ico" />
     <Content Include="Modelodb\DB.Context.tt">
       <Generator>TextTemplatingFileGenerator</Generator>

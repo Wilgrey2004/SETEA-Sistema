@@ -28,5 +28,9 @@ namespace SETEA_Sistema.Modelodb
         public virtual ICollection<Dispositivos_RP> Dispositivos_RP { get; set; }
         public virtual Marca_Del_Dispositivo_RP Marca_Del_Dispositivo_RP { get; set; }
         public virtual Tipo_Dispositivos_RP Tipo_Dispositivos_RP { get; set; }
+
+                public override string ToString() {
+                        return this.ID_Info_Dispositivo.ToString();
+                }
     }
 }

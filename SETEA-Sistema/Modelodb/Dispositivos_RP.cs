@@ -24,7 +24,6 @@ namespace SETEA_Sistema.Modelodb
         public string Fallo_Encontrado_Del_Dispositivo { get; set; }
         public string Descripcion_Del_Problema_De_Parte_Del_Cliente { get; set; }
         public Nullable<int> Info_Dispositivo_ID { get; set; }
-        public string Numero_de_Serie { get; set; }
         public Nullable<System.DateTime> Fecha_Recepcion { get; set; }
     
         public virtual Dispositivo_Info_RP Dispositivo_Info_RP { get; set; }

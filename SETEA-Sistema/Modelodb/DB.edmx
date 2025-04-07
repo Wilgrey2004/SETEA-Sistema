@@ -106,7 +106,6 @@
           <Property Name="Fallo_Encontrado_Del_Dispositivo" Type="text" />
           <Property Name="Descripcion_Del_Problema_De_Parte_Del_Cliente" Type="text" />
           <Property Name="Info_Dispositivo_ID" Type="int" />
-          <Property Name="Numero_de_Serie" Type="varchar" MaxLength="100" />
           <Property Name="Fecha_Recepcion" Type="datetime" />
         </EntityType>
         <EntityType Name="estado">
@@ -1017,7 +1016,6 @@
           <Property Name="Fallo_Encontrado_Del_Dispositivo" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
           <Property Name="Descripcion_Del_Problema_De_Parte_Del_Cliente" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
           <Property Name="Info_Dispositivo_ID" Type="Int32" />
-          <Property Name="Numero_de_Serie" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
           <Property Name="Fecha_Recepcion" Type="DateTime" Precision="3" />
           <NavigationProperty Name="Dispositivo_Info_RP" Relationship="DBS.FK__Dispositi__Info___3E1D39E1" FromRole="Dispositivos_RP" ToRole="Dispositivo_Info_RP" />
           <NavigationProperty Name="Reparaciones_RP" Relationship="DBS.FK__Reparacio__Dispo__45BE5BA9" FromRole="Dispositivos_RP" ToRole="Reparaciones_RP" />
@@ -1549,7 +1547,6 @@
             <EntityTypeMapping TypeName="DBS.Dispositivos_RP">
               <MappingFragment StoreEntitySet="Dispositivos_RP">
                 <ScalarProperty Name="Fecha_Recepcion" ColumnName="Fecha_Recepcion" />
-                <ScalarProperty Name="Numero_de_Serie" ColumnName="Numero_de_Serie" />
                 <ScalarProperty Name="Info_Dispositivo_ID" ColumnName="Info_Dispositivo_ID" />
                 <ScalarProperty Name="Descripcion_Del_Problema_De_Parte_Del_Cliente" ColumnName="Descripcion_Del_Problema_De_Parte_Del_Cliente" />
                 <ScalarProperty Name="Fallo_Encontrado_Del_Dispositivo" ColumnName="Fallo_Encontrado_Del_Dispositivo" />

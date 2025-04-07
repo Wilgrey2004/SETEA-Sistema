@@ -1,4 +1,5 @@
-﻿using System;
+﻿using SETEA_Sistema.Entidades;
+using System;
 using System.Drawing;
 using System.Drawing.Printing;
 using System.Windows.Forms;
@@ -38,7 +39,57 @@ public class ImpresionRecibo
                         MessageBox.Show("Error al imprimir: " + ex.Message);
                 }
         }
+        public void ImprimirReciboReparacion( ReparacionesRPShowModels reparacion ) {
+                PrintDocument printDocument = new PrintDocument();
+                PaperSize paperSize = new PaperSize("Custom80mm", 300, 600);
+                printDocument.DefaultPageSettings.PaperSize = paperSize;
+                printDocument.DefaultPageSettings.Margins = new Margins(0, 0, 0, 0);
+                printDocument.PrinterSettings.PrinterName = "80mm Series Printer";
 
+                printDocument.PrintPage += ( sender, e ) => {
+                        Graphics g = e.Graphics;
+                        int margenIzquierdo = 10;
+                        int margenSuperior = 20;
+                        int espacioLinea = 25;
+                        int pageWidth = e.PageBounds.Width;
+                        int y = margenSuperior;
+
+                        // Encabezado
+                        string empresa = "S.E.T.E.A";
+                        float textWidth = g.MeasureString(empresa, fuente).Width;
+                        g.DrawString(empresa, fuente, Brushes.Black, pageWidth - textWidth - 10, y);
+                        y += espacioLinea;
+                        g.DrawString("Servicios tecnologicos de americas", fuente, Brushes.Black, margenIzquierdo, y);
+                        y += espacioLinea;
+                        g.DrawString("Tel: 849-581-8773", fuente, Brushes.Black, margenIzquierdo, y);
+                        y += espacioLinea;
+                        g.DrawString("Fecha: " + DateTime.Now.ToString("dd-MM-yyyy HH:mm"), fuente, Brushes.Black, margenIzquierdo, y);
+                        y += espacioLinea + 10;
+
+                        // Detalles de reparación
+                        g.DrawString("Cliente: " + reparacion.Nombre_Cliente, fuente, Brushes.Black, margenIzquierdo, y); y += espacioLinea;
+                        g.DrawString("Correo: " + reparacion.Correo_Del_Cliente, fuente, Brushes.Black, margenIzquierdo, y); y += espacioLinea;
+                        g.DrawString("Dispositivo: " + reparacion.Marca_Dispositivo + " - " + reparacion.Tipo_Dispositivo, fuente, Brushes.Black, margenIzquierdo, y); y += espacioLinea;
+                        g.DrawString("Estado: " + reparacion.Estado, fuente, Brushes.Black, margenIzquierdo, y); y += espacioLinea;
+                        g.DrawString("Diagnóstico: " + reparacion.Diagnostico_Inicial, fuente, Brushes.Black, margenIzquierdo, y); y += espacioLinea;
+                        g.DrawString("Fallo: " + reparacion.Fallo_Detectado, fuente, Brushes.Black, margenIzquierdo, y); y += espacioLinea;
+                        g.DrawString("Ingreso: " + reparacion.Fecha_Ingreso?.ToString("dd-MM-yyyy"), fuente, Brushes.Black, margenIzquierdo, y); y += espacioLinea;
+                        g.DrawString("Entrega: " + reparacion.Fecha_Alta?.ToString("dd-MM-yyyy"), fuente, Brushes.Black, margenIzquierdo, y); y += espacioLinea;
+                        y += 10;
+                        g.DrawString("*---------------------------------------------*", fuente, Brushes.Black, margenIzquierdo, y); y += espacioLinea;
+                        g.DrawString("Total a pagar: " + reparacion.Cobro_Reparacion?.ToString("C2"), new Font("Arial", 11, FontStyle.Bold), Brushes.Black, margenIzquierdo, y);
+                        y += espacioLinea;
+                        g.DrawString("¡Gracias por confiar en S.E.T.E.A!", fuente, Brushes.Black, margenIzquierdo, y);
+                };
+
+                try
+                {
+                        printDocument.Print();
+                } catch (Exception ex)
+                {
+                        MessageBox.Show("Error al imprimir: " + ex.Message);
+                }
+        }
         private void PrintPage( object sender, PrintPageEventArgs e ) {
                 Graphics g = e.Graphics;
 
@@ -148,7 +199,7 @@ public class ImpresionRecibo
                 }
                 return total;
         }
-
+        
         // Ajusta el nombre del producto para que no se desborde
         private string AjustarNombreProducto( string nombreProducto, int maxWidth ) {
                 using (Graphics g = Graphics.FromImage(new Bitmap(1, 1)))
@@ -165,4 +216,6 @@ public class ImpresionRecibo
                         }
                 }
         }
+       
+
 }

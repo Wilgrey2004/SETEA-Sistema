@@ -121,7 +121,7 @@
   <data name="UserCorreo.TrailingIcon" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
     <value>
         iVBORw0KGgoAAAANSUhEUgAAAI0AAACNCAYAAACKXvmlAAAABGdBTUEAALGPC/xhBQAAAAlwSFlzAAAO
-        vgAADr4B6kKxwAAAdZtJREFUeF7tvQd4HOW1Pn7v87+5z+8mgKXdnT6zu5JtjCH03lvoLZQQSCVUJ7TQ
+        vQAADr0BR/uQrQAAdZtJREFUeF7tvQd4HOW1Pn7v87+5z+8mgKXdnT6zu5JtjCH03lvoLZQQSCVUJ7TQ
         AiGFFCD0Xtx7b+q9WbbB9JLQQgkldDDFtixpd6X3/7znzOyuvDbYhtQnA8eSRitpdr4z5zvlPe/5r//6
         r//Cf+Q/solScuI/8h/5PCk58W8trudjv/0Pw3EnjMFpp1+PU0+fguNOmINDD52PffZdjN33qMV22y7C
         8Mr58NzZsK1pCPzpGDF8JrYdPQP77T0X++87EQcdeCcOPfR3OPjgMdhtt8NgWX7J3/o3lpIT/zZiWjaO
@@ -629,7 +629,7 @@
   <data name="UserPass.TrailingIcon" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
     <value>
         iVBORw0KGgoAAAANSUhEUgAAAI0AAACNCAYAAACKXvmlAAAABGdBTUEAALGPC/xhBQAAAAlwSFlzAAAO
-        vgAADr4B6kKxwAAAdZtJREFUeF7tvQd4HOW1Pn7v87+5z+8mgKXdnT6zu5JtjCH03lvoLZQQSCVUJ7TQ
+        vQAADr0BR/uQrQAAdZtJREFUeF7tvQd4HOW1Pn7v87+5z+8mgKXdnT6zu5JtjCH03lvoLZQQSCVUJ7TQ
         AiGFFCD0Xtx7b+q9WbbB9JLQQgkldDDFtixpd6X3/7znzOyuvDbYhtQnA8eSRitpdr4z5zvlPe/5r//6
         r//Cf+Q/solScuI/8h/5PCk58W8trudjv/0Pw3EnjMFpp1+PU0+fguNOmINDD52PffZdjN33qMV22y7C
         8Mr58NzZsK1pCPzpGDF8JrYdPQP77T0X++87EQcdeCcOPfR3OPjgMdhtt8NgWX7J3/o3lpIT/zZiWjaO

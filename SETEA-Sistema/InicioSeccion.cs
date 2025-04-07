@@ -70,10 +70,14 @@ namespace SETEA_Sistema
                                         {
                                                 query.Ultima_Vez = DateTime.Now;
                                                 db.SaveChanges();
+                                                MessageBox.Show("Bienvenido", "Bienvenido", MessageBoxButtons.OK, MessageBoxIcon.Information);
                                                 Gestion gs = new Gestion();
                                                 Hide();
                                                 gs.ShowDialog();
                                                 Show();
+                                        } else
+                                        {
+                                                MessageBox.Show("Correo o contraseña incorrectos", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
                                         }
                                 }
                         } catch (Exception ex)

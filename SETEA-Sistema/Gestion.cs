@@ -3,6 +3,7 @@ using MaterialSkin.Controls;
 using SETEA_Sistema.Entidades;
 using SETEA_Sistema.Gestion_Productos;
 using SETEA_Sistema.Modelodb;
+using SETEA_Sistema.SeccionRP;
 using SETEA_Sistema.Utilidades;
 using SETEA_Sistema.Utilidades.ReturnsBindingList;
 using System;
@@ -11,7 +12,6 @@ using System.ComponentModel;
 using System.Data;
 using System.Data.Entity;
 using System.Data.Entity.Infrastructure;
-using System.IO;
 using System.Linq;
 using System.Windows.Forms;
 namespace SETEA_Sistema
@@ -176,8 +176,6 @@ namespace SETEA_Sistema
                         MyDataUsers.Columns["Roles"].Visible = false;
                 }
 
-                
-
 
                 private void GenerarReporteUsuarios() {
                         var Mensaje = MessageBox.Show("Desea generar un reporte de usuarios ?", "Reporte", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
@@ -240,6 +238,86 @@ namespace SETEA_Sistema
                         CargarTablaDeCodigos();
                         CargarLaListaDeProductosYcodigos();
                         CargarTablaProductos();
+                        CargarTabla_Info_Rp();
+                        CargarComboboxes_Seccion_Reparaciones();
+                }
+
+                BindingList<ReparacionesRPShowModels> reparacionesLST = new BindingList<ReparacionesRPShowModels>();
+
+                private void CargarComboboxes_Seccion_Reparaciones() {
+                        Cargar_Combobox_Clientes_RP();
+                        Cargar_Combobox_Estados_RP();
+                        Cargar_Combobox_Dispositivos();
+                }
+
+                private void Cargar_Combobox_Dispositivos() {
+                        try
+                        {
+                                GetBindingListDispositivosCombobox getBindingListDispositivosCombobox = new GetBindingListDispositivosCombobox();
+                                var query = getBindingListDispositivosCombobox.GetBindingList();
+                                Com_RP_Dispositivos_Rp.Items.Clear();
+                                foreach (var item in query)
+                                {
+                                        Com_RP_Dispositivos_Rp.Items.Add(item);
+                                }
+                        } catch (Exception err)
+                        {
+                                MessageBox.Show($"No hay ningun dispositivo registrado: {err.Message}", "Advertencia", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                                return;
+                        }
+                }
+
+                private void Cargar_Combobox_Estados_RP() {
+                        try
+                        {
+                                GetBindingListEstadoComboboxModelsShow newListas = new GetBindingListEstadoComboboxModelsShow();
+
+                                var query = newListas.GetBindingList();
+                                Com_RP_Estados_Rp.Items.Clear();
+                                foreach (var item in query)
+                                {
+                                        Com_RP_Estados_Rp.Items.Add(item);
+                                }
+                        } catch (Exception err)
+                        {
+                                MessageBox.Show($"No hay ningun estado registrado: {err.Message}", "Advertencia", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                                return;
+                        }
+                }
+                private void Cargar_Combobox_Clientes_RP() {
+
+                        try
+                        {
+                                GetBinlingLIstClientesComboboxShow newListas = new GetBinlingLIstClientesComboboxShow();
+
+                                var query = newListas.GetBindingList();
+                                Com_RP_Clientes_Rp.Items.Clear();
+                                foreach (var item in query)
+                                {
+                                        Com_RP_Clientes_Rp.Items.Add(item);
+                                }
+
+                        } catch (Exception err)
+                        {
+                                MessageBox.Show($"No hay ningun cliente registrado: {err.Message}", "Advertencia", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                                return;
+                        }
+
+                        //Com_RP_Clientes_Rp
+                }
+                private void CargarTabla_Info_Rp() {
+                        try
+                        {
+                                GetBindingListReparacionesRP getBindingListReparaciones = new GetBindingListReparacionesRP();
+                                reparacionesLST.Clear();
+                                reparacionesLST = getBindingListReparaciones.GetBindingList();
+                                MyReparacion_RP_Info.DataSource = null;
+                                MyReparacion_RP_Info.DataSource = reparacionesLST;
+                        } catch (Exception err)
+                        {
+                                MessageBox.Show($"No hay ninguna reparacion registrada: {err.Message}", "Advertencia", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                                return;
+                        }
                 }
 
                 BindingList<CodigosProductosShowModels1> showsModelsCodigos = new BindingList<CodigosProductosShowModels1>();
@@ -272,7 +350,6 @@ namespace SETEA_Sistema
                 }
 
                 private BindingList<CodigosDeproductosShowsModels> codigosDeProductosList = new BindingList<CodigosDeproductosShowsModels>();
-
                 private void CargarTablaDeCodigos() {
                         codigosDeProductosList.Clear();
                         GetBindingListcodigosShowModels getBindingListCodigos = new GetBindingListcodigosShowModels();
@@ -291,7 +368,6 @@ namespace SETEA_Sistema
                         ListaDecodigosProductos.DataSource = codigosDeProductosList;
 
                 }
-
                 private void CargarProductos( string codigo ) {
 
 
@@ -336,31 +412,25 @@ namespace SETEA_Sistema
                         numCantidadProducto.Minimum = 1;
                         // CargarProductos();
                 }
-
                 private void AlterDatagrids() {
                         Configurador_DataGrid.ConfiguracionDelDataGrid(MyDataProductosCaja);
                         Configurador_DataGrid.ConfiguracionDelDataGrid(ListaDecodigosProductos, 70);
                         Configurador_DataGrid.ConfiguracionDelDataGrid(MyDataUsers, 50);
                         Configurador_DataGrid.ConfiguracionDelDataGrid(MyDataProductosCaja, 50);
+                        Configurador_DataGrid.ConfiguracionDelDataGrid(MyReparacion_RP_Info, 50);
                 }
-
-
                 private void GestionUsuarios_Click( object sender, EventArgs e ) {
 
                 }
-
                 private void MyDataUsers_DataError( object sender, DataGridViewDataErrorEventArgs e ) {
 
                 }
-
                 private void MyDataUsers_CellContentClick( object sender, DataGridViewCellEventArgs e ) {
 
                 }
-
                 private void Gestion_DoubleClick( object sender, EventArgs e ) {
 
                 }
-
                 private void MyDataUsers_CellContentDoubleClick( object sender, DataGridViewCellEventArgs e ) {
                         try
                         {
@@ -376,18 +446,14 @@ namespace SETEA_Sistema
                                 return;
                         }
                 }
-
                 private void materialButton1_Click( object sender, EventArgs e ) {
                         ActualizarTablaUser();
                         GenerarReporteUsuarios();
                 }
-
                 private void materialButton2_Click( object sender, EventArgs e ) {
                         CargarTablaConRegistrosDiario();
                         ActualizarTablaUser();
                 }
-
-
                 private void materialComboBox1_SelectedIndexChanged( object sender, EventArgs e ) {
                         string productoNombre = MyProductos.Text;
 
@@ -403,11 +469,9 @@ namespace SETEA_Sistema
                                 NombreProductoSeleccionado = proPrecio.nombre;
                         }
                 }
-
                 private void dataGridView1_CellContentClick( object sender, DataGridViewCellEventArgs e ) {
 
                 }
-
                 private void numCantidadProducto_ValueChanged( object sender, EventArgs e ) {
                         double precioUnidad = Convert.ToDouble(myProductoPrecio.Text);
                         int cantidadProducto = Convert.ToInt32(numCantidadProducto.Value);
@@ -418,7 +482,6 @@ namespace SETEA_Sistema
                                 txtPrecioTotalPorCantidad.Text = resultado.ToString();
                         }
                 }
-
                 private void CalCularTotalVenta() {
                         double? total = 0;
                         foreach (VentaEnCaja item in ventaEnCajaLista)
@@ -430,8 +493,6 @@ namespace SETEA_Sistema
                         }
                         MyTotalVentaProductos.Text = total.ToString();
                 }
-
-
                 private void materialButton6_Click( object sender, EventArgs e ) {
                         var query = ventaEnCajaLista.FirstOrDefault(x => x.codigoDelProducto == CodigoDelProductoVenta.Text);
 
@@ -481,11 +542,9 @@ namespace SETEA_Sistema
                         // No es necesario actualizar el DataSource manualmente
                         CalCularTotalVenta();
                 }
-
                 private void txtNombreCliente_Click( object sender, EventArgs e ) {
 
                 }
-
                 private void materialButton4_Click( object sender, EventArgs e ) {
                         ventaEnCajaLista.Clear();
                         CalCularTotalVenta();
@@ -501,7 +560,6 @@ namespace SETEA_Sistema
                                 CalCularTotalVenta();
                         }
                 }
-
                 private void materialButton5_Click( object sender, EventArgs e ) {
                         if (ventaEnCajaLista != null)
                         {
@@ -509,14 +567,9 @@ namespace SETEA_Sistema
                         }
                         return;
                 }
-
-
-
                 private bool EstaCajaEstaVacia( MaterialTextBox2 textBox ) {
                         return textBox.Text != "";
                 }
-
-
                 private void materialButton3_Click( object sender, EventArgs e ) {
                         using (db = new SeteaEntities1())
                         {
@@ -586,7 +639,6 @@ namespace SETEA_Sistema
 
                         }
                 }
-
                 private void materialButton7_Click( object sender, EventArgs e ) {
                         Gestion_Ventas gv = new Gestion_Ventas();
                         Hide();
@@ -594,9 +646,6 @@ namespace SETEA_Sistema
                         Show();
                 }
                 private List<string> HeadersProductos = new List<string> { "ID", "Nombre", "Descripcion", "Cantidad", "Precio", "Categoria", "Estado", "Fecha" };
-
-
-
                 private void GenerarReporteDeProductos() {
                         var mensajeAprovar = MessageBox.Show("Desea generar un reporte de productos ?", "Reporte", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
 
@@ -638,7 +687,6 @@ namespace SETEA_Sistema
                                 productosLs = new BindingList<producto>(query);
                         }
                 }
-
                 private void materialButton2_Click_1( object sender, EventArgs e ) {
                         GenerarReporteDeProductos();
                 }
@@ -682,7 +730,6 @@ namespace SETEA_Sistema
                                 MessageBox.Show("Error al obtener el ID: " + ex.Message);
                         }
                 }
-
                 private void materialButton9_Click( object sender, EventArgs e ) {
                         if (idProductoSeleccionadoEdicion != 0)
                         {
@@ -694,7 +741,6 @@ namespace SETEA_Sistema
 
                         }
                 }
-
                 private void materialButton10_Click( object sender, EventArgs e ) {
                         Agregar_Editar_Producto agregarEditar = new Agregar_Editar_Producto();
                         Hide();
@@ -703,7 +749,6 @@ namespace SETEA_Sistema
                         CargarTablas();
                         Show();
                 }
-
                 private void materialButton8_Click( object sender, EventArgs e ) {
                         if (idProductoSeleccionadoEdicion > 0)
                         {
@@ -746,7 +791,6 @@ namespace SETEA_Sistema
                                 MessageBox.Show("No ha seleccionado ningún producto");
                         }
                 }
-
                 private void materialMultiLineTextBox21_TextChanged( object sender, EventArgs e ) {
                         using (var db = new SeteaEntities1()) // Se crea la instancia correctamente
                         {
@@ -759,22 +803,18 @@ namespace SETEA_Sistema
                                 }
                         }
                 }
-
                 private void ProductoNombreFind_Click( object sender, EventArgs e ) {
 
                 }
-
                 private void materialButton12_Click( object sender, EventArgs e ) {
                         ListaDeCompras listaDeCompras = new ListaDeCompras();
                         Hide();
                         listaDeCompras.ShowDialog();
                         Show();
                 }
-
                 private void ProductoVentaDescuento_TextChanged( object sender, EventArgs e ) {
 
                 }
-
                 private void CodigoDelProductoVenta_KeyDown( object sender, KeyEventArgs e ) {
                         if (e.KeyCode == Keys.Enter)
                         {
@@ -794,19 +834,15 @@ namespace SETEA_Sistema
 
                         }
                 }
-
                 private void Paneles_SelectedIndexChanged( object sender, EventArgs e ) {
 
                 }
-
                 private void GestionCodigos_Click( object sender, EventArgs e ) {
 
                 }
-
                 private void materialLabel20_Click( object sender, EventArgs e ) {
 
                 }
-
                 private void materialButton13_Click( object sender, EventArgs e ) {
                         Codigos_Agregar_editar codigos_Agregar_Editar = new Codigos_Agregar_editar();
                         Hide();
@@ -832,7 +868,6 @@ namespace SETEA_Sistema
                                 return query;
                         }
                 }
-
                 private void MyProductos_TextChanged( object sender, EventArgs e ) {
                         if (MyProductos.Text == null) return;
 
@@ -849,7 +884,6 @@ namespace SETEA_Sistema
                         txtPrecioTotalPorCantidad.Text = (precioUnidad * numCantidadProducto.Value).ToString();
 
                 }
-
                 private void BuscarPorCodigo_TextChanged( object sender, EventArgs e ) {
                         using (db = new SeteaEntities1())
                         {
@@ -879,24 +913,19 @@ namespace SETEA_Sistema
                                 }
                         }
                 }
-
                 private void MyListProductos_MouseEnter( object sender, EventArgs e ) {
 
                 }
-
                 private void MyListProductos_MouseMove( object sender, MouseEventArgs e ) {
 
 
                 }
-
                 private void MyListProductos_MouseClick( object sender, MouseEventArgs e ) {
 
                 }
-
                 private void MyListProductos_SelectedIndexChanged( object sender, EventArgs e ) {
 
                 }
-
                 private void MyListProductos_Click( object sender, EventArgs e ) {
                         if (MyListProductos.SelectedItem == null)
                         {
@@ -918,7 +947,6 @@ namespace SETEA_Sistema
                                 MyProductos.Text = codigoProducto.Nombre_Del_Producto;
                         }
                 }
-
                 private void dateTimePicker1_ValueChanged( object sender, EventArgs e ) {
 
 
@@ -948,11 +976,9 @@ namespace SETEA_Sistema
                                 ListaDecodigosProductos.DataSource = codigosDeProductosList;
                         }
                 }
-
                 private void materialButton20_Click( object sender, EventArgs e ) {
                         CargarTablas();
                 }
-
                 private void materialButton15_Click( object sender, EventArgs e ) {
                         if (IdDelCodigoseleccionado == 0)
                         {
@@ -989,7 +1015,6 @@ namespace SETEA_Sistema
                         }
 
                 }
-
                 private void materialButton14_Click( object sender, EventArgs e ) {
                         if (IdDelCodigoseleccionado == 0)
                         {
@@ -1017,7 +1042,6 @@ namespace SETEA_Sistema
                         }
                         CargarTablas();
                 }
-
                 private void materialTextBox21_TextChanged( object sender, EventArgs e ) {
                         using (db = new SeteaEntities1())
                         {
@@ -1037,19 +1061,15 @@ namespace SETEA_Sistema
 
 
                 }
-
                 private void materialButton21_Click( object sender, EventArgs e ) {
                         CargarTablas();
                 }
-
                 private void materialButton22_Click( object sender, EventArgs e ) {
                         CargarTablas();
                 }
-
                 private void materialLabel30_Click( object sender, EventArgs e ) {
 
                 }
-
                 private void ProductoNombreFind_TextChanged( object sender, EventArgs e ) {
                         using (db = new SeteaEntities1())
                         {
@@ -1065,13 +1085,230 @@ namespace SETEA_Sistema
                                 MyProducDg.DataSource = productosLs;
                         }
                 }
-
                 private void ProductoNombreFind_TextAlignChanged( object sender, EventArgs e ) {
 
                 }
-
                 private void materialButton16_Click( object sender, EventArgs e ) {
                         GenerarReporteDeCodigo();
+                }
+                private void marcasToolStripMenuItem_Click( object sender, EventArgs e ) {
+                        Hide();
+                        SETEA_Sistema.SeccionRP.Marcas_RP_Show marcas = new SETEA_Sistema.SeccionRP.Marcas_RP_Show();
+                        marcas.ShowDialog();
+                        Show();
+                        CargarTablas();
+                }
+                private void dispositivosToolStripMenuItem_Click( object sender, EventArgs e ) {
+                        Hide();
+                        Dispositivo_Informacion_RP dispositivo_Informacion_RP = new Dispositivo_Informacion_RP();
+                        dispositivo_Informacion_RP.ShowDialog();
+                        Show();
+                        CargarTablas();
+
+                }
+
+                private void tipoDeDIspositivoToolStripMenuItem_Click( object sender, EventArgs e ) {
+                        Tipo_De_Dispositivo_Show_RP tipo_De_Dispositivo_Show_RP = new Tipo_De_Dispositivo_Show_RP();
+                        Hide();
+                        tipo_De_Dispositivo_Show_RP.ShowDialog();
+                        Show();
+                        CargarTablas();
+                }
+
+                private void clientesToolStripMenuItem_Click( object sender, EventArgs e ) {
+                        Cliente_Show_RPS cliente_Show_RPS = new Cliente_Show_RPS();
+                        Hide();
+                        cliente_Show_RPS.ShowDialog();
+                        Show();
+                        CargarTablas();
+                }
+
+                private void eaToolStripMenuItem_Click( object sender, EventArgs e ) {
+                        SeccionRP.Estados_RP estados_RP = new SeccionRP.Estados_RP();
+                        Hide();
+                        estados_RP.ShowDialog();
+                        Show();
+                        CargarTablas();
+                }
+                int idDeLaReparacion = 0;
+                private void MyReparacion_RP_Info_CellClick( object sender, DataGridViewCellEventArgs e ) {
+                        try
+                        {
+                                if (e.RowIndex >= 0) // Asegura que no se clickee el encabezado
+                                {
+                                        idDeLaReparacion = (int)this.MyReparacion_RP_Info.Rows[e.RowIndex].Cells[0].Value;
+
+                                        using (var db = new SeteaEntities1())
+                                        {
+                                                var reparacion = db.Reparaciones_RP.FirstOrDefault(x => x.ID_Reparacion_RP == idDeLaReparacion);
+                                                if (reparacion != null)
+                                                {
+                                                        // Combobox de cliente
+                                                        var cliente = db.Cliente_RP.FirstOrDefault(c => c.ID_Cliente_RP == reparacion.Cliente);
+                                                        Com_RP_Clientes_Rp.SelectedItem = Com_RP_Clientes_Rp.Items
+                                                            .Cast<ClienteEntityComboboBoxShow>()
+                                                            .FirstOrDefault(i => i.Cliente_ID == cliente.ID_Cliente_RP);
+
+                                                        // Combobox de dispositivo
+                                                        var dispositivo = db.Dispositivos_RP.FirstOrDefault(d => d.ID_Dispositivo_RP == reparacion.Dispositivo_RP);
+                                                        Com_RP_Dispositivos_Rp.SelectedItem = Com_RP_Dispositivos_Rp.Items
+                                                            .Cast<DispositivosComboboxShowModels>()
+                                                            .FirstOrDefault(i => i.Dispositivo_ID == dispositivo.ID_Dispositivo_RP);
+
+                                                        // Combobox de estado
+                                                        Modelodb.Estados_RP estado = db.Estados_RP.FirstOrDefault(u => u.ID_Estado_RP == reparacion.Estado_RP);
+                                                        Com_RP_Estados_Rp.SelectedItem = Com_RP_Estados_Rp.Items
+                                                            .Cast<EstadosEntityComboboxModelsShow>()
+                                                            .FirstOrDefault(i => i.Estado_Id == estado.ID_Estado_RP);
+
+                                                        // Diagnóstico y cobro
+                                                        DIagnosticoTxt.Text = reparacion.Diagnostico_Inicial;
+                                                        CobroTxt.Text = reparacion.Cobro_Reparacion?.ToString("F2");
+                                                }
+                                        }
+                                }
+                        } catch (Exception err)
+                        {
+                                MessageBox.Show("Error al cargar la reparación: " + err.Message);
+                        }
+                }
+
+
+                private void materialButton11_Click_1( object sender, EventArgs e ) {
+                        try
+                        {
+                                using (var db = new SeteaEntities1())
+                                {
+                                        Reparaciones_RP nuevaReparacion = new Reparaciones_RP();
+
+                                        // Obtener dispositivo
+                                        var seleccionado_Dispositivo = Com_RP_Dispositivos_Rp.SelectedItem as DispositivosComboboxShowModels;
+                                        if (seleccionado_Dispositivo != null)
+                                        {
+                                                nuevaReparacion.Dispositivo_RP = seleccionado_Dispositivo.Dispositivo_ID;
+                                        } else
+                                        {
+                                                MessageBox.Show("No se ha seleccionado ningun dispositivo", "Advertencia", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                                                return;
+                                        }
+
+                                        // Obtener cliente
+                                        var seleccionado_Cliente = Com_RP_Clientes_Rp.SelectedItem as ClienteEntityComboboBoxShow;
+                                        if (seleccionado_Cliente != null)
+                                        {
+                                                nuevaReparacion.Cliente = seleccionado_Cliente.Cliente_ID;
+                                        } else
+                                        {
+                                                MessageBox.Show("No se ha seleccionado ningun cliente", "Advertencia", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                                                return;
+                                        }
+
+                                        // Obtener estado
+                                        var seleccionado_Estado = Com_RP_Estados_Rp.SelectedItem as EstadosEntityComboboxModelsShow;
+                                        if (seleccionado_Estado != null)
+                                        {
+                                                nuevaReparacion.Estado_RP = seleccionado_Estado.Estado_Id;
+                                        } else
+                                        {
+                                                MessageBox.Show("No se ha seleccionado ningun estado", "Advertencia", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                                                return;
+                                        }
+
+                                        nuevaReparacion.Fecha_De_Ingreso = DateTime.Now;
+                                        nuevaReparacion.Diagnostico_Inicial = DIagnosticoTxt.Text;
+                                        nuevaReparacion.Cobro_Reparacion = MyConversorGenerico.DeStringANumero<decimal>(CobroTxt.Text);
+                                        db.Reparaciones_RP.Add(nuevaReparacion);
+                                        db.SaveChanges();
+                                        CargarTablas();
+
+                                        MessageBox.Show("Reparación registrada exitosamente.");
+                                }
+                        } catch (Exception err)
+                        {
+                                MessageBox.Show("Error al agregar: " + err.Message);
+                        }
+                }
+
+                private void materialButton24_Click( object sender, EventArgs e ) {
+                        try
+                        {
+                                using( db = new SeteaEntities1())
+                                {
+                                        var query = db.Reparaciones_RP.FirstOrDefault(x => x.ID_Reparacion_RP == idDeLaReparacion);
+                                        if (query == null)
+                                        {
+                                                MessageBox.Show("No se ha seleccionado ninguna reparacion", "Advertencia", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                                                return;
+                                        }
+                                        db.Reparaciones_RP.Remove(query);
+                                        db.SaveChanges();
+                                        CargarTablas();
+                                }
+                        }catch (Exception err)
+                        {
+                                MessageBox.Show("Error al agregar: " + err.Message);
+                                return;
+                        }
+                }
+
+                private void materialButton23_Click( object sender, EventArgs e ) {
+                        try
+                        {
+                                using (var db = new SeteaEntities1())
+                                {
+                                        var reparacionExistente = db.Reparaciones_RP.FirstOrDefault(x => x.ID_Reparacion_RP == idDeLaReparacion);
+
+                                        if (reparacionExistente == null)
+                                        {
+                                                MessageBox.Show("Debe seleccionar una reparación válida.", "Advertencia", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                                                return;
+                                        }
+
+                                        // Obtener dispositivo
+                                        var seleccionado_Dispositivo = Com_RP_Dispositivos_Rp.SelectedItem as DispositivosComboboxShowModels;
+                                        if (seleccionado_Dispositivo != null)
+                                        {
+                                                reparacionExistente.Dispositivo_RP = seleccionado_Dispositivo.Dispositivo_ID;
+                                        } else
+                                        {
+                                                MessageBox.Show("No se ha seleccionado ningún dispositivo", "Advertencia", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                                                return;
+                                        }
+
+                                        // Obtener cliente
+                                        var seleccionado_Cliente = Com_RP_Clientes_Rp.SelectedItem as ClienteEntityComboboBoxShow;
+                                        if (seleccionado_Cliente != null)
+                                        {
+                                                reparacionExistente.Cliente = seleccionado_Cliente.Cliente_ID;
+                                        } else
+                                        {
+                                                MessageBox.Show("No se ha seleccionado ningún cliente", "Advertencia", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                                                return;
+                                        }
+
+                                        // Obtener estado
+                                        var seleccionado_Estado = Com_RP_Estados_Rp.SelectedItem as EstadosEntityComboboxModelsShow;
+                                        if (seleccionado_Estado != null)
+                                        {
+                                                reparacionExistente.Estado_RP = seleccionado_Estado.Estado_Id;
+                                        } else
+                                        {
+                                                MessageBox.Show("No se ha seleccionado ningún estado", "Advertencia", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                                                return;
+                                        }
+
+                                        // Otros campos
+                                        reparacionExistente.Diagnostico_Inicial = DIagnosticoTxt.Text;
+                                        reparacionExistente.Cobro_Reparacion = MyConversorGenerico.DeStringANumero<decimal>(CobroTxt.Text);
+
+                                        db.SaveChanges();
+                                        CargarTablas();
+                                        MessageBox.Show("Reparación actualizada exitosamente.");
+                                }
+                        } catch (Exception err)
+                        {
+                                MessageBox.Show("Error al editar: " + err.Message);
+                        }
                 }
         }
 }
