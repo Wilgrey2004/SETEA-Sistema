@@ -13,6 +13,8 @@ public class ImpresionRecibo
 
         public ImpresionRecibo( DataGridView dgv ) {
                 this.dataGrid = dgv;
+        }public ImpresionRecibo(  ) {
+                
         }
 
         public void Imprimir() {

@@ -595,6 +595,7 @@ namespace SETEA_Sistema
                                 } else
                                 {
                                         MessageBox.Show("No hay productos que guardar");
+                                        return;
                                 }
                                 ImpresionRecibo imprimirRecibo = new ImpresionRecibo(MyDataProductosCaja);
                                 imprimirRecibo.Imprimir();
@@ -634,9 +635,6 @@ namespace SETEA_Sistema
                                 TelefonoCompraCaja.Text = "";
                                 ventaEnCajaLista.Clear();
                                 CargarTablas();
-
-
-
                         }
                 }
                 private void materialButton7_Click( object sender, EventArgs e ) {
@@ -1308,6 +1306,48 @@ namespace SETEA_Sistema
                         } catch (Exception err)
                         {
                                 MessageBox.Show("Error al editar: " + err.Message);
+                        }
+                }
+
+                private void materialButton25_Click( object sender, EventArgs e ) {
+                        try
+                        {
+                                using(db = new SeteaEntities1())
+                                {
+                                        var query = db.Reparaciones_RP.FirstOrDefault(x => x.ID_Reparacion_RP == idDeLaReparacion);
+                                        if (query == null)
+                                        {
+                                                MessageBox.Show("No se ha seleccionado ninguna reparacion", "Advertencia", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                                                return;
+                                        }
+                                        query.Estado_RP = 3;
+
+                                        GetBindingListReparacionesRP getBindingListReparacionesRP = new GetBindingListReparacionesRP();
+                                        var query2 = getBindingListReparacionesRP.GetBindingList();
+                                        if (query2 == null)
+                                        {
+                                                MessageBox.Show("No se ha encontrado ninguna reparacion", "Advertencia", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                                                return;
+                                        }
+
+                                        var reparacionEncontrada = query2.FirstOrDefault(x => x.ID_Reparacion == idDeLaReparacion);
+                                        
+                                        if (reparacionEncontrada == null)
+                                        {
+                                                MessageBox.Show("No se ha encontrado ninguna reparacion", "Advertencia", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                                                return;
+                                        }
+
+                                        ImpresionRecibo reciboReparacion = new ImpresionRecibo();
+                                        reciboReparacion.ImprimirReciboReparacion(reparacionEncontrada);
+
+
+                                        db.SaveChanges();
+                                        CargarTablas();
+                                }
+                        }catch (Exception err)
+                        {
+                                MessageBox.Show("Error al dar de alta: " + err.Message);
                         }
                 }
         }
