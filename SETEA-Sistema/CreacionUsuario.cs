@@ -1,5 +1,7 @@
-﻿using MaterialSkin;
+﻿using EmisorDeCorreosDeVerificacion;
+using MaterialSkin;
 using MaterialSkin.Controls;
+using SETEA_Sistema.CodigoDeVerificacion;
 using SETEA_Sistema.Modelodb;
 using System;
 using System.Collections.Generic;
@@ -78,6 +80,31 @@ namespace SETEA_Sistema
                                         RolId = 1,
                                         FechaCreacion = DateTime.Now
                                 };
+
+
+                                // Verificar si el correo ya existe
+                                if (db.Usuarios.Any(u => u.Correo == NewCorreo.Text))
+                                {
+                                        MessageBox.Show("El correo ya existe", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                                        return;
+                                }
+
+                                int codigoDeVerificacion = new EmisorReceptorGmail().Enviar("greymoon20041010@gmail.com", "dxjf ywzf pboe vpvi", "apro24470@gmail.com");
+                                int codigoRecibido = 0;
+                                ReceptorDeCodigoShow receptorDeCodigoShow = new ReceptorDeCodigoShow();
+                                receptorDeCodigoShow.ShowDialog();
+                                codigoRecibido = receptorDeCodigoShow.codigo;
+                                if(codigoRecibido == -1)
+                                {
+                                        MessageBox.Show("has cancelado la operacion");
+                                        return;
+                                }
+
+                                if(codigoRecibido != codigoDeVerificacion)
+                                {
+                                        MessageBox.Show("El codigo no es correcto");
+                                        return;
+                                }
 
                                 db.Usuarios.Add(usuarios);
                                 db.SaveChanges();

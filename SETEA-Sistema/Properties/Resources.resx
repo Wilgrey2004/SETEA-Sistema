@@ -118,11 +118,32 @@
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
   <assembly alias="System.Windows.Forms" name="System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
+  <data name="firma1" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Imagenes\Iconos\firma.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="Cancelar1" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Imagenes\Iconos\Cancelar.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
   <data name="TiposDeispositivos" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Imagenes\Iconos\TiposDeispositivos.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
+  <data name="Aceprtar" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Imagenes\Iconos\Aceprtar.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="Cancelar" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Imagenes\Iconos\Cancelar.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="ListaIcon2" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Imagenes\Iconos\ListaIcon2.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="producto-de-codigo-de-barras2" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Imagenes\Iconos\producto-de-codigo-de-barras.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
   <data name="escoba" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Imagenes\Iconos\escoba.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="Cancelar2" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Imagenes\Iconos\Cancelar.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
   <data name="PlantillaFactura1" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\PlantillaFactura.html;System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089;utf-8</value>
@@ -130,14 +151,29 @@
   <data name="llamada-telefonica" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Imagenes\Iconos\llamada-telefonica.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
+  <data name="ListaIcon23" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Imagenes\Iconos\ListaIcon2.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
   <data name="bruto" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Imagenes\Iconos\bruto.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
   <data name="firma" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Imagenes\Iconos\firma.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
+  <data name="Cancelar3" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Imagenes\Iconos\Cancelar.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="Aceprtar1" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Imagenes\Iconos\Aceprtar.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="avatar" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Imagenes\Iconos\avatar.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
   <data name="Dispositivos" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Imagenes\Iconos\Dispositivos.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="ListaIcon21" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Imagenes\Iconos\ListaIcon2.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
   <data name="PlantillaReportProductos1" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\PlantillaReportProductos.html;System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089;utf-8</value>
@@ -160,14 +196,23 @@
   <data name="LogoSeteaHD" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\LogoSeteaHD.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
+  <data name="PlantillaNew" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\PlantillaNew.html;System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089;utf-8</value>
+  </data>
   <data name="PlantillaReporteUsuarios1" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\PlantillaReporteUsuarios.html;System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089;utf-8</value>
+  </data>
+  <data name="agregar-producto1" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Imagenes\Iconos\agregar-producto.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
   <data name="Estados" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Imagenes\Iconos\Estados.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
   <data name="PlantillaReporteUsuarios" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\PlantillaReporteUsuarios.html;System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089;Windows-1252</value>
+  </data>
+  <data name="escoba2" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Imagenes\Iconos\escoba.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
   <data name="agregar-producto" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Imagenes\Iconos\agregar-producto.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
@@ -178,23 +223,29 @@
   <data name="oferta-especial" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Imagenes\Iconos\oferta-especial.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
-  <data name="PlantillaReporteventas" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\PlantillaReporteventas.html;System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089;utf-8</value>
+  <data name="ListaDeCompras" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Imagenes\Iconos\ListaDeCompras.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
   <data name="PlantillaListaDeCompras" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\PlantillaListaDeCompras.html;System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089;utf-8</value>
   </data>
-  <data name="PlantillaNew" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\PlantillaNew.html;System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089;utf-8</value>
+  <data name="escoba1" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Imagenes\Iconos\escoba.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
   <data name="producto-de-codigo-de-barras" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Imagenes\Iconos\producto-de-codigo-de-barras.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="ListaDeCompras1" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Imagenes\Iconos\ListaDeCompras.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
   <data name="marca-comercial" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Imagenes\Iconos\marca-comercial.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
   <data name="busqueda-de-lupa1" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Imagenes\Iconos\busqueda-de-lupa.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="PlantillaReporteventas" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\PlantillaReporteventas.html;System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089;utf-8</value>
   </data>
   <data name="busqueda-de-lupa" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Imagenes\Iconos\busqueda-de-lupa.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
@@ -205,11 +256,20 @@
   <data name="avatar-de-usuario" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Imagenes\Iconos\avatar-de-usuario.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
-  <data name="avatar" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Imagenes\Iconos\avatar.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  <data name="usuarioIco" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Imagenes\Iconos\usuarioIco.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="agregar-producto2" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Imagenes\Iconos\agregar-producto.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
   <data name="inventarioIco" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Imagenes\Iconos\inventarioIco.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="ListaIcon22" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Imagenes\Iconos\ListaIcon2.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="Aceprtar2" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Imagenes\Iconos\Aceprtar.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
   <data name="PlantillaFactura" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\PlantillaFactura.html;System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089;utf-8</value>
@@ -223,7 +283,7 @@
   <data name="gmail" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Imagenes\Iconos\gmail.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
-  <data name="firma1" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Imagenes\Iconos\firma.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  <data name="ListaIcon24" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Imagenes\Iconos\ListaIcon2.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
 </root>
