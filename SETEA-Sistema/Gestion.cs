@@ -1,4 +1,5 @@
-﻿using MaterialSkin;
+﻿using EmisorDeCorreosDeVerificacion;
+using MaterialSkin;
 using MaterialSkin.Controls;
 using SETEA_Sistema.Entidades;
 using SETEA_Sistema.Gestion_Productos;
@@ -184,8 +185,17 @@ namespace SETEA_Sistema
                         {
                                 return;
                         }
-                        GeneradorDePdf.GeneradorDePDFS(usl, headersUsers, "Usuarios", "PlantillaReporteUsuarios");
-                        MessageBox.Show("Reporte generado con exito", "Reporte", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                        try
+                        {
+
+                                GeneradorDePdf.GeneradorDePDFS(new GetBindingListUsuariosModel().GetBindingList(), headersUsers, "Usuarios", "PlantillaReporteUsuarios");
+                                MessageBox.Show("Reporte generado con exito", "Reporte", MessageBoxButtons.OK, MessageBoxIcon.Information);
+
+                        } catch (Exception err)
+                        {
+                                MessageBox.Show($"Error: {err.Message}", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                                return;
+                        }
                 }
 
                 private void CargarTablaConRegistrosDiario() {
@@ -1230,7 +1240,7 @@ namespace SETEA_Sistema
                 private void materialButton24_Click( object sender, EventArgs e ) {
                         try
                         {
-                                using( db = new SeteaEntities1())
+                                using (db = new SeteaEntities1())
                                 {
                                         var query = db.Reparaciones_RP.FirstOrDefault(x => x.ID_Reparacion_RP == idDeLaReparacion);
                                         if (query == null)
@@ -1242,7 +1252,7 @@ namespace SETEA_Sistema
                                         db.SaveChanges();
                                         CargarTablas();
                                 }
-                        }catch (Exception err)
+                        } catch (Exception err)
                         {
                                 MessageBox.Show("Error al agregar: " + err.Message);
                                 return;
@@ -1286,6 +1296,7 @@ namespace SETEA_Sistema
 
                                         // Obtener estado
                                         var seleccionado_Estado = Com_RP_Estados_Rp.SelectedItem as EstadosEntityComboboxModelsShow;
+
                                         if (seleccionado_Estado != null)
                                         {
                                                 reparacionExistente.Estado_RP = seleccionado_Estado.Estado_Id;
@@ -1294,14 +1305,43 @@ namespace SETEA_Sistema
                                                 MessageBox.Show("No se ha seleccionado ningún estado", "Advertencia", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                                                 return;
                                         }
-
+                                        var Estado_Desde_La_Db = db.Estados_RP.FirstOrDefault(x => x.ID_Estado_RP == reparacionExistente.Estado_RP);
                                         // Otros campos
                                         reparacionExistente.Diagnostico_Inicial = DIagnosticoTxt.Text;
                                         reparacionExistente.Cobro_Reparacion = MyConversorGenerico.DeStringANumero<decimal>(CobroTxt.Text);
+                                        if (reparacionExistente == null)
+                                        {
+                                                MessageBox.Show("No se ha seleccionado ninguna reparacion", "Advertencia", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                                                return;
+                                        }
+                                        var query = new GetBindingListReparacionesRP().GetBindingList();
 
-                                        db.SaveChanges();
-                                        CargarTablas();
-                                        MessageBox.Show("Reparación actualizada exitosamente.");
+                                        var reparacionSeleccionadaExistene = query.FirstOrDefault(x => x.ID_Reparacion == idDeLaReparacion);
+                                        if (reparacionSeleccionadaExistene == null)
+                                        {
+                                                MessageBox.Show("No se ha seleccionado ninguna reparacion", "Advertencia", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                                                return;
+                                        }
+                                        try
+                                        {
+                                                db.SaveChanges();
+                                                var emisor = new EmisorReceptorGmail();
+                                                emisor.EnviarInformacionDeLaReparacion("greymoon20041010@gmail.com",
+                                                                                        "dxjf ywzf pboe vpvi",
+                                                                                        reparacionSeleccionadaExistene,
+                                                                                        Estado_Desde_La_Db
+                                                                                    );
+                                                MessageBox.Show("Reparación actualizada exitosamente.");
+                                                
+                                                CargarTablas();
+                                        } catch (Exception err)
+                                        {
+                                                MessageBox.Show("Error al dar de alta: " + err.Message);
+                                                return;
+                                        }
+
+
+
                                 }
                         } catch (Exception err)
                         {
@@ -1312,7 +1352,11 @@ namespace SETEA_Sistema
                 private void materialButton25_Click( object sender, EventArgs e ) {
                         try
                         {
+<<<<<<< HEAD
                                 using(db = new SeteaEntities1())
+=======
+                                using (db = new SeteaEntities1())
+>>>>>>> update
                                 {
                                         var query = db.Reparaciones_RP.FirstOrDefault(x => x.ID_Reparacion_RP == idDeLaReparacion);
                                         if (query == null)
@@ -1322,8 +1366,13 @@ namespace SETEA_Sistema
                                         }
                                         query.Estado_RP = 3;
 
+<<<<<<< HEAD
                                         GetBindingListReparacionesRP getBindingListReparacionesRP = new GetBindingListReparacionesRP();
                                         var query2 = getBindingListReparacionesRP.GetBindingList();
+=======
+                                        var query2 = new GetBindingListReparacionesRP().GetBindingList();
+
+>>>>>>> update
                                         if (query2 == null)
                                         {
                                                 MessageBox.Show("No se ha encontrado ninguna reparacion", "Advertencia", MessageBoxButtons.OK, MessageBoxIcon.Warning);
@@ -1331,12 +1380,17 @@ namespace SETEA_Sistema
                                         }
 
                                         var reparacionEncontrada = query2.FirstOrDefault(x => x.ID_Reparacion == idDeLaReparacion);
+<<<<<<< HEAD
                                         
+=======
+
+>>>>>>> update
                                         if (reparacionEncontrada == null)
                                         {
                                                 MessageBox.Show("No se ha encontrado ninguna reparacion", "Advertencia", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                                                 return;
                                         }
+<<<<<<< HEAD
 
                                         ImpresionRecibo reciboReparacion = new ImpresionRecibo();
                                         reciboReparacion.ImprimirReciboReparacion(reparacionEncontrada);
@@ -1346,6 +1400,32 @@ namespace SETEA_Sistema
                                         CargarTablas();
                                 }
                         }catch (Exception err)
+=======
+                                        var estadoActual = db.Estados_RP.FirstOrDefault(x => x.ID_Estado_RP == query.Estado_RP);
+
+
+
+                                        try
+                                        {
+                                                var emisor = new EmisorReceptorGmail();
+                                                emisor.EnviarInformacionDeLaReparacion("greymoon20041010@gmail.com",
+                                                                                        "dxjf ywzf pboe vpvi",
+                                                                                        reparacionEncontrada,
+                                                                                        estadoActual
+                                                                                    );
+                                                ImpresionRecibo reciboReparacion = new ImpresionRecibo();
+                                                reciboReparacion.ImprimirReciboReparacion(reparacionEncontrada);
+                                                db.SaveChanges();
+                                        } catch (Exception err)
+                                        {
+                                                MessageBox.Show("Error al dar de alta: " + err.Message);
+                                                return;
+                                        }
+
+                                        CargarTablas();
+                                }
+                        } catch (Exception err)
+>>>>>>> update
                         {
                                 MessageBox.Show("Error al dar de alta: " + err.Message);
                         }

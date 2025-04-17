@@ -409,6 +409,13 @@
     <Reference Include="WindowsBase" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="CodigoDeVerificacion\GeneradorDeCorreos.cs" />
+    <Compile Include="CodigoDeVerificacion\ReceptorDeCodigoShow.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="CodigoDeVerificacion\ReceptorDeCodigoShow.Designer.cs">
+      <DependentUpon>ReceptorDeCodigoShow.cs</DependentUpon>
+    </Compile>
     <Compile Include="CreacionUsuario.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -423,6 +430,7 @@
     <Compile Include="Entidades\ProductoReporteModelShows.cs" />
     <Compile Include="Entidades\ProductoShowModels.cs" />
     <Compile Include="Entidades\ReparacionesRPShowModels.cs" />
+    <Compile Include="Entidades\UsuarioShowModels.cs" />
     <Compile Include="Entidades\VentaShowModels.cs" />
     <Compile Include="Gestion-Productos\Agregar_Editar_Producto.cs">
       <SubType>Form</SubType>
@@ -609,8 +617,12 @@
     <Compile Include="Utilidades\ReturnsBindingList\GetBindingListEstadoComboboxModelsShow.cs" />
     <Compile Include="Utilidades\ReturnsBindingList\GetBindingListProductoShowsModels.cs" />
     <Compile Include="Utilidades\ReturnsBindingList\GetBindingListReparacionesRP.cs" />
+    <Compile Include="Utilidades\ReturnsBindingList\GetBindingListUsuariosModel.cs" />
     <Compile Include="Utilidades\ReturnsBindingList\GetBindingListVentaModelsShow.cs" />
     <Compile Include="Utilidades\ReturnsBindingList\GetBinlingLIstClientesComboboxShow.cs" />
+    <EmbeddedResource Include="CodigoDeVerificacion\ReceptorDeCodigoShow.resx">
+      <DependentUpon>ReceptorDeCodigoShow.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="CreacionUsuario.resx">
       <DependentUpon>CreacionUsuario.cs</DependentUpon>
     </EmbeddedResource>
@@ -702,6 +714,11 @@
     <None Include="Imagenes\Iconos\mapas-y-banderas.png" />
     <None Include="Imagenes\Iconos\escoba.png" />
     <None Include="Imagenes\Iconos\Estados.png" />
+    <None Include="Imagenes\Iconos\Aceprtar.png" />
+    <None Include="Imagenes\Iconos\Cancelar.png" />
+    <None Include="Imagenes\Iconos\ListaIcon2.png" />
+    <None Include="Imagenes\Iconos\ListaDeCompras.png" />
+    <None Include="Imagenes\Iconos\usuarioIco.png" />
     <Content Include="LogoSeteaHD.ico" />
     <Content Include="Modelodb\DB.Context.tt">
       <Generator>TextTemplatingFileGenerator</Generator>

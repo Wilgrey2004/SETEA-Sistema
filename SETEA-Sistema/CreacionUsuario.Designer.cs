@@ -35,8 +35,6 @@
                         this.NewPass = new MaterialSkin.Controls.MaterialMaskedTextBox();
                         this.materialButton1 = new MaterialSkin.Controls.MaterialButton();
                         this.linkLabel1 = new System.Windows.Forms.LinkLabel();
-                        this.pictureBox1 = new System.Windows.Forms.PictureBox();
-                        ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
                         this.SuspendLayout();
                         // 
                         // materialLabel1
@@ -45,7 +43,7 @@
                         this.materialLabel1.Depth = 0;
                         this.materialLabel1.Font = new System.Drawing.Font("Roboto Medium", 20F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Pixel);
                         this.materialLabel1.FontType = MaterialSkin.MaterialSkinManager.fontType.H6;
-                        this.materialLabel1.Location = new System.Drawing.Point(35, 125);
+                        this.materialLabel1.Location = new System.Drawing.Point(113, 133);
                         this.materialLabel1.MouseState = MaterialSkin.MouseState.HOVER;
                         this.materialLabel1.Name = "materialLabel1";
                         this.materialLabel1.Size = new System.Drawing.Size(72, 24);
@@ -58,7 +56,7 @@
                         this.materialLabel2.Depth = 0;
                         this.materialLabel2.Font = new System.Drawing.Font("Roboto Medium", 20F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Pixel);
                         this.materialLabel2.FontType = MaterialSkin.MaterialSkinManager.fontType.H6;
-                        this.materialLabel2.Location = new System.Drawing.Point(35, 186);
+                        this.materialLabel2.Location = new System.Drawing.Point(113, 211);
                         this.materialLabel2.MouseState = MaterialSkin.MouseState.HOVER;
                         this.materialLabel2.Name = "materialLabel2";
                         this.materialLabel2.Size = new System.Drawing.Size(61, 24);
@@ -71,7 +69,7 @@
                         this.materialLabel3.Depth = 0;
                         this.materialLabel3.Font = new System.Drawing.Font("Roboto Medium", 20F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Pixel);
                         this.materialLabel3.FontType = MaterialSkin.MaterialSkinManager.fontType.H6;
-                        this.materialLabel3.Location = new System.Drawing.Point(35, 248);
+                        this.materialLabel3.Location = new System.Drawing.Point(113, 286);
                         this.materialLabel3.MouseState = MaterialSkin.MouseState.HOVER;
                         this.materialLabel3.Name = "materialLabel3";
                         this.materialLabel3.Size = new System.Drawing.Size(104, 24);
@@ -92,7 +90,7 @@
                         this.NewName.HideSelection = true;
                         this.NewName.InsertKeyMode = System.Windows.Forms.InsertKeyMode.Default;
                         this.NewName.LeadingIcon = null;
-                        this.NewName.Location = new System.Drawing.Point(342, 133);
+                        this.NewName.Location = new System.Drawing.Point(113, 160);
                         this.NewName.Mask = "";
                         this.NewName.MaxLength = 32767;
                         this.NewName.MouseState = MaterialSkin.MouseState.OUT;
@@ -109,7 +107,7 @@
                         this.NewName.SelectionLength = 0;
                         this.NewName.SelectionStart = 0;
                         this.NewName.ShortcutsEnabled = true;
-                        this.NewName.Size = new System.Drawing.Size(250, 48);
+                        this.NewName.Size = new System.Drawing.Size(416, 48);
                         this.NewName.SkipLiterals = true;
                         this.NewName.TabIndex = 5;
                         this.NewName.TabStop = false;
@@ -133,7 +131,7 @@
                         this.NewCorreo.HideSelection = true;
                         this.NewCorreo.InsertKeyMode = System.Windows.Forms.InsertKeyMode.Default;
                         this.NewCorreo.LeadingIcon = null;
-                        this.NewCorreo.Location = new System.Drawing.Point(342, 194);
+                        this.NewCorreo.Location = new System.Drawing.Point(113, 237);
                         this.NewCorreo.Mask = "";
                         this.NewCorreo.MaxLength = 32767;
                         this.NewCorreo.MouseState = MaterialSkin.MouseState.OUT;
@@ -150,7 +148,7 @@
                         this.NewCorreo.SelectionLength = 0;
                         this.NewCorreo.SelectionStart = 0;
                         this.NewCorreo.ShortcutsEnabled = true;
-                        this.NewCorreo.Size = new System.Drawing.Size(250, 48);
+                        this.NewCorreo.Size = new System.Drawing.Size(416, 48);
                         this.NewCorreo.SkipLiterals = true;
                         this.NewCorreo.TabIndex = 6;
                         this.NewCorreo.TabStop = false;
@@ -174,7 +172,7 @@
                         this.NewPass.HideSelection = true;
                         this.NewPass.InsertKeyMode = System.Windows.Forms.InsertKeyMode.Default;
                         this.NewPass.LeadingIcon = null;
-                        this.NewPass.Location = new System.Drawing.Point(342, 248);
+                        this.NewPass.Location = new System.Drawing.Point(113, 313);
                         this.NewPass.Mask = "";
                         this.NewPass.MaxLength = 32767;
                         this.NewPass.MouseState = MaterialSkin.MouseState.OUT;
@@ -191,7 +189,7 @@
                         this.NewPass.SelectionLength = 0;
                         this.NewPass.SelectionStart = 0;
                         this.NewPass.ShortcutsEnabled = true;
-                        this.NewPass.Size = new System.Drawing.Size(250, 48);
+                        this.NewPass.Size = new System.Drawing.Size(416, 48);
                         this.NewPass.SkipLiterals = true;
                         this.NewPass.TabIndex = 7;
                         this.NewPass.TabStop = false;
@@ -208,7 +206,7 @@
                         this.materialButton1.Depth = 0;
                         this.materialButton1.HighEmphasis = true;
                         this.materialButton1.Icon = null;
-                        this.materialButton1.Location = new System.Drawing.Point(39, 310);
+                        this.materialButton1.Location = new System.Drawing.Point(113, 370);
                         this.materialButton1.Margin = new System.Windows.Forms.Padding(4, 6, 4, 6);
                         this.materialButton1.MouseState = MaterialSkin.MouseState.HOVER;
                         this.materialButton1.Name = "materialButton1";
@@ -224,7 +222,7 @@
                         // linkLabel1
                         // 
                         this.linkLabel1.AutoSize = true;
-                        this.linkLabel1.Location = new System.Drawing.Point(468, 341);
+                        this.linkLabel1.Location = new System.Drawing.Point(405, 382);
                         this.linkLabel1.Name = "linkLabel1";
                         this.linkLabel1.Size = new System.Drawing.Size(124, 13);
                         this.linkLabel1.TabIndex = 10;
@@ -232,22 +230,12 @@
                         this.linkLabel1.Text = "Ya Creacte Tu Usuario ?";
                         this.linkLabel1.LinkClicked += new System.Windows.Forms.LinkLabelLinkClickedEventHandler(this.linkLabel1_LinkClicked);
                         // 
-                        // pictureBox1
-                        // 
-                        this.pictureBox1.Image = global::SETEA_Sistema.Properties.Resources.LogoSeteaHD;
-                        this.pictureBox1.Location = new System.Drawing.Point(581, 70);
-                        this.pictureBox1.Name = "pictureBox1";
-                        this.pictureBox1.Size = new System.Drawing.Size(55, 57);
-                        this.pictureBox1.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
-                        this.pictureBox1.TabIndex = 11;
-                        this.pictureBox1.TabStop = false;
-                        // 
                         // CreacionUsuario
                         // 
                         this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
                         this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-                        this.ClientSize = new System.Drawing.Size(642, 391);
-                        this.Controls.Add(this.pictureBox1);
+                        this.BackColor = System.Drawing.SystemColors.Control;
+                        this.ClientSize = new System.Drawing.Size(642, 539);
                         this.Controls.Add(this.linkLabel1);
                         this.Controls.Add(this.materialButton1);
                         this.Controls.Add(this.NewPass);
@@ -259,9 +247,8 @@
                         this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
                         this.Name = "CreacionUsuario";
                         this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
-                        this.Text = "CreacionUsuario";
+                        this.Text = "Creacion usuario";
                         this.Load += new System.EventHandler(this.CreacionUsuario_Load);
-                        ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
                         this.ResumeLayout(false);
                         this.PerformLayout();
 
@@ -277,6 +264,5 @@
                 private MaterialSkin.Controls.MaterialMaskedTextBox NewPass;
                 private MaterialSkin.Controls.MaterialButton materialButton1;
                 private System.Windows.Forms.LinkLabel linkLabel1;
-                private System.Windows.Forms.PictureBox pictureBox1;
         }
 }
